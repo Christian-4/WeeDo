@@ -50,9 +50,6 @@ app.use(cors({
 const index = require('./routes/index');
 app.use('/', index);
 
-const authRoutes = require('./routes/auth');
-app.use('/', authRoutes);
-
 app.use((req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 });

@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const chatSchema = new Schema({
-    users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    messages: Array
 }, {
         timestamps: {
             createdAt: 'created_at',

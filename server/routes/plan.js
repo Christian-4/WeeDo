@@ -39,11 +39,9 @@ router.post("/newplan", function (req, res, next) {
     newChat.save()
         .then(() => {
             const newPlan = new Plan({
-                // owner: req.user._id,
-                owner: "5c0feba519ee7b1ea5d63046",
+                owner: req.user._id,
                 chat: newChat._id,
-                // users: [req.user._id],
-                users: ["5c0feba519ee7b1ea5d63046"],
+                users: [req.user._id],
                 title,
                 description,
                 location,
@@ -116,17 +114,18 @@ router.put('/editplan/:_id', (req, res, next) => {
                 .then((planupdated) => {
                     res.status(200).json({ planupdated, message: "Plan edited!" })
                 })
-                .catch(err => res.status(500).json({ message: "Error to edit plan" }))
+                .catch(err => res.status(500).json({ message: "Error to edit plan " + err }))
         })
-        .catch(err => res.status(500).json({ message: "Error to edit plan" }))
+        .catch(err => res.status(500).json({ message: "Error to edit plan " + err }))
 })
 
 router.delete("/deleteplan/:_id", function (req, res, next) {
     Plan.findByIdAndDelete(req.params._id)
-        .then(() => {
-            res.status(200).json({ message: "Plan deleted!" })
+        .then((plan) => {
+            Chat.findByIdAndDelete(plan.chat)
+                .then(() => res.status(200).json({ message: "Plan deleted!" }))
         })
-        .catch(err => res.status(500).json({ message: "Error to delete plan" }))
+        .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
 });
 
 module.exports = router;

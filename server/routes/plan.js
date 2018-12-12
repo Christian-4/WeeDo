@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const Plan = require("../models/Plan");
 const Chat = require("../models/Chat");
+const User = require("../models/User");
 
 router.post("/newplan", function (req, res, next) {
     const { title, description, location, date, limit, hobby } = req.body;
@@ -33,14 +34,15 @@ router.post("/newplan", function (req, res, next) {
     }
 
     const newChat = new Chat({
-        users: []
+        users: [req.user._id],
+        messages: []
     })
 
     newChat.save()
-        .then(() => {
+        .then((chat) => {
             const newPlan = new Plan({
                 owner: req.user._id,
-                chat: newChat._id,
+                chat: chat._id,
                 users: [req.user._id],
                 title,
                 description,
@@ -51,17 +53,38 @@ router.post("/newplan", function (req, res, next) {
                 confirmations: []
             });
 
-            newPlan.save()
-                .then((plan) => {
-                    res.status(200).json({ plan, message: "Plan create!" })
+
+            User.findByIdAndUpdate(req.user._id, { $push: { planchats: chat._id } })
+                .then(userfound => {
+                    newPlan.save()
+                        .then((plan) => {
+                            User.findByIdAndUpdate(req.user._id, { $push: { plans: plan._id } })
+                                .then(() => {
+                                    res.status(200).json({ plan, message: "Plan create!" })
+                                })
+                                .catch(err => {
+                                    Chat.findByIdAndDelete(chat._id)
+                                        .then(() => {
+                                            Plan.findByIdAndDelete(plan._id)
+                                                .then(() => res.status(500).json({ message: "Error to create plan " + err })
+                                                )
+                                        })
+                                })
+                        })
+                        .catch(err => {
+                            Chat.findByIdAndDelete(chat._id)
+                                .then(() => {
+                                    User.findByIdAndUpdate(req.user._id, { $pull: { planchats: chat._id } })
+                                        .then(() => {
+                                            res.status(500).json({ message: "Error to create plan " + err })
+                                        })
+                                })
+                        })
                 })
-                .catch(err => {
-                    Chat.findByIdAndDelete(newChat.id)
-                        .then(() => res.status(500).json({ message: "Error to create plan " + err }))
-                })
+                .catch(err => res.status(500).json({ message: "Error to create plan " + err }))
         })
         .catch(err => {
-            Chat.findByIdAndDelete(newChat.id)
+            Chat.findByIdAndDelete(chat._id)
                 .then(() => res.status(500).json({ message: "Error to create plan " + err }))
         })
 });
@@ -123,7 +146,18 @@ router.delete("/deleteplan/:_id", function (req, res, next) {
     Plan.findByIdAndDelete(req.params._id)
         .then((plan) => {
             Chat.findByIdAndDelete(plan.chat)
-                .then(() => res.status(200).json({ message: "Plan deleted!" }))
+                .then((chat) => {
+                    User.find()
+                        .then(users => {
+                            users.forEach(user => {
+                                User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id } })
+                                    .then(() => {
+                                        User.findByIdAndUpdate(user._id, { $pull: { plans: plan._id } })
+                                            .then(() => res.status(200).json({ message: "Plan deleted!" }))
+                                    })
+                            })
+                        })
+                })
         })
         .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
 });

@@ -14,11 +14,12 @@ const userSchema = new Schema({
   },
   location: String,
   hobbies: Array,
+  plans: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  chats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
+  planchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
+  friendchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
   confirmations: [{ type: Schema.Types.ObjectId, ref: 'FriendConfirmations' }],
   favourites: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
-
 }, {
     timestamps: {
       createdAt: 'created_at',

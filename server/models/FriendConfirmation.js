@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const friendConfirmationSchema = new Schema({
     status: {
         type: String,
-        enum: ["Pendient", "Accept", "Denied"]
+        enum: ["Pendient", "Accept", "Denied"],
+        default: "Pendient"
     },
     originUser: { type: Schema.Types.ObjectId, ref: 'User' },
     finalUser: { type: Schema.Types.ObjectId, ref: 'User' }

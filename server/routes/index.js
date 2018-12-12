@@ -10,5 +10,7 @@ router.use('/', require('./auth'));
 
 router.use('/', require('./plan'));
 
+router.use('/', require('./friend'));
+
 module.exports = router;
 

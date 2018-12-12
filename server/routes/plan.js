@@ -65,8 +65,11 @@ router.post("/newplan", function (req, res, next) {
                                 .catch(err => {
                                     Chat.findByIdAndDelete(chat._id)
                                         .then(() => {
-                                            Plan.findByIdAndDelete(plan._id)
-                                                .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+                                            User.findByIdAndUpdate(req.user._id, { $pull: { planchats: chat._id } })
+                                                .then(() => {
+                                                    Plan.findByIdAndDelete(plan._id)
+                                                        .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+                                                })
                                         })
                                 })
                         })
@@ -80,11 +83,13 @@ router.post("/newplan", function (req, res, next) {
                                 })
                         })
                 })
-                .catch(err => res.status(500).json({ message: "Error to create plan " + err }))
+                .catch(err => {
+                    Chat.findByIdAndDelete(chat._id)
+                        .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+                })
         })
         .catch(err => {
-            Chat.findByIdAndDelete(chat._id)
-                .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+            res.status(500).json({ message: "Error to create plan " + err })
         })
 });
 

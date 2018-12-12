@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const chatSchema = new Schema({
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    messages: Array
+    messages: Array,
+    type:{type:String, enum: ["Plan","Friend"]}
 }, {
         timestamps: {
             createdAt: 'created_at',

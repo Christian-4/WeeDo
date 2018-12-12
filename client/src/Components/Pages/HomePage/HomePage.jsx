@@ -8,7 +8,8 @@ export default class HomePage extends Component {
       <div>
         <Link to={"/signup"}><p>SignUp</p></Link>
         <Link to={"/login"}><p>LogIn</p></Link>
-     
+        <Link to={"/newplan"}><p>New Plan</p></Link>
+    
       </div>
     )
   }

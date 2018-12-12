@@ -31,6 +31,7 @@ class App extends Component {
           <Route exact path="/profile/:_id" render={() => <ProfilePage />} />
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:_id" render={() => <ChatPage />} />
+          
         </Switch>
       </div>
     );

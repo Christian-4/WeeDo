@@ -12,5 +12,7 @@ router.use('/', require('./plan'));
 
 router.use('/', require('./friend'));
 
+router.use('/', require('./user'));
+
 module.exports = router;
 

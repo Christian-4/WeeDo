@@ -55,7 +55,7 @@ router.post("/newplan", function (req, res, next) {
 
 
             User.findByIdAndUpdate(req.user._id, { $push: { planchats: chat._id } })
-                .then(userfound => {
+                .then(() => {
                     newPlan.save()
                         .then((plan) => {
                             User.findByIdAndUpdate(req.user._id, { $push: { plans: plan._id } })
@@ -66,8 +66,7 @@ router.post("/newplan", function (req, res, next) {
                                     Chat.findByIdAndDelete(chat._id)
                                         .then(() => {
                                             Plan.findByIdAndDelete(plan._id)
-                                                .then(() => res.status(500).json({ message: "Error to create plan " + err })
-                                                )
+                                                .then(() => res.status(500).json({ message: "Error to create plan " + err }))
                                         })
                                 })
                         })

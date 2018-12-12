@@ -14,13 +14,13 @@ export default class SignupPage extends Component {
       <React.Fragment>
         
         <Form/>
-        <FacebookLogin
+        {/* <FacebookLogin
           appId={process.env.REACT_APP_FACEBOOK_ID}
           autoLoad={true}
           fields="name,email,picture"
           textButton = "Continue with FaceBook"
           callback={responseFacebook}
-        />
+        /> */}
       </React.Fragment>
     );
   }

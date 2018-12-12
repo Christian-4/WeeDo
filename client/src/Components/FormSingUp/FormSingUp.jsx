@@ -34,19 +34,35 @@ export default class FormSingUp extends Component {
 
   handleChange = (e) => {
     let  {name, value} = e.target;
-    this.setState({[name]: value});
+      if(name == "image") {
+        this.setState({...this.state, imnage: e.target.files[0]})
+      } else {
+      
+        this.setState({[name]: value});
+      }
   }
 
 
+  selectChange = location => {
+    //Select de localizacion
+    this.setState({...this.state, location: location.value} );
+ 
+  };
+
+
   handleFormSubmit = (e) => {
+  
     e.preventDefault();
 
-    const {username, password, email, image, location, hobbies} = this.state;
+    console.log(this.state.location);
+    const {username, password, password_confirm,email,location, image} = this.state;
 
-    this.authService.signup({username, password, email, image, location, hobbies})
+//    console.log(username, password, password_confirm, email, image, location, hobbies)
+
+
+    this.authService.signup({username, password, password_confirm, email, location, image})
     .then(user => {
-      this.props.getUser(user)
-      this.setState({username: '', password: '', redirect: true})
+      console.log(user)
     });
   }
 
@@ -56,7 +72,7 @@ export default class FormSingUp extends Component {
   }
 
   displayHobbies = () =>{
-    console.log("Sonia")
+
     this.setState({
       displayHobbies: !this.state.displayHobbies
   })
@@ -73,7 +89,7 @@ export default class FormSingUp extends Component {
     let hobbies =""
 
     if(this.state.displayHobbies){
-      console.log("Sonia2")
+ 
       hobbies = (
         <div>
            {this.getViewHobbies()}
@@ -104,7 +120,7 @@ export default class FormSingUp extends Component {
           <label>Confirm Password</label>
           <input
             type="password"
-            name="password-confirm"
+            name="password_confirm"
             onChange={e => this.handleChange(e)}
           />
 
@@ -116,12 +132,15 @@ export default class FormSingUp extends Component {
           />
          
 
+         <label>Photo</label>
+         <input type="file" name="image" onChange={e => this.handleChange(e)} />
+
           {!this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled  ? 
           <div>
                <label>Location</label>
             <Select
             value={location}
-            onChange={e => this.handleChange(e)}
+            onChange={e => this.selectChange(e)}
             options={options}
             />
           </div>

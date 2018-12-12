@@ -11,9 +11,29 @@ import ProfilePage from "./Components/Pages/ProfilePage/ProfilePage.jsx"
 import ChatsPage from "./Components/Pages/ChatsPage/ChatsPage.jsx"
 import ChatPage from "./Components/Pages/ChatPage/ChatPage.jsx"
 import Home from "./Components/Pages/HomePage/HomePage.jsx"
-
+import FriendsPage from "./Components/Pages/FriendsPage/FriendsPage.jsx"
+import BdService from "./Components/BdService"
 
 class App extends Component {
+  
+  constructor() {
+    super();
+
+    this.state = {
+        friends: {}
+    };
+
+    this.bdService = new BdService();
+
+  }
+
+  getListFriends = () => {
+    this.bdService.getFriends()
+    .then(response => {
+        this.setState({friends: response})
+    })
+  }
+
   render() {
     return (
 
@@ -31,6 +51,7 @@ class App extends Component {
           <Route exact path="/profile/:_id" render={() => <ProfilePage />} />
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:_id" render={() => <ChatPage />} />
+          <Route exact path="/friends" render={() => <FriendsPage friends = {this.state.friends} />} />
           
         </Switch>
       </div>

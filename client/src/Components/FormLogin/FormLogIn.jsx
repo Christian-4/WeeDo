@@ -14,6 +14,22 @@ export default class FormLogIn extends Component {
     this.authService = new AuthService();
   }
 
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const {username, password} = this.state;
+
+    this.authService.login({username, password})
+    .then(user => this.props.getUser(user));
+  }
+
+
+  handleChange = (e) => {
+    const {name, value} = e.target;
+
+    this.setState({[name]: value});
+  }
+
   render() {
     return (
         <div>

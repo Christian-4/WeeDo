@@ -13,13 +13,15 @@ export default class LoginPage extends Component {
     return (
       <div>
         <FormLogin />
-        <FacebookLogin
+
+
+        {/* <FacebookLogin
           appId={process.env.REACT_APP_FACEBOOK_ID}
           autoLoad={true}
           fields="name,email,picture"
           textButton = "Login with FaceBook"
           callback={responseFacebook}
-        />
+        /> */}
       </div>
     )
   }

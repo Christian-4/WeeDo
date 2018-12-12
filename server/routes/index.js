@@ -6,7 +6,7 @@ const router  = express.Router();
 //   res.render('index');
 // });
 
-router.use('/', require('./auth'));
+router.use('/api/auth', require('./auth'));
 
 router.use('/', require('./plan'));
 

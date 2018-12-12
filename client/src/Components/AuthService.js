@@ -3,22 +3,24 @@ import axios from "axios";
 class AuthService {
     constructor() {
         this.service = axios.create({
-            baseURL: "http://localhost:5000",
+            baseURL: "http://localhost:5000/api/auth",
             withCredentials: true
         })
     }
 
+
     signup = (user) => {
+
         const formData = new FormData();
         Object.keys(user).forEach(key => formData.append(key, user[key]));
 
         return this.service.post('/signup', formData, {
             headers: {
-                "Content-Type": "multipart/form-data"
+              "Content-Type": "multipart/form-data"
             }
         })
-            .then(response => response.data)
-    }
+        .then(response => response.data)
+      }
 
     login = (user) => {
 

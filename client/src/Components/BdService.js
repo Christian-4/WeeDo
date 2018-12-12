@@ -15,11 +15,17 @@ class BdService {
     }   
 
 
-
     deletePlan = () =>{
         return this.service.get('/delete-plan')
             .then(response => response.data)
+    } 
+
+
+    getFriends = () =>{
+        return this.service.get('/getFriends')
+            .then(response => response.data)
     }  
+    
 }
 
 

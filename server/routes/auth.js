@@ -29,85 +29,70 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
     .catch(err => res.status(500).json({ message: "Something went wrong" }));
 });
 
-router.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
-  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let token = '';
-  for (let i = 0; i < 25; i++) {
-    token += characters[Math.floor(Math.random() * characters.length)];
-  }
+router.post("/signup",  (req, res, next) => {
 
-  const { username, password, confirmPass, email } = req.body;
-  const image = req.body.image;
+  const { username, password, password_confirm, email, location} = req.body;
+  const pictureUrl = req.file.url;
+  
 
-  if (username === "" || password === "") {
-    res.status(500).json({ message: "Indicate username and password" });
+
+  if (username === "" || password === "" || email === "" || location === "") {
+    res.status(500).json({ message: "Indicar todos los datos" });
     return;
   }
 
-  if (confirmPass === "") {
-    res.status(500).json({ message: "Confirm your password" })
-  } else if (password !== confirmPass) {
+  if (password !== password_confirm) {
     res.status(500).json({ message: "The passwords not same" })
+    return
   }
 
-  if (email === "") {
-    res.status(500).json({ message: "Indicate an email" });
-    return;
-  }
 
-  if (image === "") {
-    res.status(500).json({ message: "Provide a photo" });
-    return;
-  }
-
-  const confirmationCode = token;
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
       res.status(500).json({ message: "The username already exists" })
       return;
     }
-  })
-    .then(() => {
-      User.findOne({ email }, "email", (err, user) => {
-        if (user !== null) {
-          res.status(500).json({ message: "The email already exists" })
-          return;
-        }
-      })
-        .then(() => {
-          const salt = bcrypt.genSaltSync(bcryptSalt);
-          const hashPass = bcrypt.hashSync(password, salt);
 
-          const newUser = new User({
-            username,
-            password: hashPass,
-            email,
-            image,
-            confirmationCode
-          });
+   
 
-          newUser.save()
-            .then(() => {
-              transporter.sendMail({
-                from: '"WeeDo Corporation" <labsandtests@gmail.com>',
-                to: email,
-                subject: 'Confirmation Email',
-                text: 'Welcome to WeeDo',
-                html: `<p>Welcome to WeeDo</p>
-      <p>Your username is: ${username}</p>
-      <a href="http://localhost:5000/confirm/${confirmationCode}">Confirm your email here, for activate your account & can access in our WebSite!<a>
-      `,
-              })
-                .then(() => res.status(200).json({ message: "Succefully registered, revise your email to activate the account" }))
-                .catch(err => res.status(500).json({ message: "Error at signup" }));
-            })
-            .catch(err => {
-              res.status(500).json({ message: "Something went wrong, try again or wait, thanks and sorry for issues" });
-            })
-        }).catch(err => res.status(500).json({ message: "Error at signup" }));
-    })
-    .catch(err => res.status(500).json({ message: "Error at signup" }));
+    User.findOne({ email }, "email", (err, email) => {
+      if (email !== null) {
+        res.status(500).json({ message: "The email already exists" })
+        return;
+      }
+    });
+
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const newUser = new User({
+      username,
+      password: hashPass,
+      email: email, 
+      location: location,
+    });
+
+
+
+    newUser.save((err, user) => {
+      if (err) {
+        res.status(500).json({ message: "Something went wrong" });
+      } else {
+        req.login(user, (err) => {
+
+          if (err) {
+              res.status(500).json({ message: 'Login after signup went bad.' });
+              return;
+          }
+
+          res.status(200).json(user);
+      });
+      }
+    });
+  });
+   
 })
 
 router.get("/logout", (req, res) => {

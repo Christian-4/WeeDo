@@ -11,7 +11,15 @@ const userSchema = new Schema({
     type: String,
     enum: ["Disable", "Active"],
     default: "Disable"
-  }
+  },
+  location: String,
+  hobbies: Array,
+  plans: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  planchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
+  friendchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
+  confirmations: [{ type: Schema.Types.ObjectId, ref: 'FriendConfirmations' }],
+  favourites: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
 }, {
     timestamps: {
       createdAt: 'created_at',

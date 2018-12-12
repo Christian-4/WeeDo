@@ -4,6 +4,7 @@ const router = express.Router();
 const Plan = require("../models/Plan");
 const Chat = require("../models/Chat");
 const User = require("../models/User");
+const PlanConfirmation = require("../models/PlanConfirmation");
 
 router.post("/newplan", function (req, res, next) {
     const { title, description, location, date, limit, hobby } = req.body;
@@ -35,7 +36,7 @@ router.post("/newplan", function (req, res, next) {
 
     const newChat = new Chat({
         users: [req.user._id],
-        messages: []
+        type: "Plan"
     })
 
     newChat.save()
@@ -54,11 +55,11 @@ router.post("/newplan", function (req, res, next) {
             });
 
 
-            User.findByIdAndUpdate(req.user._id, { $push: { planchats: chat._id } })
+            User.findByIdAndUpdate(req.user._id, { $addToSet: { planchats: chat._id } })
                 .then(() => {
                     newPlan.save()
                         .then((plan) => {
-                            User.findByIdAndUpdate(req.user._id, { $push: { plans: plan._id } })
+                            User.findByIdAndUpdate(req.user._id, { $addToSet: { plans: plan._id } })
                                 .then(() => {
                                     res.status(200).json({ plan, message: "Plan create!" })
                                 })
@@ -147,6 +148,7 @@ router.put('/editplan/:_id', (req, res, next) => {
 })
 
 router.delete("/deleteplan/:_id", function (req, res, next) {
+
     Plan.findByIdAndDelete(req.params._id)
         .then((plan) => {
             Chat.findByIdAndDelete(plan.chat)
@@ -157,13 +159,96 @@ router.delete("/deleteplan/:_id", function (req, res, next) {
                                 User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id } })
                                     .then(() => {
                                         User.findByIdAndUpdate(user._id, { $pull: { plans: plan._id } })
-                                            .then(() => res.status(200).json({ message: "Plan deleted!" }))
+                                            .then(() => {
+                                                PlanConfirmation.find()
+                                                    .then(foundplanconfirmations => {
+                                                        foundplanconfirmations.forEach(() => {
+                                                            return PlanConfirmation.findOneAndDelete({ plan: plan._id })
+                                                            .then(() => res.status(200).json({ message: "Plan deleted!" }))
+                                                        })
+                                                    })
+                                                    .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
+                                            })
+                                            .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
                                     })
+                                    .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
                             })
                         })
+                        .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
                 })
+                .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
         })
         .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
 });
+
+router.post("/acceptplan/:_id", function (req, res, next) {
+
+    PlanConfirmation.findById(req.params._id)
+        .then((confirmationFounded) => {
+            Plan.findByIdAndUpdate(confirmationFounded.plan, { $addToSet: { users: confirmationFounded.user }, $pull: { confirmations: req.params._id } })
+                .then((plan) => {
+                    User.findByIdAndUpdate(confirmationFounded.user, { $addToSet: { plans: plan._id } })
+                        .then(() => {
+                            PlanConfirmation.findByIdAndDelete(req.params._id)
+                                .then(() => res.status(200).json({ message: "User accepted in your plan!" }))
+                                .catch(err => res.status(500).json({ message: "Error to accept the user in your plan " + err }))
+                        })
+                        .catch(err => res.status(500).json({ message: "Error to accept the user in your plan " + err }))
+                })
+                .catch(err => res.status(500).json({ message: "Error to accept the user in your plan " + err }))
+        })
+        .catch(err => res.status(500).json({ message: "Error to accept the user in your plan " + err }))
+})
+
+router.post("/declineplan/:_id", function (req, res, next) {
+
+    PlanConfirmation.findById(req.params._id)
+        .then((confirmationFounded) => {
+            Plan.findByIdAndUpdate(confirmationFounded.plan, { $pull: { confirmations: req.params._id } })
+                .then(() => {
+                    PlanConfirmation.findByIdAndDelete(req.params._id)
+                        .then(() => res.status(200).json({ message: "User declined in your plan" }))
+                })
+                .catch(err => res.status(500).json({ message: "Error to declined the user in your plan " + err }))
+        })
+        .catch(err => res.status(500).json({ message: "Error to declined the user in your plan " + err }))
+})
+
+router.get("/allplans", function (req, res, next) {
+
+    Plan.find()
+        .then(plans => res.status(200).json({ plans }))
+        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+})
+
+router.get("/plan/:_id", function (req, res, next) {
+
+    Plan.findById(req.params._id)
+        .then(plan => res.status(200).json({ plan }))
+        .catch(err => res.status(500).json({ message: "Error to show the plan " + err }))
+})
+
+router.get("/planstogo", function (req, res, next) {
+
+    User.findById(req.user._id)
+        .then(user => res.status(200).json({ planstogo: user.plans }))
+        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+})
+
+router.get("/favouriteplans", function (req, res, next) {
+
+    User.findById(req.user._id)
+        .then(user => res.status(200).json({ favouriteplans: user.favourites }))
+        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+})
+
+router.get("/userplans", function (req, res, next) {
+
+    Plan.find({ owner: req.user._id })
+        .then(plans => res.status(200).json({ plans }))
+        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+})
+
+
 
 module.exports = router;

@@ -72,7 +72,18 @@ router.post("/acceptfriend/:_id", function (req, res, next) {
 })
 
 router.post("/declinefriend/:_id", function (req, res, next) {
-    
+
+    FriendConfirmation.findById(req.params._id)
+        .then(() => {
+            User.findByIdAndUpdate(req.user._id, { $pull: { confirmations: req.params._id } })
+                .then(() => {
+                    FriendConfirmation.findByIdAndDelete(req.params._id)
+                        .then(() => res.status(200).json({ message: "Friend declined!" }))
+                        .catch(err => res.status(500).json({ message: "Error to decline the friend " + err }))
+                })
+                .catch(err => res.status(500).json({ message: "Error to decline the friend " + err }))
+        })
+        .catch(err => res.status(500).json({ message: "Error to decline the friend " + err }))
 })
 
 module.exports = router;

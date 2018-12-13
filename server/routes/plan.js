@@ -155,24 +155,25 @@ router.delete("/deleteplan/:_id", function (req, res, next) {
                 .then((chat) => {
                     User.find()
                         .then(users => {
+                            let promises = [];
                             users.forEach(user => {
-                                User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id } })
-                                    .then(() => {
-                                        User.findByIdAndUpdate(user._id, { $pull: { plans: plan._id } })
-                                            .then(() => {
-                                                PlanConfirmation.find()
-                                                    .then(foundplanconfirmations => {
-                                                        foundplanconfirmations.forEach(() => {
-                                                            return PlanConfirmation.findOneAndDelete({ plan: plan._id })
-                                                            .then(() => res.status(200).json({ message: "Plan deleted!" }))
-                                                        })
-                                                    })
-                                                    .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
-                                            })
-                                            .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
-                                    })
-                                    .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
+                                promises.push(User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id, plans: req.params._id } }, { new: true }))
                             })
+                            Promise.all(promises)
+                                .then(() => {
+                                    PlanConfirmation.find({ plan: req.params._id })
+                                        .then(foundplanconfirmations => {
+                                            let promisesConfirmation = [];
+                                            foundplanconfirmations.forEach(confirmation => {
+                                                promisesConfirmation.push(PlanConfirmation.findByIdAndDelete(confirmation._id))
+                                            })
+                                            Promise.all(promisesConfirmation)
+                                                .then(() => res.status(200).json({ message: "Plan deleted!" }))
+                                                .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
+                                        })
+                                        .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
+
+                                })
                         })
                         .catch(err => res.status(500).json({ message: "Error to delete plan " + err }))
                 })

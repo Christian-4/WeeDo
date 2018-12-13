@@ -14,5 +14,9 @@ router.use('/', require('./friend'));
 
 router.use('/', require('./user'));
 
+router.use('/', require('./chat'));
+
+
+
 module.exports = router;
 

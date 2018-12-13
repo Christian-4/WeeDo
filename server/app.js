@@ -10,6 +10,8 @@ const cors = require('cors');
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
+const WebSocket = require('ws');
+
 
 
 mongoose
@@ -52,6 +54,22 @@ app.use('/', index);
 
 app.use((req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
+});
+
+
+const wss = new WebSocket.Server({ port: 3030 });
+
+let clients = []
+
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(data) {
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(data); 
+      }
+    });
+  });
 });
 
 module.exports = app;

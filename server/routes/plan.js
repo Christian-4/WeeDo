@@ -248,7 +248,7 @@ router.post("/addfriendtoplan", function (req, res, next) {
 
     Plan.findByIdAndUpdate(planId, { $addToSet: { users: userId } }, { new: true })
         .then(plan => {
-            Chat.findByIdAndUpdate(plan.chat, { $addToSet: { users: UserId } }, { new: true })
+            Chat.findByIdAndUpdate(plan.chat, { $addToSet: { users: userId } }, { new: true })
                 .then(chat => {
                     User.findByIdAndUpdate(userId, { $addToSet: { plans: plan._id, planchats: chat._id } }, { new: true })
                         .then(() => res.status(200).json({ message: "Your friend was added to plan!" }))
@@ -282,7 +282,7 @@ router.post("/kickuserofplan", function (req, res, next) {
             Chat.findByIdAndUpdate(plan.chat, { $pull: { users: userId } }, { new: true })
                 .then(chat => {
                     User.findByIdAndUpdate(userId, { $pull: { plans: plan._id, planchats: chat._id } }, { new: true })
-                        .then(() => res.status(200).json({ message: "Your friend was added to plan!" }))
+                        .then(() => res.status(200).json({ message: "The user was kicked of the plan!" }))
                         .catch(err => res.status(500).json({ message: "Error to kick the user " + err }))
                 })
                 .catch(err => res.status(500).json({ message: "Error to kick the user " + err }))
@@ -294,18 +294,18 @@ router.post("/addplanfav/:_id", function (req, res, next) {
 
     Plan.findById(req.params._id)
         .then(plan => {
-            User.findByIdAndUpdate(req.user._id, { $addToSet: { favourites: req.params._id } }, { new: true })
+            User.findByIdAndUpdate(req.user._id, { $addToSet: { favourites: plan._id } }, { new: true })
                 .then(() => res.status(200).json({ message: "Plan added to favourites!" }))
                 .catch(err => res.status(500).json({ message: "Error add plan to favourites " + err }))
         })
         .catch(err => res.status(500).json({ message: "Error add plan to favourites " + err }))
 })
 
-router.post("/delplanfav/:_id", function (req, res, next) {
+router.delete("/delplanfav/:_id", function (req, res, next) {
 
     Plan.findById(req.params._id)
         .then(plan => {
-            User.findByIdAndUpdate(req.user._id, { $pull: { favourites: req.params._id } }, { new: true })
+            User.findByIdAndUpdate(req.user._id, { $pull: { favourites: plan._id } }, { new: true })
                 .then(() => res.status(200).json({ message: "Plan delete to favourites!" }))
                 .catch(err => res.status(500).json({ message: "Error delete plan to favourites " + err }))
         })

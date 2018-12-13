@@ -16,7 +16,7 @@ router.post("/addfriend/:_id", function (req, res, next) {
             });
             newFriendConfirmation.save()
                 .then((confirmation) => {
-                    User.findByIdAndUpdate(userFounded._id, { $addToSet: { confirmations: newFriendConfirmation._id } })
+                    User.findByIdAndUpdate(userFounded._id, { $addToSet: { confirmations: newFriendConfirmation._id } }, { new: true })
                         .then(() => {
                             res.status(200).json({ message: "Friend request send!" })
                         })
@@ -32,12 +32,37 @@ router.post("/addfriend/:_id", function (req, res, next) {
 
 router.delete("/deletefriend/:_id", function (req, res, next) {
 
-    User.findByIdAndUpdate(req.user._id, { $pull: { friends: req.params._id } })
-        .then(() => {
-            User.findByIdAndUpdate(req.params._id, { $pull: { friends: req.user._id } })
-                .then(() => res.status(200).json({ message: "The friend was deleted!", friends: req.user.friends }))
+    User.findByIdAndUpdate(req.user._id, { $pull: { friends: req.params._id } }, { new: true })
+        .then(user1 => {
+            User.findByIdAndUpdate(req.params._id, { $pull: { friends: req.user._id } }, { new: true })
+                .then(user2 => {
+                    let idChat = []
+                    user1.friendchats.forEach(id_chat1 => {
+                        user2.friendchats.forEach(id_chat2 => {
+
+                            if (id_chat1.toString() === id_chat2.toString()) {
+                                idChat.push(id_chat1)
+                            }
+                        })
+                    })
+
+                    Chat.findByIdAndDelete(idChat[0])
+                        .then(chat => {
+                            console.log(chat)
+                            User.findByIdAndUpdate(req.user._id, { $pull: { friendchats: chat._id } }, { new: true })
+                                .then(() => {
+                                    User.findByIdAndUpdate(req.params._id, { $pull: { friendchats: chat._id } }, { new: true })
+                                        .then(() => {
+                                            res.status(200).json({ message: "The friend was deleted!", friends: req.user.friends })
+                                        })
+                                        .catch(err => res.status(500).json({ message: "Error to delete the friend " + err }))
+                                })
+                                .catch(err => res.status(500).json({ message: "Error to delete the friend " + err }))
+                        })
+                        .catch(err => res.status(500).json({ message: "Error to delete the friend " + err }))
+                })
                 .catch(err => {
-                    User.findByIdAndUpdate(req.user._id, { $addToSet: { friends: req.params._id } })
+                    User.findByIdAndUpdate(req.user._id, { $addToSet: { friends: req.params._id } }, { new: true })
                         .then(() => res.status(500).json({ message: "Error to delete the friend " + err }))
                 })
         })
@@ -46,13 +71,11 @@ router.delete("/deletefriend/:_id", function (req, res, next) {
 
 router.post("/acceptfriend/:_id", function (req, res, next) {
 
-
-
     FriendConfirmation.findById(req.params._id)
         .then((confirmationFounded) => {
-            User.findByIdAndUpdate(req.user._id, { $addToSet: { friends: confirmationFounded.originUser }, $pull: { confirmations: req.params._id } })
+            User.findByIdAndUpdate(req.user._id, { $addToSet: { friends: confirmationFounded.originUser }, $pull: { confirmations: req.params._id } }, { new: true })
                 .then(() => {
-                    User.findByIdAndUpdate(confirmationFounded.originUser, { $addToSet: { friends: req.user._id } })
+                    User.findByIdAndUpdate(confirmationFounded.originUser, { $addToSet: { friends: req.user._id } }, { new: true })
                         .then(() => {
                             FriendConfirmation.findByIdAndDelete(req.params._id)
                                 .then(() => {
@@ -63,9 +86,9 @@ router.post("/acceptfriend/:_id", function (req, res, next) {
 
                                     newChat.save()
                                         .then(chat => {
-                                            User.findByIdAndUpdate(req.user._id, { $addToSet: { friendchats: chat._id } })
+                                            User.findByIdAndUpdate(req.user._id, { $addToSet: { friendchats: chat._id } }, { new: true })
                                                 .then(() => {
-                                                    User.findByIdAndUpdate(confirmationFounded.originUser, { $addToSet: { friendchats: chat._id } })
+                                                    User.findByIdAndUpdate(confirmationFounded.originUser, { $addToSet: { friendchats: chat._id } }, { new: true })
                                                         .then(() => {
                                                             res.status(200).json({ message: "User accepted as friend!", friends: req.user.friends })
                                                         })
@@ -76,7 +99,7 @@ router.post("/acceptfriend/:_id", function (req, res, next) {
                                         .catch(err => res.status(500).json({ message: "Error to accept the user as friend " + err }))
                                 })
                                 .catch(err => {
-                                    User.findByIdAndUpdate(req.user._id, { $pull: { friends: confirmationFounded.originUser }, $addToSet: { confirmations: req.params._id } })
+                                    User.findByIdAndUpdate(req.user._id, { $pull: { friends: confirmationFounded.originUser }, $addToSet: { confirmations: req.params._id } }, { new: true })
                                         .then(() => {
                                             User.findByIdAndUpdate(confirmationFounded.originUser, { $pull: { friends: req.user._id } })
                                                 .then(() => res.status(500).json({ message: "Error to accept the user as friend " + err }))
@@ -85,7 +108,7 @@ router.post("/acceptfriend/:_id", function (req, res, next) {
                                 })
                         })
                         .catch(err => {
-                            User.findByIdAndUpdate(req.user._id, { $pull: { friends: confirmationFounded.originUser }, $addToSet: { confirmations: req.params._id } })
+                            User.findByIdAndUpdate(req.user._id, { $pull: { friends: confirmationFounded.originUser }, $addToSet: { confirmations: req.params._id } }, { new: true })
                                 .then(() => res.status(500).json({ message: "Error to accept the user as friend " + err }))
                         })
                 })

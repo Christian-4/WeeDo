@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 import './App.css';
-import PrincipalPage from "./Components/Pages/PrincipalPage/PrincipalPage.jsx"
 import SignupPage from "./Components/Pages/SignupPage/SignupPage.jsx"
 import LoginPage from "./Components/Pages/LoginPage/LoginPage.jsx"
 import PlansPage from "./Components/Pages/PlansPage/PlansPage.jsx"
@@ -12,35 +11,36 @@ import ChatsPage from "./Components/Pages/ChatsPage/ChatsPage.jsx"
 import ChatPage from "./Components/Pages/ChatPage/ChatPage.jsx"
 import Home from "./Components/Pages/HomePage/HomePage.jsx"
 import FriendsPage from "./Components/Pages/FriendsPage/FriendsPage.jsx"
-import BdService from "./Components/BdService"
+import PlansService from "./Components/PlansService"
+import FriendService from "./Components/FriendsService"
 
 class App extends Component {
-  
+
   constructor() {
     super();
 
     this.state = {
-        friends: {}
+      friends: {}
     };
 
-    this.bdService = new BdService();
+    this.friendService = new FriendService();
 
   }
 
   getListFriends = () => {
-    this.bdService.getFriends()
-    .then(response => {
-        this.setState({friends: response})
-    })
+    this.friendService.getFriends()
+      .then(response => {
+        this.setState({ friends: response })
+      })
   }
 
   render() {
     return (
 
-   
-     
+
+
       <div className="App">
-         
+
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signup" render={() => <SignupPage />} />
@@ -51,9 +51,9 @@ class App extends Component {
           <Route exact path="/profile/:_id" render={() => <ProfilePage />} />
           {/* <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:_id" render={() => <ChatPage />} /> */}
-          <Route exact path="/friends" render={() => <FriendsPage friends = {this.state.friends} />} />
-          <Route exact path="/chat" render={() => <ChatPage/>} />
-          
+          <Route exact path="/friends" render={() => <FriendsPage friends={this.state.friends} />} />
+          <Route exact path="/chat" render={() => <ChatPage />} />
+
         </Switch>
       </div>
     );

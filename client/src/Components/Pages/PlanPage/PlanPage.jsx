@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BdService from '../../BdService'
+import PlansService from '../../PlansService'
 
 export default class PlanPage extends Component {
 
@@ -7,34 +7,34 @@ export default class PlanPage extends Component {
     super();
 
     this.state = {
-      plan_id : ""
+      plan_id: ""
     }
 
-    this.bdService = new BdService();
+    this.plansService = new PlansService();
 
-    
+
   }
 
 
   handleDeletePlan = (e) => {
     e.preventDefault();
 
-    const {plan_id} = this.state;
+    const { plan_id } = this.state;
 
-    this.bdService.deletePlan(plan_id)
-    .then(response => {
-      console.log("response")
-    });
+    this.plansService.deletePlan(plan_id)
+      .then(response => {
+        console.log("response " + response)
+      });
   }
 
   render() {
 
     return (
       <div>
-          <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+        <form onSubmit={this.handleDeletePlan} className="new-plan-form">
           <input type="submit" value="delete-plan" />
 
-          </form>
+        </form>
       </div>
     )
   }

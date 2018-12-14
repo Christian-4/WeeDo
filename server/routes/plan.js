@@ -139,7 +139,7 @@ router.put('/editplan/:_id', (req, res, next) => {
             }
 
             Plan.findByIdAndUpdate(req.params._id, planEdited, { new: true })
-                .then((planupdated) => {
+                .then(planupdated => {
                     res.status(200).json({ planupdated, message: "Plan edited!" })
                 })
                 .catch(err => res.status(500).json({ message: "Error to edit plan " + err }))
@@ -150,9 +150,9 @@ router.put('/editplan/:_id', (req, res, next) => {
 router.delete("/deleteplan/:_id", function (req, res, next) {
 
     Plan.findByIdAndDelete(req.params._id)
-        .then((plan) => {
+        .then(plan => {
             Chat.findByIdAndDelete(plan.chat)
-                .then((chat) => {
+                .then(chat => {
                     User.find()
                         .then(users => {
                             let promises = [];
@@ -185,13 +185,13 @@ router.delete("/deleteplan/:_id", function (req, res, next) {
 router.post("/planrequest/:_id", function (req, res, next) {
 
     Plan.findById(req.params._id)
-        .then((planFounded) => {
+        .then(planFounded => {
             const newPlanConfirmation = new PlanConfirmation({
                 plan: req.params._id,
                 user: req.user._id
             });
             newPlanConfirmation.save()
-                .then((confirmation) => {
+                .then(confirmation => {
                     Plan.findByIdAndUpdate(planFounded._id, { $addToSet: { confirmations: newPlanConfirmation._id } }, { new: true })
                         .then(() => {
                             res.status(200).json({ message: "Plan request send!" })
@@ -209,11 +209,11 @@ router.post("/planrequest/:_id", function (req, res, next) {
 router.post("/acceptplan/:_id", function (req, res, next) {
 
     PlanConfirmation.findById(req.params._id)
-        .then((confirmationFounded) => {
+        .then(confirmationFounded => {
             Plan.findByIdAndUpdate(confirmationFounded.plan, { $addToSet: { users: confirmationFounded.user }, $pull: { confirmations: req.params._id } }, { new: true })
-                .then((plan) => {
+                .then(plan => {
                     Chat.findByIdAndUpdate(plan.chat, { $addToSet: { users: confirmationFounded.user } }, { new: true })
-                        .then((chat) => {
+                        .then(chat => {
                             User.findByIdAndUpdate(confirmationFounded.user, { $addToSet: { plans: plan._id, planchats: chat._id } }, { new: true })
                                 .then(() => {
                                     PlanConfirmation.findByIdAndDelete(req.params._id)
@@ -232,7 +232,7 @@ router.post("/acceptplan/:_id", function (req, res, next) {
 router.post("/declineplan/:_id", function (req, res, next) {
 
     PlanConfirmation.findById(req.params._id)
-        .then((confirmationFounded) => {
+        .then(confirmationFounded => {
             Plan.findByIdAndUpdate(confirmationFounded.plan, { $pull: { confirmations: req.params._id } }, { new: true })
                 .then(() => {
                     PlanConfirmation.findByIdAndDelete(req.params._id)
@@ -317,6 +317,20 @@ router.get("/allplans", function (req, res, next) {
     Plan.find()
         .then(plans => res.status(200).json({ plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+})
+
+router.get("/friendplans", function (req, res, next) {
+
+    User.findById(req.user._id)
+        .then(user => {
+            let promises = []
+            user.friends.forEach(friend => {
+                promises.push(Plan.find({ owner: friend._id }))
+            })
+            Promise.all(promises)
+                .then(plans => res.status(200).json({ plans }))
+        })
+        .catch(err => res.status(500).json({ message: "Error to show the plan " + err }))
 })
 
 router.get("/plan/:_id", function (req, res, next) {

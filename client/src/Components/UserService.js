@@ -13,10 +13,12 @@ class UserService {
             .then(response => response.data)
     }
 
-    getProfile = () => {
-        return this.service.get('/profile/:_id')
+    getProfile = (id) => {
+        return this.service.get(`/profile/${id}`)
             .then(response => response.data)
     }
+
+    
 
 }
 

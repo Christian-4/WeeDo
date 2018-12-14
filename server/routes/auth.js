@@ -32,7 +32,7 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
 router.post("/signup",  (req, res, next) => {
 
   const { username, password, password_confirm, email, location} = req.body;
-  const pictureUrl = req.file.url;
+  // const pictureUrl = req.file.url;
   
 
 

@@ -56,4 +56,12 @@ router.put('/editprofile/:_id', (req, res, next) => {
         .catch(err => res.status(500).json({ message: "Error to edit user " + err }))
 })
 
+router.get('/profile/:_id', (req, res, next) => {
+
+    User.findById(req.params._id)
+        .then((user) => res.status(200).json({ user }))
+        .catch(err => res.status(500).json({ message: "Error to show the user profile " + err }))
+})
+
+
 module.exports = router;

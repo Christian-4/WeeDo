@@ -9,8 +9,8 @@ class PlansService {
     }
 
 
-    createNewPlan = () => {
-        return this.service.post('/newplan')
+    createNewPlan = (dataPlan) => {
+        return this.service.post('/newplan',dataPlan)
             .then(response => response.data)
     }
 

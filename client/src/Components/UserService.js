@@ -18,6 +18,11 @@ class UserService {
             .then(response => response.data)
     }
 
+    getUser = () => {
+        return this.service.get('/getuser')
+            .then(response => response.data)
+    }
+
 }
 
 

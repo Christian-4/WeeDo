@@ -59,8 +59,15 @@ router.put('/editprofile/:_id', (req, res, next) => {
 router.get('/profile/:_id', (req, res, next) => {
 
     User.findById(req.params._id)
-        .then((user) => res.status(200).json({ user }))
+        .then(user => res.status(200).json({ user }))
         .catch(err => res.status(500).json({ message: "Error to show the user profile " + err }))
+})
+
+router.get("/getuser", (req, res, next) => {
+
+    User.findById(req.user._id).populate('plans')
+        .then(user => res.status(200).json({ user }))
+        .catch(err => res.status(500).json({ message: "Error to get user " + err }))
 })
 
 

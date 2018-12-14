@@ -29,10 +29,10 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
     .catch(err => res.status(500).json({ message: "Something went wrong" }));
 });
 
-router.post("/signup",  (req, res, next) => {
+router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
 
   const { username, password, password_confirm, email, location} = req.body;
-  // const pictureUrl = req.file.url;
+  const pictureUrl = req.file.url;
   
 
 
@@ -72,6 +72,7 @@ router.post("/signup",  (req, res, next) => {
       password: hashPass,
       email: email, 
       location: location,
+      image: pictureUrl
     });
 
 

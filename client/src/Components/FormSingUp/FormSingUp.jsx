@@ -35,7 +35,7 @@ export default class FormSingUp extends Component {
   handleChange = (e) => {
     let  {name, value} = e.target;
       if(name == "image") {
-        this.setState({...this.state, imnage: e.target.files[0]})
+        this.setState({...this.state, image: e.target.files[0]})
       } else {
       
         this.setState({[name]: value});

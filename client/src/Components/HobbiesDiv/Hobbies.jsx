@@ -6,9 +6,15 @@ export default class Hobbies extends Component {
     constructor() {
         super();
         this.state = {
-          hobbies: hobbies
+          hobbies: hobbies,
+          hobbiesSelected: []
         };
       }
+
+  hobbieClicked =  (e) => {
+    let  {name, value} = e.target;
+    console.log("hobbie clicked "+ e, e.target.getAttribute('id') )
+  }
 
   render() {
     return (
@@ -16,7 +22,7 @@ export default class Hobbies extends Component {
         <div>
             <ul>
                  {this.state.hobbies.map((hobbie)=>(
-                    <li>{hobbie.name}</li>
+                    <li id={`${hobbie.name}`} name="deportes" value="deportes" onClick={e => this.hobbieClicked(e)}>{hobbie.name}</li>
                 ))}
             </ul>
         </div>

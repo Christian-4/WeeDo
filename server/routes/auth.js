@@ -31,12 +31,12 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
 
 router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
 
-  const { username, password, password_confirm, email, location} = req.body;
+  const { username, password, password_confirm, email, location, hobbies} = req.body;
   const pictureUrl = req.file.url;
   
 
 
-  if (username === "" || password === "" || email === "" || location === "") {
+  if (username === "" || password === "" || email === "" || location === "" || hobbies.length <= 0) {
     res.status(500).json({ message: "Indicar todos los datos" });
     return;
   }
@@ -72,7 +72,8 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
       password: hashPass,
       email: email, 
       location: location,
-      image: pictureUrl
+      image: pictureUrl,
+      hobbies: hobbies
     });
 
 
@@ -86,9 +87,7 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
           if (err) {
               res.status(500).json({ message: 'Login after signup went bad.' });
               return;
-          }
-
-          res.status(200).json(user);
+          }     
       });
       }
     });

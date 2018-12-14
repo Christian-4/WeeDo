@@ -22,7 +22,7 @@ export default class FormSingUp extends Component {
       email: "",
       image: "",
       location: "",
-      hobbies: "",
+      hobbies: [],
       redirect: false,
       displayHobbies: false
     }
@@ -31,6 +31,14 @@ export default class FormSingUp extends Component {
 
     
   }
+
+
+  hobbieClicked =  (e) => {
+    let hobbies = this.state.hobbies;
+    hobbies.push(e.target.getAttribute('id'))
+    this.setState({...this.state,hobbies: hobbies})
+  }
+
 
   handleChange = (e) => {
     let  {name, value} = e.target;
@@ -55,12 +63,12 @@ export default class FormSingUp extends Component {
     e.preventDefault();
 
     console.log(this.state.location);
-    const {username, password, password_confirm,email,location, image} = this.state;
+    const {username, password, password_confirm,email,location, image, hobbies} = this.state;
 
 //    console.log(username, password, password_confirm, email, image, location, hobbies)
 
 
-    this.authService.signup({username, password, password_confirm, email, location, image})
+    this.authService.signup({username, password, password_confirm, email, location, image, hobbies})
     .then(user => {
       console.log(user)
     });
@@ -68,7 +76,7 @@ export default class FormSingUp extends Component {
 
   getViewHobbies = (props) =>{
 
-    return (<div><Hobbies /></div>) 
+    return (<div><Hobbies selectHobbies={this.hobbieClicked} /></div>) 
   }
 
   displayHobbies = () =>{
@@ -86,7 +94,7 @@ export default class FormSingUp extends Component {
         return <Redirect to="/" />
       }
 
-    let hobbies =""
+    let hobbies = ""
 
     if(this.state.displayHobbies){
  

@@ -11,10 +11,6 @@ export default class Hobbies extends Component {
         };
       }
 
-  hobbieClicked =  (e) => {
-    let  {name, value} = e.target;
-    this.state.hobbiesSelected.push( e.target.getAttribute('id'))
-  }
 
   render() {
     return (
@@ -22,7 +18,7 @@ export default class Hobbies extends Component {
         <div>
             <ul>
                  {this.state.hobbies.map((hobbie)=>(
-                    <li id={`${hobbie.name}`} name="deportes" value="deportes" onClick={e => this.hobbieClicked(e)}>{hobbie.name}</li>
+                    <li id={`${hobbie.name}`} name="deportes" value="deportes" onClick={e => this.props.selectHobbies(e)}>{hobbie.name}</li>
                 ))}
             </ul>
         </div>

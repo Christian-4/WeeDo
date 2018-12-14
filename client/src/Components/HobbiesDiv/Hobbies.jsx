@@ -13,7 +13,7 @@ export default class Hobbies extends Component {
 
   hobbieClicked =  (e) => {
     let  {name, value} = e.target;
-    console.log("hobbie clicked "+ e, e.target.getAttribute('id') )
+    this.state.hobbiesSelected.push( e.target.getAttribute('id'))
   }
 
   render() {

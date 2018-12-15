@@ -16,6 +16,14 @@ export default class PlanPage extends Component {
   }
 
 
+  componentDidMount(){
+    this.plansService.getPlan(this.state.plan_id)
+    .then(response =>{
+      console.log(response)
+      // this.setState({...this.state,plan_id: })
+    })
+  }
+
   handleDeletePlan = (e) => {
     e.preventDefault();
 

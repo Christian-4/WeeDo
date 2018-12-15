@@ -12,8 +12,7 @@ import ChatsPage from "./Components/Pages/ChatsPage/ChatsPage.jsx"
 import ChatPage from "./Components/Pages/ChatPage/ChatPage.jsx"
 import Home from "./Components/Pages/HomePage/HomePage.jsx"
 import FriendsPage from "./Components/Pages/FriendsPage/FriendsPage.jsx"
-import PlansService from "./Components/PlansService"
-import FriendService from "./Components/FriendsService"
+import UserPage from "./Components/Pages/UserPage/UserPage.jsx"
 
 class App extends Component {
 
@@ -57,7 +56,7 @@ class App extends Component {
           <Route exact path="/chat/:id" component={ChatPage} />
           <Route exact path="/friends" render={() => <FriendsPage />} />
           <Route exact path="/chat" render={() => <ChatPage />} />
-
+          <Route exact path="/allusers" render={() => <UserPage />} />
         </Switch>
       </div>
     );

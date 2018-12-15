@@ -134,7 +134,7 @@ router.post("/declinefriend/:_id", function (req, res, next) {
 
 router.get("/allusers", function (req, res, next) {
 
-    User.find()
+    User.find(  { _id: { $nin: [req.user._id] } } )
         .then(users => res.status(200).json({ users }))
         .catch(err => res.status(500).json({ message: "Error to show users " + err }))
 })

@@ -8,8 +8,8 @@ class FriendsService {
         })
     }
 
-    addFriend = () => {
-        return this.service.post('/addfriend/:_id')
+    addFriend = (id) => {
+        return this.service.post(`/addfriend/${id}`)
             .then(response => response.data)
     }
 
@@ -30,7 +30,7 @@ class FriendsService {
 
     getAllUsers = () => {
         return this.service.get('/allusers')
-            .then(response => response.data)
+            .then(response => response.data )
     }
 
     getFriends = () => {

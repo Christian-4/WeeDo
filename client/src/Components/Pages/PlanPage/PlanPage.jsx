@@ -46,7 +46,7 @@ export default class PlanPage extends Component {
           <p>{title}</p>
           <p>{description}</p>
           <p>{date}</p>
-          <Link to={`/plan/${chat}`}><p> Chat</p></Link>
+          <Link to={`/chat/${chat}`}><p> Chat</p></Link>
         </div>
       </React.Fragment>
     )

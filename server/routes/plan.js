@@ -6,6 +6,13 @@ const Chat = require("../models/Chat");
 const User = require("../models/User");
 const PlanConfirmation = require("../models/PlanConfirmation");
 
+
+
+router.get("/favicon.ico", (req,res,next)=>{
+    res.status(204).json({message: "favicon not found"});
+    return
+})
+
 router.post("/newplan", function (req, res, next) {
     const { title, description, location, date, limit, hobby } = req.body;
 
@@ -313,9 +320,8 @@ router.delete("/delplanfav/:_id", function (req, res, next) {
 })
 
 router.get("/allplans", function (req, res, next) {
-
-
-    Plan.find()
+    
+    Plan.find().populate('users')
         .then(plans => res.status(200).json({ plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })

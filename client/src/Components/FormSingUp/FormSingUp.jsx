@@ -28,8 +28,6 @@ export default class FormSingUp extends Component {
     }
 
     this.authService = new AuthService();
-
-    
   }
 
 
@@ -61,8 +59,7 @@ export default class FormSingUp extends Component {
   handleFormSubmit = (e) => {
   
     e.preventDefault();
-
-    console.log(this.state.location);
+    
     const {username, password, password_confirm,email,location, image, hobbies} = this.state;
 
 //    console.log(username, password, password_confirm, email, image, location, hobbies)

@@ -34,6 +34,10 @@ class App extends Component {
       })
   }
 
+  getUserId = () =>{
+    
+  }
+
   render() {
     return (
 
@@ -46,11 +50,11 @@ class App extends Component {
           <Route exact path="/signup" render={() => <SignupPage />} />
           <Route exact path="/login" render={() => <LoginPage />} />
           <Route exact path="/plans" render={() => <PlansPage />} />
-          <Route exact path="/plan/:_id" render={() => <PlanPage />} />
+          <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
           <Route exact path="/profile" render={() => <ProfilePage />} />
-          {/* <Route exact path="/chats" render={() => <ChatsPage />} />
-          <Route exact path="/chat/:_id" render={() => <ChatPage />} /> */}
+          {/* <Route exact path="/chats" render={() => <ChatsPage />} />*/}
+          <Route exact path="/chat/:id" component={ChatPage} /> 
           <Route exact path="/friends" render={() => <FriendsPage friends={this.state.friends} />} />
           <Route exact path="/chat" render={() => <ChatPage />} />
 

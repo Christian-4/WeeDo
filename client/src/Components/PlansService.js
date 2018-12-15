@@ -1,4 +1,6 @@
 import axios from "axios";
+const array = require('lodash/array');
+
 
 class PlansService {
     constructor() {
@@ -65,9 +67,10 @@ class PlansService {
             .then(response => response.data)
     }
 
-    getAllPlans = () => {
+    getAllPlans = (id) => {
+        
         return this.service.get("/allplans")
-            .then(response => response.data)
+            .then(response =>  response.data)
     }
 
     getFriendPlans = () => {
@@ -75,8 +78,8 @@ class PlansService {
             .then(response => response.data)
     }
 
-    getPlan = () => {
-        return this.service.get("/plan/:_id")
+    getPlan = (id) => {
+        return this.service.get(`/plan/${id}`)
             .then(response => response.data)
     }
 

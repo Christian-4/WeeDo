@@ -14,7 +14,7 @@ export default class ChatPage extends Component {
     this.state = {
       name: 'Bob',
       messages: [],
-      id: Math.floor(Math.random()*2)
+      id: this.this.props.match.params.id
     }
   }
 

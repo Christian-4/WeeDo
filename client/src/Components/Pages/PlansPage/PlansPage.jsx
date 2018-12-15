@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PlanService from '../../PlansService'
+import { Link } from "react-router-dom";
 
 export default class PlansPage extends Component {
 
@@ -7,7 +8,8 @@ export default class PlansPage extends Component {
     super(props)
     
     this.state = {
-      plans: []
+      plans: null,
+      userId: "5c14d8301c9cb706bb600247"
     }
 
     this.planService = new PlanService()
@@ -15,17 +17,43 @@ export default class PlansPage extends Component {
 
 
   componentDidMount(){
-    this.planService.getAllPlans()
+    this.planService.getAllPlans(this.state.userId)
     .then(response => {
-      console.log(response)
+      this.setState({...this.state,plans: response.plans})
     })
   }
 
-  render() {
+
+
+  printPlans = () =>{
     return (
       <React.Fragment>
-        
+        {this.state.plans.map(function(plan,index){
+         return(
+           <div>
+              <div>{plan.title}</div>
+              <p>{plan.description}</p>
+              <p>{plan.date}</p>
+              <Link to={`/plan/${plan._id}`}><p>View Plan</p></Link>
+           </div>
+           
+         )
+        })}
       </React.Fragment>
     )
+  }
+
+  render() {
+    return( 
+      <React.Fragment>
+        {
+          this.state.plans !== null && 
+          <div>{this.printPlans()}</div>
+       
+        }
+       
+        
+      </React.Fragment>
+      )
   }
 }

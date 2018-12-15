@@ -6,6 +6,7 @@ import LoginPage from "./Components/Pages/LoginPage/LoginPage.jsx"
 import PlansPage from "./Components/Pages/PlansPage/PlansPage.jsx"
 import PlanPage from "./Components/Pages/PlanPage/PlanPage.jsx"
 import CreatePlanPage from "./Components/Pages/CreatePlanPage/CreatePlanPage.jsx"
+import MyProfilePage from "./Components/Pages/MyProfilePage/MyProfilePage.jsx"
 import ProfilePage from "./Components/Pages/ProfilePage/ProfilePage.jsx"
 import ChatsPage from "./Components/Pages/ChatsPage/ChatsPage.jsx"
 import ChatPage from "./Components/Pages/ChatPage/ChatPage.jsx"
@@ -52,7 +53,8 @@ class App extends Component {
           <Route exact path="/plans" render={() => <PlansPage />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
-          <Route exact path="/profile" render={() => <ProfilePage />} />
+          <Route exact path="/profile" component={MyProfilePage} />
+          <Route exact path="/profile/:id" component={ProfilePage} />
           {/* <Route exact path="/chats" render={() => <ChatsPage />} />*/}
           <Route exact path="/chat/:id" component={ChatPage} /> 
           <Route exact path="/friends" render={() => <FriendsPage friends={this.state.friends} />} />

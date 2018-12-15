@@ -71,12 +71,4 @@ router.get("/getuser", (req, res, next) => {
 })
 
 
-router.get("/getuser", (req, res, next) => {
-
-    User.findById(req.user._id)
-        .then(user => res.status(200).json({ user }))
-        .catch(err => res.status(500).json({ message: "Error to get user " + err }))
- })
-
-
 module.exports = router;

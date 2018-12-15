@@ -14,6 +14,7 @@ export default class HomePage extends Component {
         <Link to={"/chat"}><p>Chat</p></Link>
         <Link to={"/profile"}><p>View Profile</p></Link>
         <Link to={"/plans"}><p>View Plans</p></Link>
+        <Link to={"/friends"}><p>View Friends</p></Link>
 
       </div>
     )

@@ -7,7 +7,6 @@ export default class ProfilePage extends Component {
 
     this.state = {
       user: null,
-      userId: this.props.match.params.id
     }
 
     this.UserService = new UserService()
@@ -15,7 +14,7 @@ export default class ProfilePage extends Component {
 
   componentDidMount() {
 
-    this.UserService.getProfile(this.state.userId)
+    this.UserService.getUser()
     .then(response => {
         this.setState({...this.state, user: response.user})
     })

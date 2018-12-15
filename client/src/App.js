@@ -17,32 +17,30 @@ import FriendService from "./Components/FriendsService"
 
 class App extends Component {
 
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.state = {
-      friends: {}
-    };
+  //   this.state = {
+  //     friends: {}
+  //   };
 
-    this.friendService = new FriendService();
+  //   this.friendService = new FriendService();
 
-  }
+  // }
 
-  getListFriends = () => {
-    this.friendService.getFriends()
-      .then(response => {
-        this.setState({ friends: response })
-      })
-  }
+  // getListFriends = () => {
+  //   this.friendService.getFriends()
+  //     .then(response => {
+  //       this.setState({ friends: response })
+  //     })
+  // }
 
-  getUserId = () =>{
-    
-  }
+  // getUserId = () =>{
+
+  // }
 
   render() {
     return (
-
-
 
       <div className="App">
 
@@ -55,9 +53,9 @@ class App extends Component {
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
           <Route exact path="/profile" component={MyProfilePage} />
           <Route exact path="/profile/:id" component={ProfilePage} />
-          {/* <Route exact path="/chats" render={() => <ChatsPage />} />*/}
-          <Route exact path="/chat/:id" component={ChatPage} /> 
-          <Route exact path="/friends" render={() => <FriendsPage friends={this.state.friends} />} />
+          <Route exact path="/chats" render={() => <ChatsPage />} />
+          <Route exact path="/chat/:id" component={ChatPage} />
+          <Route exact path="/friends" render={() => <FriendsPage />} />
           <Route exact path="/chat" render={() => <ChatPage />} />
 
         </Switch>

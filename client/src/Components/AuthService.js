@@ -19,7 +19,7 @@ class AuthService {
               "Content-Type": "multipart/form-data"
             }
         })
-        .then(response => response.data)
+        .then(response => response)
       }
 
     login = (user) => {

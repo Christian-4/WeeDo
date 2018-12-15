@@ -3,6 +3,16 @@ import DatePicker from 'react-date-picker';
 import DatePickerStyle from 'react-date-picker/dist/entry.nostyle';
 import PlansService from '../../PlansService'
 import './CreatePlanPage.css'
+import hobbies from '../../HobbiesDiv/hobbies.json'
+import Select from "react-select";
+
+
+const options = [
+  { value: "Deportes", label: "Deportes" },
+  { value: "Educación y tecnología", label: "Educación y tecnología" },
+  { value: "Ejercicio", label: "Ejercicio" }
+]
+
 
 export default class CreatePlanPage extends Component {
 
@@ -14,13 +24,20 @@ export default class CreatePlanPage extends Component {
       description: "",
       location: null,
       date: new Date(),
-      limit: 0
+      limit: 0,
+      hobby:""
     }
 
     this.plansService = new PlansService();
 
 
   }
+
+  selectChange = type => {
+    //Select de localizacion
+    this.setState({...this.state, hobby: type.value} );
+ 
+  };
 
 
   handleChange = (e) => {
@@ -33,9 +50,9 @@ export default class CreatePlanPage extends Component {
   handleNewPlan = (e) => {
     e.preventDefault();
 
-    const { title, description, date, limit } = this.state;
+    const { title, description, date, limit, hobby } = this.state;
 
-    this.plansService.createNewPlan({ title, description, date, date, limit })
+    this.plansService.createNewPlan({ title, description, date, date, limit, hobby })
       .then(response => {
         console.log("response")
       });
@@ -45,6 +62,10 @@ export default class CreatePlanPage extends Component {
 
 
   render() {
+
+    const { type } = this.state.hobby;
+
+
     return (
       <React.Fragment>
 
@@ -78,7 +99,19 @@ export default class CreatePlanPage extends Component {
             name="limit"
             onChange={e => this.handleChange(e)}
           />
+
+           
+           <div>
+               <label>Tematica</label>
+            <Select
+            value={type}
+            onChange={e => this.selectChange(e)}
+            options={options}
+            />
+          </div>
+
           <input type="submit" value="new-plan" />
+         
         </form>
 
 

@@ -87,7 +87,9 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
           if (err) {
               res.status(500).json({ message: 'Login after signup went bad.' });
               return;
-          }     
+          } 
+          
+          res.status(200).json(user);
       });
       }
     });

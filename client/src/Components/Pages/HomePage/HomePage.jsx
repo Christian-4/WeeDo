@@ -12,10 +12,12 @@ export default class HomePage extends Component {
         <Link to={"/login"}><p>LogIn</p></Link>
         <Link to={"/newplan"}><p>New Plan</p></Link>
         <Link to={"/chat"}><p>Chat</p></Link>
+        <Link to={"/chats"}><p>Chats</p></Link>
         <Link to={"/profile"}><p>View Profile</p></Link>
         <Link to={"/plans"}><p>View Plans</p></Link>
+        <Link to={"/friends"}><p>View Friends</p></Link>
 
-      </div>
+      </div >
     )
   }
 }

@@ -141,7 +141,7 @@ router.get("/allusers", function (req, res, next) {
 
 router.get("/friends", function (req, res, next) {
 
-    User.findById(req.user._id)
+    User.findById(req.user._id).populate("friends")
         .then(user => res.status(200).json({ friends: user.friends }))
         .catch(err => res.status(500).json({ message: "Error to show friends " + err }))
 })

@@ -371,6 +371,29 @@ router.get("/userplans", function (req, res, next) {
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })
 
+router.get("/plannotifications/:_id", function (req, res, next) {
+
+    PlanConfirmation.find({ plan: req.params._id }).populate("user")
+        .then(confirmations => res.status(200).json({ confirmations }))
+        .catch(err => res.status(500).json({ message: "Error to show confirmations " + err }))
+})
+
+// router.get("/plannotifications", function (req, res, next) {
+
+//     Plan.find({ owner: req.user._id })
+//         .then(plans => {
+//             let promises = []
+//             plans.forEach(plan => {
+//                 promises.push(PlanConfirmation.find({ plan }).populate("user").populate("plan"))
+//             })
+//             Promise.all(promises)
+//                 .then(confirmations => res.status(200).json({ confirmations }))
+//         })
+//     PlanConfirmation.find
+//         .catch(err => res.status(500).json({ message: "Error to show confirmations " + err }))
+// })
+
+
 
 
 module.exports = router;

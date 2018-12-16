@@ -29,6 +29,7 @@ export default class HomePage extends Component {
         <Link to={"/plans"}><p>View Plans</p></Link>
         <Link to={"/friends"}><p>View Friends</p></Link>
         <Link to={`/allusers/`}><p>All Users</p></Link>
+        <Link to={`/notifications`}><p>Notifications</p></Link>
 
       </div >
     )

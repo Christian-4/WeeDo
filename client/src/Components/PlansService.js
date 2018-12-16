@@ -12,7 +12,7 @@ class PlansService {
 
 
     createNewPlan = (dataPlan) => {
-        return this.service.post('/newplan',dataPlan)
+        return this.service.post('/newplan', dataPlan)
             .then(response => response.data)
     }
 
@@ -32,13 +32,13 @@ class PlansService {
             .then(response => response.data)
     }
 
-    acceptPlan = () => {
-        return this.service.post("/acceptplan/:_id")
+    acceptPlan = (id) => {
+        return this.service.post(`/acceptplan/${id}`)
             .then(response => response.data)
     }
 
-    declinePlan = () => {
-        return this.service.post("/declineplan/:_id")
+    declinePlan = (id) => {
+        return this.service.post(`/declineplan/${id}`)
             .then(response => response.data)
     }
 
@@ -68,9 +68,9 @@ class PlansService {
     }
 
     getAllPlans = (id) => {
-        
+
         return this.service.get("/allplans")
-            .then(response =>  response.data)
+            .then(response => response.data)
     }
 
     getFriendPlans = () => {
@@ -96,6 +96,11 @@ class PlansService {
     getOwnPlans = () => {
         return this.service.get("/userplans")
             .then(response => response.data)
+    }
+
+    getNotifications = (id) => {
+        return this.service.get(`/plannotifications/${id}`)
+            .then(response => response.data);
     }
 
 }

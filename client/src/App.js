@@ -14,6 +14,7 @@ import ChatPage from "./Components/Pages/ChatPage/ChatPage.jsx"
 import Home from "./Components/Pages/HomePage/HomePage.jsx"
 import FriendsPage from "./Components/Pages/FriendsPage/FriendsPage.jsx"
 import UserPage from "./Components/Pages/UserPage/UserPage.jsx"
+import NotificationsPage from './Components/Pages/NotificationsPage/NotificationsPage.jsx';
 
 class App extends Component {
 
@@ -80,6 +81,7 @@ class App extends Component {
           <Route exact path="/friends" render={() => <FriendsPage />} />
           <Route exact path="/chat" render={() => <ChatPage />} />
           <Route exact path="/allusers" render={() => <UserPage />} />
+          <Route exact path="/notifications" render={() => <NotificationsPage />} />
         </Switch>
       </div>
     );

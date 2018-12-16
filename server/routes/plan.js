@@ -8,8 +8,8 @@ const PlanConfirmation = require("../models/PlanConfirmation");
 
 
 
-router.get("/favicon.ico", (req,res,next)=>{
-    res.status(204).json({message: "favicon not found"});
+router.get("/favicon.ico", (req, res, next) => {
+    res.status(204).json({ message: "favicon not found" });
     return
 })
 
@@ -66,17 +66,20 @@ router.post("/newplan", function (req, res, next) {
                 .then(() => {
                     newPlan.save()
                         .then((plan) => {
-                            User.findByIdAndUpdate(req.user._id, { $addToSet: { plans: plan._id } }, { new: true })
+                            Chat.findByIdAndUpdate(chat._id, { plan: plan._id }, { new: true })
                                 .then(() => {
-                                    res.status(200).json({ plan, message: "Plan create!" })
-                                })
-                                .catch(err => {
-                                    Chat.findByIdAndDelete(chat._id)
+                                    User.findByIdAndUpdate(req.user._id, { $addToSet: { plans: plan._id } }, { new: true })
                                         .then(() => {
-                                            User.findByIdAndUpdate(req.user._id, { $pull: { planchats: chat._id } }, { new: true })
+                                            res.status(200).json({ plan, message: "Plan create!" })
+                                        })
+                                        .catch(err => {
+                                            Chat.findByIdAndDelete(chat._id)
                                                 .then(() => {
-                                                    Plan.findByIdAndDelete(plan._id)
-                                                        .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+                                                    User.findByIdAndUpdate(req.user._id, { $pull: { planchats: chat._id } }, { new: true })
+                                                        .then(() => {
+                                                            Plan.findByIdAndDelete(plan._id)
+                                                                .then(() => res.status(500).json({ message: "Error to create plan " + err }))
+                                                        })
                                                 })
                                         })
                                 })
@@ -320,7 +323,7 @@ router.delete("/delplanfav/:_id", function (req, res, next) {
 })
 
 router.get("/allplans", function (req, res, next) {
-    
+
     Plan.find().populate('users')
         .then(plans => res.status(200).json({ plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))

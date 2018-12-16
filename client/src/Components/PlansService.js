@@ -17,8 +17,8 @@ class PlansService {
     }
 
 
-    deletePlan = () => {
-        return this.service.delete('/deleteplan/:_id')
+    deletePlan = (id) => {
+        return this.service.delete(`/deleteplan/${id}`)
             .then(response => response.data)
     }
 
@@ -27,8 +27,8 @@ class PlansService {
             .then(response => response.data)
     }
 
-    planRequest = () => {
-        return this.service.post("/planrequest/:_id")
+    planRequest = (id) => {
+        return this.service.post(`/planrequest/${id}`)
             .then(response => response.data)
     }
 

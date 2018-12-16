@@ -45,6 +45,13 @@ export default class PlanPage extends Component {
       })
   }
 
+  planRequest = (id) => {
+    this.plansService.planRequest(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
+
   handleDeletePlan = (e) => {
     e.preventDefault();
 
@@ -57,7 +64,7 @@ export default class PlanPage extends Component {
   }
 
 
-  printPlan = () => {
+  printPlan = (planRequest) => {
     const { title, description, date, chat } = this.state.plan
     return (
       <React.Fragment>
@@ -65,7 +72,8 @@ export default class PlanPage extends Component {
           <p>{title}</p>
           <p>{description}</p>
           <p>{date}</p>
-          <Link to={`/chat/${chat}`}><p> Chat</p></Link>
+          <button onClick={() => planRequest(this.state.plan_id)}>Join request</button>
+          {/* <Link to={`/chat/${chat}`}><p> Chat</p></Link> */}
         </div>
       </React.Fragment>
     )
@@ -98,7 +106,11 @@ export default class PlanPage extends Component {
       <div>
         {
           this.state.plan !== null &&
-          <div>{this.printPlan()}</div>
+          <div>{this.printPlan(this.planRequest)}
+            <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+              <input type="submit" value="delete-plan" />
+            </form>
+          </div>
 
         }
 
@@ -107,9 +119,6 @@ export default class PlanPage extends Component {
           <div>{this.printNotifications(this.acceptPlan, this.declinePlan)}</div>
 
         }
-        <form onSubmit={this.handleDeletePlan} className="new-plan-form">
-          <input type="submit" value="delete-plan" />
-        </form>
       </div>
     )
   }

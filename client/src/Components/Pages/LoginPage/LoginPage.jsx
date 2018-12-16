@@ -9,10 +9,19 @@ const responseFacebook = response => {
 };
 
 export default class LoginPage extends Component {
+
+  constructor(props){
+    super()
+
+    this.props = props
+
+  }
+
+
   render() {
     return (
       <div>
-        <FormLogin />
+        <FormLogin getUserSession= {this.props.getUserSession} />
 
 
         {/* <FacebookLogin

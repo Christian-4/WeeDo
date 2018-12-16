@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 import './App.css';
 import SignupPage from "./Components/Pages/SignupPage/SignupPage.jsx"
 import LoginPage from "./Components/Pages/LoginPage/LoginPage.jsx"
@@ -16,16 +17,31 @@ import UserPage from "./Components/Pages/UserPage/UserPage.jsx"
 
 class App extends Component {
 
-  // constructor() {
-  //   super();
+  constructor() {
+    super();
 
-  //   this.state = {
-  //     friends: {}
-  //   };
+    this.state = {
+      userSession: null,
+      userSessionId: null
+    }
 
-  //   this.friendService = new FriendService();
+    this.IsredirectHome = false
+    
 
-  // }
+  }
+
+  getUserSession = (user) => {
+   this.setState({...this.state, userSession: user, userSessionId: user})
+
+  }
+
+
+  redirectHome = () => {
+    return  <Redirect to='/' />
+  } 
+
+  
+
 
   // getListFriends = () => {
   //   this.friendService.getFriends()
@@ -40,13 +56,20 @@ class App extends Component {
 
   render() {
     return (
-
+      
+     
       <div className="App">
 
+        {
+           this.state.userSessionId !== null && 
+           this.redirectHome()
+     
+        }
+
         <Switch>
-          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} />
           <Route exact path="/signup" render={() => <SignupPage />} />
-          <Route exact path="/login" render={() => <LoginPage />} />
+          <Route exact path="/login" render={() => <LoginPage  getUserSession = {this.getUserSession}/>} />
           <Route exact path="/plans" render={() => <PlansPage />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />

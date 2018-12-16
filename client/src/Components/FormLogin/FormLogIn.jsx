@@ -4,8 +4,10 @@ import Logout from "../Logout/Logout.jsx"
 
 
 export default class FormLogIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.props=props;
 
     this.state = {
       username: "",
@@ -21,7 +23,9 @@ export default class FormLogIn extends Component {
     const { username, password } = this.state;
 
     this.authService.login({ username, password })
-      .then(user => console.log({ user }));
+      .then(user => {
+          this.props.getUserSession(user)
+      });
   }
 
 

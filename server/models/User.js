@@ -18,7 +18,8 @@ const userSchema = new Schema({
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   planchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
   friendchats: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
-  confirmations: [{ type: Schema.Types.ObjectId, ref: 'FriendConfirmations' }],
+  confirmations: [{ type: Schema.Types.ObjectId, ref: 'FriendConfirmation' }],
+  sendRequestUser:[{ type: Schema.Types.ObjectId, ref: 'User' }],
   favourites: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
 }, {
     timestamps: {

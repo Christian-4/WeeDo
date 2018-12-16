@@ -18,7 +18,12 @@ router.post("/addfriend/:_id", function (req, res, next) {
                 .then((confirmation) => {
                     User.findByIdAndUpdate(userFounded._id, { $addToSet: { confirmations: newFriendConfirmation._id } }, { new: true })
                         .then(() => {
-                            res.status(200).json({ message: "Friend request send!" })
+                            User.findByIdAndUpdate(req.user._id, { $addToSet: { sendRequestUser: req.params._id} }, { new: true })
+                            .then(() => {
+                                res.status(200).json({ message: "Friend request send!" })
+                            })
+                            .catch(err => res.status(500).json({message: "Error to send friend request! "}))
+                           
                         })
                         .catch(err => {
                             FriendConfirmation.findByIdAndDelete(confirmation._id)
@@ -133,9 +138,13 @@ router.post("/declinefriend/:_id", function (req, res, next) {
 })
 
 router.get("/allusers", function (req, res, next) {
-
-    User.find(  { _id: { $nin: [req.user._id] } } )
-        .then(users => res.status(200).json({ users }))
+   
+    User.find()
+        .then(users =>  {
+          
+          res.status(200).json({users}) 
+          
+        })
         .catch(err => res.status(500).json({ message: "Error to show users " + err }))
 })
 

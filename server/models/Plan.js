@@ -8,7 +8,7 @@ const planSchema = new Schema({
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     title: String,
     description: String,
-    location: String,
+    location: {},
     date: Date,
     limit: Number,
     hobby: String,

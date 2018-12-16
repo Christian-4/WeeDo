@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PlansService from '../../PlansService'
 import { Link } from "react-router-dom";
+import Map from "../../Map/Map.jsx"
 
 
 export default class PlanPage extends Component {
@@ -52,6 +53,16 @@ export default class PlanPage extends Component {
     )
   }
 
+  printMap = () => {
+    console.log(this.state.plan)
+    return (
+      <React.Fragment>
+
+        <Map center={this.state.plan.location} view = {true} />
+      </React.Fragment>
+    )
+  }
+
   render() {
     return (
       
@@ -64,6 +75,12 @@ export default class PlanPage extends Component {
         <form onSubmit={this.handleDeletePlan} className="new-plan-form">
           <input type="submit" value="delete-plan" />
         </form>
+
+       { this.state.plan !== null &&
+      
+        <div> {this.printMap()} </div>
+        }
+        
       </div>
     )
   }

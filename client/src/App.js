@@ -48,16 +48,7 @@ class App extends Component {
   
 
 
-  // getListFriends = () => {
-  //   this.friendService.getFriends()
-  //     .then(response => {
-  //       this.setState({ friends: response })
-  //     })
-  // }
 
-  // getUserId = () =>{
-
-  // }
 
   render() {
     return (
@@ -90,6 +81,7 @@ class App extends Component {
           <Route exact path="/ownplans" render={() => <OwnPlansPage />} />
           <Route exact path="/friendsplans" render={() => <FriendsPlansPage />} />
         </Switch>
+
       </div>
     );
   }

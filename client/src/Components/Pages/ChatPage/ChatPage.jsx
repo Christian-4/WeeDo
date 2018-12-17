@@ -72,7 +72,7 @@ export default class ChatPage extends Component {
   };
 
   addMessage = message =>{
-    this.setState(state => ({ messages: [message, ...state.messages] }));
+    this.setState(state => ({ messages: [...state.messages, message] }));
     this.chatService.addMessage(this.state.id,message);}
 
   submitMessage = messageString => {

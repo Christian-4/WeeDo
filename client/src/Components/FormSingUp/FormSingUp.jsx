@@ -7,6 +7,7 @@ import {Redirect} from "react-router-dom";
 import { Link } from "react-router-dom";
 import Hobbies from "../HobbiesDiv/Hobbies.jsx"
 
+
 const options = [
     { value: "Madrid", label: "Madrid" },
     { value: "Barcelona", label: "Barcelona" },
@@ -57,6 +58,14 @@ export default class FormSingUp extends Component {
  
   };
 
+  redirectLogin = () => {
+    console.log("redirect login")
+    this.setState({...this.state, redirect : true})
+  }
+
+  ShowErrorMessage = (message) => {
+    return <div>{message}</div>
+  }
 
   handleFormSubmit = (e) => {
   
@@ -69,12 +78,21 @@ export default class FormSingUp extends Component {
     if(this.props.profile){
       console.log("editado")
       this.userService.editProfile({username, password, password_confirm,email,location, image, hobbies})
-      .then(user => console.log(user))
+      .then(response => console.log(response))
       .catch(err => console.log(err))
 
     }else{
       this.authService.signup({username, password, password_confirm, email, location, image, hobbies})
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response.data.message)
+         if(response.data.message === "SignUp succesfull"){
+            this.redirectLogin("login")
+         }
+        //  }else{
+        //     this.ShowErrorMessage(response.data.message)
+        //  }
+
+      })
     }
 
    
@@ -97,7 +115,7 @@ export default class FormSingUp extends Component {
     const { location } = this.state;
 
     if(this.state && this.state.redirect) {
-        return <Redirect to="/" />
+        return <Redirect to="/login" />
       }
 
     let hobbies = ""

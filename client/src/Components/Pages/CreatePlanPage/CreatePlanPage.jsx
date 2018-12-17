@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DatePicker from 'react-date-picker';
 import DatePickerStyle from 'react-date-picker/dist/entry.nostyle';
 import PlansService from '../../PlansService'
+import {Redirect} from "react-router-dom";
 import './CreatePlanPage.css'
 import hobbies from '../../HobbiesDiv/hobbies.json'
 import Select from "react-select";
@@ -28,7 +29,9 @@ export default class CreatePlanPage extends Component {
       limit: 0,
       hobby:"",
       showMap : false,
-      center: {lat: 40.4378698, lng: -3.8196207 }
+      center: {lat: 40.4378698, lng: -3.8196207 },
+      redirect: false,
+      planId: null
     }
 
     this.plansService = new PlansService();
@@ -60,7 +63,9 @@ export default class CreatePlanPage extends Component {
     const { title, description,location, date, limit, hobby } = this.state;
     this.plansService.createNewPlan({ title, description, location,date, date, limit, hobby })
       .then(response => {
-        console.log("response")
+          if(response.message === "Plan create!"){
+            this.setState({...this.state, redirect : true, planId: response.plan._id})
+          }
       });
   }
 
@@ -82,6 +87,10 @@ export default class CreatePlanPage extends Component {
 
     const { type } = this.state.hobby;
     const map = this.renderMap()
+
+    if(this.state.redirect){
+      return <Redirect to={`/plan/${this.state.planId}`} />
+    }
 
     return (
       <React.Fragment>

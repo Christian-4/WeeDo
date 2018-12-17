@@ -90,7 +90,7 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
               return;
           } 
           
-          res.status(200).json(user);
+          res.status(200).json({ message: 'SignUp succesfull' });
       });
       }
     });

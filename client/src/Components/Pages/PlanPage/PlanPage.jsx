@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PlansService from '../../PlansService'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Map from "../../Map/Map.jsx"
-
 
 export default class PlanPage extends Component {
 
@@ -13,6 +12,7 @@ export default class PlanPage extends Component {
       plan_id: this.props.match.params.id,
       plan: null,
       notifications: null,
+      redirectWhenDelete: false
     }
 
     this.plansService = new PlansService();
@@ -34,12 +34,15 @@ export default class PlanPage extends Component {
 
   handleDeletePlan = (e) => {
     e.preventDefault();
-
+    console.log("holaaa delete")
     const { plan_id } = this.state;
 
     this.plansService.deletePlan(plan_id)
       .then(response => {
-        console.log("response " + response)
+        console.log("planesborrados", response.message)
+          if(response.message === "Plan deleted!"){
+            this.setState({...this.state, redirectWhenDelete: true})
+          }
       });
   }
 
@@ -100,7 +103,7 @@ export default class PlanPage extends Component {
     return (
       <React.Fragment>
 
-        <Map center={this.state.plan.location} view={true} />
+        <Map center={this.state.plan.location} view={false} />
       </React.Fragment>
     )
   }
@@ -127,8 +130,13 @@ export default class PlanPage extends Component {
   }
 
   render() {
-    return (
+    
+    if(this.state.redirectWhenDelete){
+      return <Redirect to = {"/ownplans"} />
+    }
 
+    return (
+    
       <div>
         {
           this.state.plan !== null &&
@@ -137,6 +145,9 @@ export default class PlanPage extends Component {
             <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
             </form>
+            <br></br>
+            <br></br>
+            <br></br>
           </div>
 
         }

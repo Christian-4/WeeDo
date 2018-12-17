@@ -6,8 +6,8 @@ export default class Tapbar extends Component {
   render() {
     return (
       <div className="Tapbar">
-        <div><Link to={"/"}>H</Link></div>
-        <div><Link to={"/plans"}>P</Link></div>
+        <div><Link to={"/plans"}>H</Link></div>
+        <div><Link to={"/plansgo"}>P</Link></div>
         <div><Link to={"/newplan"}>+</Link></div>
         <div><Link to={"/friends"}>F</Link></div>
         <div><Link to={"/profile"}>M</Link></div>

@@ -324,7 +324,7 @@ router.delete("/delplanfav/:_id", function (req, res, next) {
 
 router.get("/allplans", function (req, res, next) {
 
-    Plan.find().populate('users')
+    Plan.find().sort("date").populate('users')
         .then(plans => res.status(200).json({ plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })
@@ -339,14 +339,15 @@ router.get("/friendplans", function (req, res, next) {
             })
             Promise.all(promises)
                 .then(plans => {
-                    let newPlans= []
+                    let newPlans = []
                     plans.forEach(plan => {
                         plan.forEach(plan2 => {
                             newPlans.push(plan2)
                         })
                     })
                     console.log()
-                    res.status(200).json({ plans:newPlans })})
+                    res.status(200).json({ plans: newPlans })
+                })
         })
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })
@@ -360,21 +361,35 @@ router.get("/plan/:_id", function (req, res, next) {
 
 router.get("/planstogo", function (req, res, next) {
 
-    User.findById(req.user._id).populate("plans")
-        .then(user => res.status(200).json({ planstogo: user.plans }))
-        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+    User.findById(req.user._id)
+        .then(user => {
+            Plan.find({ users: { $in: [user._id] } }).sort("date").populate("users")
+                .then(plans => res.status(200).json({ planstogo: plans }))
+                .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+        })
 })
 
 router.get("/favouriteplans", function (req, res, next) {
 
-    User.findById(req.user._id).populate("favourites")
-        .then(user => res.status(200).json({ favouriteplans: user.favourites }))
+    let promises = []
+    User.findById(req.user._id)
+        .then(user => {
+            user.favourites.forEach(function (plan) {
+                promises.push(Plan.findById(plan._id).populate('users'))
+            })
+            Promise.all(promises)
+                .then(plans => {
+                    res.status(200).json({ favouriteplans: plans })
+                })
+        })
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
+
+
 })
 
 router.get("/userplans", function (req, res, next) {
 
-    Plan.find({ owner: req.user._id })
+    Plan.find({ owner: req.user._id }).sort("date").populate("users")
         .then(plans => res.status(200).json({ plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })

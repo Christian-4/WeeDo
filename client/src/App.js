@@ -83,7 +83,6 @@ class App extends Component {
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:id" component={ChatPage} />
           <Route exact path="/friends" render={() => <FriendsPage />} />
-          <Route exact path="/chat" render={() => <ChatPage />} />
           <Route exact path="/allusers" render={() => <UserPage />} />
           <Route exact path="/notifications" render={() => <NotificationsPage />} />
           <Route exact path="/favourites" render={() => <FavouritesPage />} />

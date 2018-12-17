@@ -167,7 +167,7 @@ router.delete("/deleteplan/:_id", function (req, res, next) {
                         .then(users => {
                             let promises = [];
                             users.forEach(user => {
-                                promises.push(User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id, plans: req.params._id } }, { new: true }))
+                                promises.push(User.findByIdAndUpdate(user._id, { $pull: { planchats: chat._id, plans: req.params._id, favourites: req.params._id } }, { new: true }))
                             })
                             Promise.all(promises)
                                 .then(() => {
@@ -359,7 +359,7 @@ router.get("/planstogo", function (req, res, next) {
 
 router.get("/favouriteplans", function (req, res, next) {
 
-    User.findById(req.user._id)
+    User.findById(req.user._id).populate("favourites")
         .then(user => res.status(200).json({ favouriteplans: user.favourites }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })

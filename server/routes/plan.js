@@ -340,7 +340,7 @@ router.get("/friendplans", function (req, res, next) {
             Promise.all(promises)
                 .then(plans => res.status(200).json({ plans }))
         })
-        .catch(err => res.status(500).json({ message: "Error to show the plan " + err }))
+        .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })
 
 router.get("/plan/:_id", function (req, res, next) {

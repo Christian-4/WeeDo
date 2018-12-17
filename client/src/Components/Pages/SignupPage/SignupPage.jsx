@@ -13,7 +13,7 @@ export default class SignupPage extends Component {
     return (
       <React.Fragment>
         
-        <Form/>
+        <Form profile={false}/>
         {/* <FacebookLogin
           appId={process.env.REACT_APP_FACEBOOK_ID}
           autoLoad={true}

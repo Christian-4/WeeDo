@@ -49,6 +49,7 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
 
 
   User.findOne({ username }, "username", (err, user) => {
+  
     if (user !== null) {
       res.status(500).json({ message: "The username already exists" })
       return;

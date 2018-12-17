@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import UserService from '../../UserService';
+import FormSinUp from '../../FormSingUp/FormSingUp.jsx';
+import { Link } from "react-router-dom";
+import Logout from "../../Logout/Logout.jsx"
+
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -23,16 +27,13 @@ export default class ProfilePage extends Component {
   printUser = () =>{
     return (
       <div>
-       <img src = {this.state.user.image} width="250" height="200"/>
-       <div> {this.state.user.username} </div>
-       <div> {this.state.user.email} </div>
-       <div> {this.state.user.username} </div>
-       <div> {this.state.user.hobbies.map(function(hobbie,index){
-        return  <div>  {hobbie} </div>
-       })}</div>
-       <lable>Biografía: </lable>
-       <textarea></textarea>
+        <FormSinUp profile={true}/>
+        <div>
+        <Logout></Logout>
       </div>
+
+      </div>
+     
     )
   }
 

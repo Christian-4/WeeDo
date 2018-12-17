@@ -20,6 +20,7 @@ class AuthService {
             }
         })
         .then(response => response)
+        .catch(response => response)
       }
 
     login = (user) => {

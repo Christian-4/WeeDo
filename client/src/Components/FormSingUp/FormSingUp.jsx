@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { geolocated } from "react-geolocated";
 import Select from "react-select";
 import AuthService from "../AuthService"
+import UserService from "../UserService"
 import {Redirect} from "react-router-dom";
 import { Link } from "react-router-dom";
 import Hobbies from "../HobbiesDiv/Hobbies.jsx"
@@ -28,6 +29,7 @@ export default class FormSingUp extends Component {
     }
 
     this.authService = new AuthService();
+    this.userService = new UserService();
   }
 
 
@@ -62,13 +64,20 @@ export default class FormSingUp extends Component {
     
     const {username, password, password_confirm,email,location, image, hobbies} = this.state;
 
-//    console.log(username, password, password_confirm, email, image, location, hobbies)
 
 
-    this.authService.signup({username, password, password_confirm, email, location, image, hobbies})
-    .then(user => {
-      console.log(user)
-    });
+    if(this.props.profile){
+      console.log("editado")
+      this.userService.editProfile({username, password, password_confirm,email,location, image, hobbies})
+      .then(user => console.log(user))
+      .catch(err => console.log(err))
+
+    }else{
+      this.authService.signup({username, password, password_confirm, email, location, image, hobbies})
+      .then(response => console.log(response))
+    }
+
+   
   }
 
   getViewHobbies = (props) =>{
@@ -107,7 +116,19 @@ export default class FormSingUp extends Component {
 
         
       <div>
+
+        {this.props.profile ? 
+        
+        <h2>Profile</h2>
+
+           :
+
         <h2>Signup</h2>
+          
+        }
+        
+
+
         <form onSubmit={this.handleFormSubmit}>
           <label>Username</label>
           <input
@@ -159,7 +180,20 @@ export default class FormSingUp extends Component {
 
           {hobbies}
 
-          <input type="submit" value="Signup" />
+        
+        {this.props.profile ? 
+        
+        <input type="submit" value="Guardar Cambios" />
+        
+
+           :
+
+        <input type="submit" value="Signup" />
+          
+          
+        }
+        
+        
         </form>
         <button className="btn" onClick={this.displayHobbies}> Next</button>
       </div>

@@ -82,6 +82,7 @@ class App extends Component {
           <Route exact path="/chat" render={() => <ChatPage />} />
           <Route exact path="/allusers" render={() => <UserPage />} />
           <Route exact path="/notifications" render={() => <NotificationsPage />} />
+        
         </Switch>
       </div>
     );

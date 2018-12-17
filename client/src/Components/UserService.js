@@ -8,9 +8,18 @@ class UserService {
         })
     }
 
-    editProfile = () => {
-        return this.service.put('/editprofile/:_id')
+    editProfile = (user) => {
+
+        const formData = new FormData();
+        Object.keys(user).forEach(key => formData.append(key, user[key]));
+
+        return this.service.put('/editprofile', formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }    
+        })
             .then(response => response.data)
+            .catch((error) => error.response.data)
     }
 
     getProfile = (id) => {

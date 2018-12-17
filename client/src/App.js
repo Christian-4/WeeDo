@@ -73,7 +73,7 @@ class App extends Component {
           <Route exact path="/plans" render={() => <PlansPage />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
-          <Route exact path="/profile" component={MyProfilePage} />
+          <Route exact path="/profile"render={() => <MyProfilePage />} />
           <Route exact path="/profile/:id" component={ProfilePage} />
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:id" component={ChatPage} />

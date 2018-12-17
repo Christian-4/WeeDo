@@ -1,0 +1,22 @@
+.nav-upper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 375px;
+  height: 96px;
+  box-shadow: 0 7px 15px 0 rgba(165, 165, 165, 0.075);
+}
+
+.tittle-inside {
+  width: 223px;
+  height: 31px;
+  font-size: 26px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+
+}

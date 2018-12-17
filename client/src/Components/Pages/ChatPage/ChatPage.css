@@ -1,0 +1,52 @@
+.plan-data {
+  width: 217px;
+  height: 144px;
+  border-radius: 8px;
+  box-shadow: 2px 3px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  margin: auto;
+  flex-wrap: wrap;
+  align-items: start;
+  padding: 17px;
+}
+
+.plan-date {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.plan-location {
+  display: flex;
+  margin-left: 30px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.plan-data-section {
+  padding: 18px;
+}
+
+.text-data {
+  width: 50%;
+  margin-left: 10px; 
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}

@@ -1,0 +1,135 @@
+.headerPlans{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+width: 375px;
+  height: 96px;
+  box-shadow: 0 7px 15px 0 rgba(165, 165, 165, 0.075);
+}
+
+.titlePlans{
+    margin-top: 50px;
+width: 134px;
+  height: 31px;
+  font-size: 26px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.selectPlans{
+    display: flex;
+    justify-content: space-around
+}
+
+.selectPlans p{
+    width: 93px;
+  height: 21px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5e5e5e;
+}
+
+.planDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 375px;
+    height: 168px;
+    /* background: linear-gradient(246deg, #c9a1f0, #7ab2eb); */
+}
+
+.planDiv:first-child{
+    background: linear-gradient(246deg, #c9a1f0, #7ab2eb);
+}
+
+.planDiv:last-child{
+    margin-bottom: 20px;
+}
+
+.planCard{
+    width: 311px;
+  height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.topPlanCard{
+    display: flex;
+    justify-content: space-between;
+}
+
+.imagePlan{
+    width: 80px;
+  height: 80px;
+}
+
+.imagePlan img{
+    width: 80px;
+  height: 80px;
+}
+
+.fechaHoraDiv{
+    text-align: left;
+}
+
+.fechaYHoraPlan{
+    width: 73px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #9b9b9b;
+}
+
+.nombrePlan{
+    width: 111px;
+  height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.botPlanCard{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.botPlanCard img{
+    width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  border: 1px solid #9b9b9b;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.assistantsPlan{
+    width: 76px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}

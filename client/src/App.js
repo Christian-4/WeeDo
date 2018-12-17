@@ -19,6 +19,7 @@ import FavouritesPage from './Components/Pages/FavouritesPage/FavouritesPage';
 import PlansToGoPage from './Components/Pages/PlansToGoPage/PlansToGoPage';
 import OwnPlansPage from './Components/Pages/OwnPlansPage/OwnPlansPage';
 import FriendsPlansPage from './Components/Pages/FriendsPlansPage/FriendsPlansPage';
+import Tapbar from './Components/Tapbar/Tapbar';
 
 class App extends Component {
 
@@ -82,6 +83,7 @@ class App extends Component {
           <Route exact path="/friendsplans" render={() => <FriendsPlansPage />} />
         </Switch>
 
+        <Tapbar></Tapbar>
       </div>
     );
   }

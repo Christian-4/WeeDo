@@ -1,0 +1,10 @@
+.Tapbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 49px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    border-top: 1px solid #d8d8d8;
+}

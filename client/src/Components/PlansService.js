@@ -57,17 +57,17 @@ class PlansService {
             .then(response => response.data)
     }
 
-    addPlanFav = () => {
-        return this.service.post("/addplanfav/:_id")
+    addPlanFav = (id) => {
+        return this.service.post(`/addplanfav/${id}`)
             .then(response => response.data)
     }
 
-    delPlanFav = () => {
-        return this.service.delete("/delplanfav/:_id")
+    delPlanFav = (id) => {
+        return this.service.delete(`/delplanfav/${id}`)
             .then(response => response.data)
     }
 
-    getAllPlans = (id) => {
+    getAllPlans = () => {
 
         return this.service.get("/allplans")
             .then(response => response.data)

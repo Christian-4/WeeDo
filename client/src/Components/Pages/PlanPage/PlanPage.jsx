@@ -32,6 +32,17 @@ export default class PlanPage extends Component {
       })
   }
 
+  handleDeletePlan = (e) => {
+    e.preventDefault();
+
+    const { plan_id } = this.state;
+
+    this.plansService.deletePlan(plan_id)
+      .then(response => {
+        console.log("response " + response)
+      });
+  }
+
   acceptPlan = (id) => {
     this.plansService.acceptPlan(id)
       .then(response => {
@@ -53,19 +64,21 @@ export default class PlanPage extends Component {
       })
   }
 
-  handleDeletePlan = (e) => {
-    e.preventDefault();
-
-    const { plan_id } = this.state;
-
-    this.plansService.deletePlan(plan_id)
+  addPlanFav = (id) => {
+    this.plansService.addPlanFav(id)
       .then(response => {
-        console.log("response " + response)
-      });
+        console.log(response)
+      })
   }
 
+  delPlanFav = (id) => {
+    this.plansService.delPlanFav(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
 
-  printPlan = (planRequest) => {
+  printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan
     return (
       <React.Fragment>
@@ -74,6 +87,8 @@ export default class PlanPage extends Component {
           <p>{description}</p>
           <p>{date}</p>
           <button onClick={() => planRequest(this.state.plan_id)}>Join request</button>
+          <button onClick={() => addPlanFav(this.state.plan_id)}>Add to Favourites</button>
+          <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button>
           {/* <Link to={`/chat/${chat}`}><p> Chat</p></Link> */}
         </div>
       </React.Fragment>
@@ -85,11 +100,11 @@ export default class PlanPage extends Component {
     return (
       <React.Fragment>
 
-        <Map center={this.state.plan.location} view = {true} />
-        </React.Fragment>
-        )
-      }
-      
+        <Map center={this.state.plan.location} view={true} />
+      </React.Fragment>
+    )
+  }
+
   printNotifications = (acceptPlan, declinePlan) => {
     return (
       <React.Fragment>
@@ -117,7 +132,8 @@ export default class PlanPage extends Component {
       <div>
         {
           this.state.plan !== null &&
-          <div>{this.printPlan(this.planRequest)}
+          <div>
+            {this.printPlan(this.planRequest, this.addPlanFav, this.delPlanFav)}
             <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
             </form>
@@ -130,15 +146,12 @@ export default class PlanPage extends Component {
           <div>{this.printNotifications(this.acceptPlan, this.declinePlan)}</div>
 
         }
-        <form onSubmit={this.handleDeletePlan} className="new-plan-form">
-          <input type="submit" value="delete-plan" />
-        </form>
 
-       { this.state.plan !== null &&
-      
-        <div> {this.printMap()} </div>
+        {this.state.plan !== null &&
+
+          <div> {this.printMap()} </div>
         }
-        
+
       </div>
     )
   }

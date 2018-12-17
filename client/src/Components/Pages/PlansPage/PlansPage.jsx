@@ -8,8 +8,7 @@ export default class PlansPage extends Component {
     super(props)
     
     this.state = {
-      plans: null,
-      userId: "5c14d8301c9cb706bb600247"
+      plans: null
     }
 
     this.planService = new PlanService()
@@ -17,7 +16,7 @@ export default class PlansPage extends Component {
 
 
   componentDidMount(){
-    this.planService.getAllPlans(this.state.userId)
+    this.planService.getAllPlans()
     .then(response => {
       this.setState({...this.state,plans: response.plans})
     })

@@ -338,7 +338,15 @@ router.get("/friendplans", function (req, res, next) {
                 promises.push(Plan.find({ owner: friend._id }))
             })
             Promise.all(promises)
-                .then(plans => res.status(200).json({ plans }))
+                .then(plans => {
+                    let newPlans= []
+                    plans.forEach(plan => {
+                        plan.forEach(plan2 => {
+                            newPlans.push(plan2)
+                        })
+                    })
+                    console.log()
+                    res.status(200).json({ plans:newPlans })})
         })
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })

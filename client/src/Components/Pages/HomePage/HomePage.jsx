@@ -33,6 +33,7 @@ export default class HomePage extends Component {
         <Link to={`/favourites`}><p>Favourites Plans</p></Link>
         <Link to={`/plansgo`}><p>Planes a los que voy</p></Link>
         <Link to={`/ownplans`}><p>Planes creados por mi</p></Link>
+        <Link to={`/friendsplans`}><p>Planes creados por amigos</p></Link>
       </div >
     )
   }

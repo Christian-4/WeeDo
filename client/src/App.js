@@ -18,6 +18,7 @@ import NotificationsPage from './Components/Pages/NotificationsPage/Notification
 import FavouritesPage from './Components/Pages/FavouritesPage/FavouritesPage';
 import PlansToGoPage from './Components/Pages/PlansToGoPage/PlansToGoPage';
 import OwnPlansPage from './Components/Pages/OwnPlansPage/OwnPlansPage';
+import FriendsPlansPage from './Components/Pages/FriendsPlansPage/FriendsPlansPage';
 
 class App extends Component {
 
@@ -88,6 +89,7 @@ class App extends Component {
           <Route exact path="/favourites" render={() => <FavouritesPage />} />
           <Route exact path="/plansgo" render={() => <PlansToGoPage />} />
           <Route exact path="/ownplans" render={() => <OwnPlansPage />} />
+          <Route exact path="/friendsplans" render={() => <FriendsPlansPage />} />
         </Switch>
       </div>
     );

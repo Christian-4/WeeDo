@@ -22,7 +22,15 @@ export default class FriendsPage extends Component {
       })
   }
 
-  printFriends = () => {
+  deleteFriend = (id) => {
+    this.friendService.deleteFriend(id)
+      .then(response => {
+        console.log(response.friends)
+        this.setState({ ...this.state, friends: response.friends })
+      })
+  }
+
+  printFriends = (deleteFriend) => {
     return (
       <React.Fragment>
         {this.state.friends.map(function (friend, index) {
@@ -32,6 +40,7 @@ export default class FriendsPage extends Component {
               <img src={friend.image} />
               <p>{friend.hobbies}</p>
               <p>{friend.location}</p>
+              <button onClick={() => deleteFriend(friend._id)}>Delete friend</button>
               <Link to={`/profile/${friend._id}`}><p>View friend</p></Link>
             </div>
           )
@@ -45,7 +54,7 @@ export default class FriendsPage extends Component {
       <React.Fragment>
         {
           this.state.friends !== null &&
-          <div>{this.printFriends()}</div>
+          <div>{this.printFriends(this.deleteFriend)}</div>
 
         }
       </React.Fragment>

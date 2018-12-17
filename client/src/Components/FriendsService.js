@@ -14,46 +14,50 @@ class FriendsService {
       .then(response => response.data);
   };
 
-  deleteFriend = () => {
+  deleteFriend = (id) => {
     return this.service
-      .delete("/deletefriend/:_id")
+      .delete(`/deletefriend/${id}`)
       .then(response => response.data);
   };
 
-  acceptFriend = () => {
+  acceptFriend = (id) => {
     return this.service
-      .post("/acceptfriend/:_id")
+      .post(`/acceptfriend/${id}`)
       .then(response => response.data);
   };
 
-  declineFriend = () => {
+  declineFriend = (id) => {
     return this.service
-      .post("/declinefriend/:_id")
+      .post(`/declinefriend/${id}`)
       .then(response => response.data);
   };
 
   getAllUsers = sessionId => {
-      
+
     let res = {
       users: [],
       userSession: []
     };
     return this.service.get("/allusers").then(response => {
-      response.data.users.forEach(function(user) {
+      response.data.users.forEach(function (user) {
         if (user._id !== sessionId) {
-            res.users.push(user)
-        }else{
-            res.userSession.push(user)
+          res.users.push(user)
+        } else {
+          res.userSession.push(user)
         }
       });
 
-        return res;
+      return res;
     });
   };
 
   getFriends = () => {
     return this.service.get("/friends").then(response => response.data);
   };
+
+  getNotifications = () => {
+    return this.service.get("/friendnotifications").then(response => response.data);
+  }
 }
 
 export default FriendsService;

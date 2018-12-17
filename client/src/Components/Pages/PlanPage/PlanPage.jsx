@@ -67,18 +67,6 @@ export default class PlanPage extends Component {
       })
   }
 
-  handleDeletePlan = (e) => {
-    e.preventDefault();
-
-    const { plan_id } = this.state;
-
-    this.plansService.deletePlan(plan_id)
-      .then(response => {
-        console.log("response " + response)
-      });
-  }
-
-
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan
     return (
@@ -133,11 +121,7 @@ export default class PlanPage extends Component {
       <div>
         {
           this.state.plan !== null &&
-          <div>{this.printPlan(this.planRequest, this.addPlanFav, this.delPlanFav)}
-            <form onSubmit={this.handleDeletePlan} className="new-plan-form">
-              <input type="submit" value="delete-plan" />
-            </form>
-          </div>
+          <div>{this.printPlan(this.planRequest, this.addPlanFav, this.delPlanFav)}</div>
 
         }
 

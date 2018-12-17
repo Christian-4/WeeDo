@@ -352,7 +352,7 @@ router.get("/plan/:_id", function (req, res, next) {
 
 router.get("/planstogo", function (req, res, next) {
 
-    User.findById(req.user._id)
+    User.findById(req.user._id).populate("plans")
         .then(user => res.status(200).json({ planstogo: user.plans }))
         .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
 })

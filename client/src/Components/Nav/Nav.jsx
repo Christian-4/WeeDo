@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import "../Nav/Nav.css";
 
 export default class Nav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      tittle: "this.props.title",
-      lupa: "lupa",
-      campana: "camapana"
+      title: this.props.title,
+      left: this.props.iconleft,
+      right: this.props.iconright
     };
   }
 
@@ -16,9 +16,9 @@ export default class Nav extends Component {
     return (
       <React.Fragment>
         <nav className="nav-upper">
-            <div className="tittle-inside">{this.state.lupa}</div>
-            <div className="tittle-inside">{"tittle"}</div>
-            <div className="tittle-inside" >{this.state.campana}</div>
+            <div className="tittle-inside">{this.state.left}</div>
+            <div className="tittle-inside">{this.state.title}</div>
+            <div className="tittle-inside" >{this.state.right}</div>
         </nav>
       </React.Fragment>
     );

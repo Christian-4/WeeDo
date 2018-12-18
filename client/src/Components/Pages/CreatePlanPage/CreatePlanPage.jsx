@@ -7,6 +7,10 @@ import './CreatePlanPage.css'
 import hobbies from '../../HobbiesDiv/hobbies.json'
 import Select from "react-select";
 import Map from "../../Map/Map.jsx"
+import Nav from "../../Nav/Nav.jsx"
+import Input from "../../InputCreatePlan/InputCreatePlan.jsx";
+
+
 
 const options = [
   { value: "Deportes", label: "Deportes" },
@@ -95,47 +99,32 @@ export default class CreatePlanPage extends Component {
     return (
       <React.Fragment>
 
+        <Nav title={"Crea un plan"}/>
+
         <form onSubmit={this.handleNewPlan} className="new-plan-form">
-          <label>Title</label>
-          <input
-            type="text"
-            name="title"
-            onChange={e => this.handleChange(e)}
-          />
-          <label>Description</label>
-          <textarea
-            type="text"
-            name="description"
-            onChange={e => this.handleChange(e)}
-          />
+          <Input label={"Nombre del plan"} placeholder={"Título del plan"} handleChange={this.handleChange}></Input>
+          <Input label={"Descripción"} placeholder={"Breve descripción del plan"} handleChange={this.handleChange}></Input>
+          <Input label={"Lugar"} placeholder={"¿Dónde va a ser el plan?"} handleChange={this.handleChange}></Input>
+          <Input label={"Etiquetas"} placeholder={"Identifica el tipo de plan"} handleChange={this.handleChange}></Input>
+          <Input label={"Limit"} placeholder={"Número máximo de asistentes"} handleChange={this.handleChange}></Input>
           <label>Location</label>
-          <button onClick={e =>this.showMap(e)}>
-            {map}
-          </button>
+         <button onClick={e =>this.showMap(e)}>
+           {map}
+         </button>
+
+
+
 
           <label>Date</label>
           <DatePickerStyle
             onChange={this.onChange}
             value={this.state.date}
           />
-          <label>Limit</label>
-          <input
-            type="text"
-            name="limit"
-            onChange={e => this.handleChange(e)}
-          />
+       
 
-           
-           <div>
-               <label>Tematica</label>
-            <Select
-            value={type}
-            onChange={e => this.selectChange(e)}
-            options={options}
-            />
-          </div>
-
-          <input type="submit" value="new-plan" />
+          
+        {/*  <input className="create-plan-button" type="submit" value="new-plan" /> */}
+          <button className="create-plan-button" type="submit">Crear Plan</button>
          
         </form>
 

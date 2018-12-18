@@ -3,4 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+   margin-bottom: 80px;
+}
+
+.new-plan-form{
+    background-color: "F7F9FA";
+    border-top: 1px solid "F7F9FA"
+    
 }

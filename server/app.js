@@ -33,6 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Enable authentication using session + passport
 app.use(session({
@@ -46,7 +47,7 @@ require('./passport')(app);
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000',`${process.env.REACT_APP_API_URL}`],
 }));
 
 const index = require('./routes/index');
@@ -66,7 +67,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(data); 
+        client.send(data);
       }
     });
   });

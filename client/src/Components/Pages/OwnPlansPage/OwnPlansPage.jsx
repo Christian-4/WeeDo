@@ -44,12 +44,12 @@ export default class OwnPlansPage extends Component {
                     <Link to={`/chat/${plan.chat}`}>Chat icon</Link>
                   </div>
                 </div>
-                <div className="">
-                  <span className="assistantsPlan">Van a asistir:</span>{plan.users.map(function (user, index) {
+                <div className="botPlanCard">
+                  <p className="assistantsPlan">Van a asistir:</p><span>{plan.users.map(function (user, index) {
                     return (
                       <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
                     )
-                  })}
+                  })}</span>
                 </div>
               </div>
             </div>

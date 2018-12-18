@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PlansService from '../../PlansService'
 import { Link, Redirect } from "react-router-dom";
 import Map from "../../Map/Map.jsx"
+import "./PlanPage.css"
 
 export default class PlanPage extends Component {
 
@@ -27,6 +28,7 @@ export default class PlanPage extends Component {
         this.plansService.getNotifications(this.state.plan_id)
           .then(responseNotifications => {
             console.log(responseNotifications)
+            console.log(response)
             this.setState({ ...this.state, plan: response.plan, notifications: responseNotifications.confirmations })
           })
       })
@@ -40,9 +42,9 @@ export default class PlanPage extends Component {
     this.plansService.deletePlan(plan_id)
       .then(response => {
         console.log("planesborrados", response.message)
-          if(response.message === "Plan deleted!"){
-            this.setState({...this.state, redirectWhenDelete: true})
-          }
+        if (response.message === "Plan deleted!") {
+          this.setState({ ...this.state, redirectWhenDelete: true })
+        }
       });
   }
 
@@ -83,16 +85,46 @@ export default class PlanPage extends Component {
 
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan
+    const users = this.state.plan.users.length
     return (
       <React.Fragment>
-        <div>
-          <p>{title}</p>
-          <p>{description}</p>
-          <p>{date}</p>
-          <button onClick={() => planRequest(this.state.plan_id)}>Join request</button>
-          <button onClick={() => addPlanFav(this.state.plan_id)}>Add to Favourites</button>
-          <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button>
-          {/* <Link to={`/chat/${chat}`}><p> Chat</p></Link> */}
+        <div className="planImage">
+          <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
+          <Link to={`/profile/${this.state.plan.owner._id}`}><img className="planImageOwner" src={this.state.plan.owner.image} /></Link>
+        </div>
+        <div className="informationPlan">
+          <div className="headerPlan">
+            <div className="datePlan">
+              {date}
+            </div>
+            <div className="titlePlan">
+              {title}
+            </div>
+          </div>
+          <div className="locationPlan">
+            {this.state.plan.location.lat}
+          </div>
+          <div className="descriptionPlan">
+          <p className="descriptionPlan2">Descripción del plan</p>
+          <p className="descriptionPlan3">{description}</p>
+          </div>
+          <div className="usersPlan">
+            <p>{users} personas van a acudir</p>
+            <span>{this.state.plan.users.map(function (user, index) {
+                  return (
+                    <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+                  )
+                })}</span>
+          </div>
+          <div className="buttonsPlan">
+            <button onClick={() => planRequest(this.state.plan_id)}>Quiero apuntarme</button>
+            <button onClick={() => addPlanFav(this.state.plan_id)}>Add to Favourites</button>
+            <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button>
+            <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+              <input type="submit" value="delete-plan" />
+            </form>
+            {/* <Link to={`/chat/${chat}`}><p> Chat</p></Link> */}
+          </div>
         </div>
       </React.Fragment>
     )
@@ -130,21 +162,18 @@ export default class PlanPage extends Component {
   }
 
   render() {
-    
-    if(this.state.redirectWhenDelete){
-      return <Redirect to = {"/ownplans"} />
+
+    if (this.state.redirectWhenDelete) {
+      return <Redirect to={"/ownplans"} />
     }
 
     return (
-    
+
       <div>
         {
           this.state.plan !== null &&
           <div>
             {this.printPlan(this.planRequest, this.addPlanFav, this.delPlanFav)}
-            <form onSubmit={this.handleDeletePlan} className="new-plan-form">
-              <input type="submit" value="delete-plan" />
-            </form>
             <br></br>
             <br></br>
             <br></br>
@@ -158,10 +187,10 @@ export default class PlanPage extends Component {
 
         }
 
-        {this.state.plan !== null &&
+        {/* {this.state.plan !== null &&
 
           <div> {this.printMap()} </div>
-        }
+        } */}
 
       </div>
     )

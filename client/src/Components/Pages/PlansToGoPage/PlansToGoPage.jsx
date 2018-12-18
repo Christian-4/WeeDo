@@ -46,11 +46,11 @@ export default class PlansToGoPage extends Component {
                   </div>
                 </div>
                 <div className="botPlanCard">
-                  <span className="assistantsPlan">Van a asistir:</span>{plan.users.map(function (user, index) {
+                <p className="assistantsPlan">Van a asistir:</p><span>{plan.users.map(function (user, index) {
                     return (
                       <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
                     )
-                  })}
+                  })}</span>
                 </div>
               </div>
             </div>

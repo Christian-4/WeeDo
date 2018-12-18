@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "./ChatPage.css";
 
 const URL = "ws://localhost:3030";
+//  const URL = "ws://https://weed0.herokuapp.com/"
 
 const monthNames = [
   "ENE",

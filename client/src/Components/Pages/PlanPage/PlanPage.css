@@ -1,0 +1,110 @@
+.planImage{
+    width: 375px;
+  height: 193px;
+}
+
+.planImage img{
+    width: 375px;
+    height: 193px;
+}
+
+.planImage .planImageOwner{
+    width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  border: 2px solid gainsboro;
+  position: absolute;
+  top: 140px;
+  right: 10px;
+}
+
+.informationPlan{
+    padding: 30px;
+}
+
+.headerPlan{
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerPlan .datePlan{
+    width: 60px;
+}
+
+.headerPlan .titlePlan{
+    text-align: left;
+    margin-left: 25px;
+    width: 244px;
+  height: 63px;
+  font-size: 26px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+}
+
+.locationPlan{
+    margin-top: 25px;
+text-align: left;
+  height: 16px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.descriptionPlan .descriptionPlan2{
+    margin-top: 20px;
+    text-align: left;
+  height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.descriptionPlan .descriptionPlan3{
+    margin-top: -7px;
+    text-align: left;
+  height: 16px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.usersPlan{
+    margin-top: 20px;
+    text-align: left;
+  height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.usersPlan img{
+    width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  border: 2px solid gainsboro;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.buttonsPlan{
+    margin-top: 140px;
+}

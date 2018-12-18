@@ -19,27 +19,37 @@
     justify-content: center;
 }
 
+.allPlans :last-child{
+    position: relative;
+    margin-bottom: 30px;
+}
+
 .allPlanCard{
+    margin-top: 31px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 311px;
-    height: 96px;
+    height: 128px;
     border-radius: 8px;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
 }
 
-.imageAllPlanCard{
-    width: 96px;
-    height: 96px;
+.allPlans :first-child{
+    margin-top: 0
 }
 
-.imageAllPlanCard img{
-    width: 96px;
-    height: 96px;
+.allPlanCardTop{
+    display: flex;
 }
 
-.allPlanCardDate{
+.allPlanCardTopRight{
+    margin-left: 16px;
+    text-align: left;
+}
+
+.allPlanCardFecha{
     width: 82px;
   height: 14px;
   font-size: 12px;
@@ -49,17 +59,98 @@
   line-height: normal;
   letter-spacing: normal;
   color: #5e5e5e;
+  position: relative;
+  top: 5px;
 }
 
-.imageAllPlanCard .imageOwnerAllPlanCard{
-    width: 24px;
-  height: 24px;
-  border-radius: 50px;
-  border: 1px solid rgb(190, 189, 189);
+.allPlanCardIcon{
+    margin-left: 50px;
 }
 
-.allPlanCardRight img{
+.allPlanCardOwner{
+    width: 64px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  position: relative;
+  bottom: 36px;
+}
+
+.allPlanCardOwner img{
+    position: relative;
+    top: 38px;
+}
+
+.allPlanCardTitle{
+    width: 148px;
+  height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  position: relative;
+  top: 10px;
+}
+
+.imageAllPlanCard{
+    width: 88px;
+    height: 88px;
+}
+
+.imageAllPlanCard img{
+    width: 88px;
+    height: 88px;
+    border-top-left-radius: 8px;
+}
+
+.allPlanCardTopRight img{
  width: 24px;
  height: 24px;
  border-radius: 50px;
+ border: 1px solid rgb(190, 189, 189);
+}
+
+.allPlanCardBot{
+    display: flex;
+    align-items: center;
+}
+
+.allPlanCardBot img{
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    border: 1px solid rgb(190, 189, 189);
+    margin-left: -5px;
+    position: relative;
+    bottom: 20px;
+   }
+
+   .allPlanCardBot span{
+       margin-right: 5px;
+       position: relative;
+       top: 77px;
+   }
+
+.allPlanCardBot p {
+width: 76px;
+  height: 14px;
+  font-size: 12px;
+  margin-left: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  margin-right: 15px;
+  position: relative;
+  top: 30px;
 }

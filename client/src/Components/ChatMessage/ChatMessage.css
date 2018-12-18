@@ -1,0 +1,46 @@
+.image-chat {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}
+
+.text-message {
+  width: 191px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  width: 50%;
+  background-color: white;
+  text-align: center;
+}
+
+.text-message p{
+  width: 151px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.message-section-right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.message-section-left{
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+
+.image-chat-right{
+    width:40px; 
+    height:40px;
+    margin-right: 10px
+}

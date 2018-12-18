@@ -3,6 +3,7 @@ import ChatInput from "../../ChatInput/ChatInput.jsx";
 import ChatMessage from "../../ChatMessage/ChatMessage.jsx";
 import ChatService from "../../ChatService";
 import Nav from "../../Nav/Nav.jsx";
+import { Link } from "react-router-dom";
 import "./ChatPage.css";
 
 const URL = "ws://localhost:3030";
@@ -30,7 +31,10 @@ export default class ChatPage extends Component {
       name: null,
       messages: null,
       id: this.props.match.params.id,
-      plan: null
+      plan: null,
+      owner: null,
+      users: null,
+      image:null
     };
 
     this.chatService = new ChatService();
@@ -40,12 +44,16 @@ export default class ChatPage extends Component {
 
   componentDidMount() {
     this.chatService.getChat(this.state.id).then(response => {
-      
+      console.log(response);
       this.setState({
         ...this.state,
         name: response.user,
         messages: response.chat.messages,
-        plan: response.chat.plan
+        plan: response.chat.plan,
+        owner: response.owner,
+        users: response.chat.users,
+        image: response.user
+
       });
     });
 
@@ -70,6 +78,26 @@ export default class ChatPage extends Component {
       });
     };
   }
+
+
+  addMessage = message => {
+    this.setState(state => ({ messages: [...state.messages, message] }));
+    this.chatService.addMessage(this.state.id, message);
+  };
+
+  submitMessage = messageString => {
+    // on submitting the ChatInput form, send the message, add it to the list and reset the input
+
+    const message = {
+      name: this.state.name.username,
+      message: messageString,
+      id: this.state.id,
+      image: this.state.name.image
+
+    };
+    this.ws.send(JSON.stringify(message));
+    this.addMessage(message);
+  };
 
   parserDate = () => {
     let newDate = new Date(this.state.plan.date);
@@ -96,54 +124,56 @@ export default class ChatPage extends Component {
             <div className="plan-location">
               <div>{"location"}</div>
             </div>
-            <div className="text-data">
-              <p>Van a acudir</p>
-            </div>
-            <div className="asistentes">
-                  <img src=""></img>
+            <div className="div-data-users">
+              <div className="bot-plan-card">
+                <p className="assistantsPlan">Van a acudir</p>
+                {this.state.users.map(function(user, index) {
+                  return (
+                    <Link to={`/profile/${user._id}`} className="link-profiles">
+                      <img className="image-asisentes" src={user.image} />
+                    </Link>
+                  );
+                })}
+              </div>
+              <div>
+                <img className="owner-image" src={this.state.owner.image} />
+              </div>
             </div>
           </div>
         </section>
-
-        <ChatInput
-          ws={this.ws}
-          onSubmitMessage={messageString => this.submitMessage(messageString)}
-        />
-
-        {this.state.messages.map((message, index) => (
-          <ChatMessage
-            key={index}
-            message={message.message}
-            name={message.name}
+        <section className="state-plan-div">
+          <p>En proceso</p>
+        </section>
+        <section className="section-chat">
+          {this.state.messages.map((message, index) => (
+            <ChatMessage
+              image={message.image}
+              key={index}
+              message={message.message}
+              name={message.name}
+              userConected={this.state.name.username}
+            />
+          ))}
+        </section>
+        <div className="input-chat-page">
+          <ChatInput
+            ws={this.ws}
+            onSubmitMessage={messageString => this.submitMessage(messageString)}
           />
-        ))}
+        </div>
       </React.Fragment>
     );
   };
 
-  addMessage = message => {
-    this.setState(state => ({ messages: [...state.messages, message] }));
-    this.chatService.addMessage(this.state.id, message);
-  };
-
-  submitMessage = messageString => {
-    // on submitting the ChatInput form, send the message, add it to the list and reset the input
-
-    const message = {
-      name: this.state.name,
-      message: messageString,
-      id: this.state.id
-    };
-    this.ws.send(JSON.stringify(message));
-    this.addMessage(message);
-  };
 
   render() {
     return (
       <div>
         {this.state.name !== null &&
           this.state.messages !== null &&
-          this.state.plan && <div>{this.printChat()}</div>}
+          this.state.owner !== null &&
+          this.state.users !== null &&
+          this.state.plan !== null && <div>{this.printChat()}</div>}
       </div>
     );
   }

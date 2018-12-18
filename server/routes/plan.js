@@ -335,7 +335,7 @@ router.get("/friendplans", function (req, res, next) {
         .then(user => {
             let promises = []
             user.friends.forEach(friend => {
-                promises.push(Plan.find({ owner: friend._id }))
+                promises.push(Plan.find({ owner: friend._id }).populate("users").populate("owner"))
             })
             Promise.all(promises)
                 .then(plans => {

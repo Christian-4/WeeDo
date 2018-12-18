@@ -1,0 +1,48 @@
+.notificationDiv{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+
+.notificationsDivs{
+    margin-bottom: 30px;
+}
+
+.imageNotificationDiv{
+    width: 48px;
+  height: 48px;
+}
+
+.imageNotificationDiv img{
+    width: 48px;
+  height: 48px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.nombreNotificationDiv{
+    text-align: left;
+    width: 121px;
+  height: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.buttonsNotificationDiv img{
+    width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+hr{
+    width: 311px;
+  height: 2px;
+  background-color: #F8F8F8;
+  border: 0px;
+}

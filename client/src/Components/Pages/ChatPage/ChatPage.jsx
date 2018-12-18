@@ -40,7 +40,7 @@ export default class ChatPage extends Component {
 
   componentDidMount() {
     this.chatService.getChat(this.state.id).then(response => {
-      console.log(response);
+      
       this.setState({
         ...this.state,
         name: response.user,
@@ -98,6 +98,9 @@ export default class ChatPage extends Component {
             </div>
             <div className="text-data">
               <p>Van a acudir</p>
+            </div>
+            <div className="asistentes">
+                  <img src=""></img>
             </div>
           </div>
         </section>

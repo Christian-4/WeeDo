@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PlanService from '../../PlansService'
 import "./PlansPage.css"
+import Nav from "../../Nav/Nav.jsx"
 import { Link } from "react-router-dom";
 
 export default class PlansPage extends Component {
@@ -59,6 +60,7 @@ export default class PlansPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <Nav></Nav>
         <div className="allPlanSelected">
           <p><Link to={"/plans"}>En Madrid</Link></p>
           <p><Link to={"/friendsplans"}>Mis conexiones</Link></p>

@@ -354,7 +354,7 @@ router.get("/friendplans", function (req, res, next) {
 
 router.get("/plan/:_id", function (req, res, next) {
 
-    Plan.findById(req.params._id)
+    Plan.findById(req.params._id).populate("users").populate("owner")
         .then(plan => res.status(200).json({ plan }))
         .catch(err => res.status(500).json({ message: "Error to show the plan " + err }))
 })

@@ -10,7 +10,7 @@ const userSchema = new Schema({
   status: {
     type: String,
     enum: ["Disable", "Active"],
-    default: "Disable"
+    default: "Active"
   },
   location: String,
   hobbies: Array,

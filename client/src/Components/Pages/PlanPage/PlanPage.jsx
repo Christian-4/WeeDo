@@ -3,6 +3,9 @@ import PlansService from '../../PlansService'
 import { Link, Redirect } from "react-router-dom";
 import Map from "../../Map/Map.jsx"
 import "./PlanPage.css"
+import group5 from "../../../icons/icons/Group5.png"
+import group4 from "../../../icons/icons/Group4.png"
+import locationIcon from "../../../icons/icons/location.png"
 
 export default class PlanPage extends Component {
 
@@ -34,19 +37,19 @@ export default class PlanPage extends Component {
       })
   }
 
-  handleDeletePlan = (e) => {
-    e.preventDefault();
-    console.log("holaaa delete")
-    const { plan_id } = this.state;
+  // handleDeletePlan = (e) => {
+  //   e.preventDefault();
+  //   console.log("holaaa delete")
+  //   const { plan_id } = this.state;
 
-    this.plansService.deletePlan(plan_id)
-      .then(response => {
-        console.log("planesborrados", response.message)
-        if (response.message === "Plan deleted!") {
-          this.setState({ ...this.state, redirectWhenDelete: true })
-        }
-      });
-  }
+  //   this.plansService.deletePlan(plan_id)
+  //     .then(response => {
+  //       console.log("planesborrados", response.message)
+  //       if (response.message === "Plan deleted!") {
+  //         this.setState({ ...this.state, redirectWhenDelete: true })
+  //       }
+  //     });
+  // }
 
   acceptPlan = (id) => {
     this.plansService.acceptPlan(id)
@@ -102,28 +105,30 @@ export default class PlanPage extends Component {
             </div>
           </div>
           <div className="locationPlan">
+          <img src={locationIcon}/>
+            {this.state.plan.location.lat}
             {this.state.plan.location.lat}
           </div>
           <div className="descriptionPlan">
-          <p className="descriptionPlan2">Descripción del plan</p>
-          <p className="descriptionPlan3">{description}</p>
+            <p className="descriptionPlan2">Descripción del plan</p>
+            <p className="descriptionPlan3">{description}</p>
           </div>
           <div className="usersPlan">
             <p>{users} personas van a acudir</p>
             <span>{this.state.plan.users.map(function (user, index) {
-                  return (
-                    <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
-                  )
-                })}</span>
+              return (
+                <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+              )
+            })}</span>
           </div>
           <div className="buttonsPlan">
-            <button onClick={() => planRequest(this.state.plan_id)}>Quiero apuntarme</button>
-            <button onClick={() => addPlanFav(this.state.plan_id)}>Add to Favourites</button>
-            <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button>
-            <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+            <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>¡Quiero apuntarme!</button>
+            <Link to={`/chat/${chat}`}><img src={group5} /></Link>
+            <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
+            {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
+            {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
-            </form>
-            {/* <Link to={`/chat/${chat}`}><p> Chat</p></Link> */}
+            </form> */}
           </div>
         </div>
       </React.Fragment>

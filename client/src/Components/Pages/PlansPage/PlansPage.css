@@ -1,0 +1,65 @@
+.allPlanSelected{
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: auto;
+    color: #5e5e5e;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5e5e5e;
+}
+
+.allPlans{
+    display: flex;
+    justify-content: center;
+}
+
+.allPlanCard{
+    display: flex;
+    justify-content: space-between;
+    width: 311px;
+    height: 96px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.imageAllPlanCard{
+    width: 96px;
+    height: 96px;
+}
+
+.imageAllPlanCard img{
+    width: 96px;
+    height: 96px;
+}
+
+.allPlanCardDate{
+    width: 82px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.imageAllPlanCard .imageOwnerAllPlanCard{
+    width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  border: 1px solid rgb(190, 189, 189);
+}
+
+.allPlanCardRight img{
+ width: 24px;
+ height: 24px;
+ border-radius: 50px;
+}

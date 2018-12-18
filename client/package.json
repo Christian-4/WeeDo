@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
+    "dotenv-cli": "^1.4.0",
     "google-maps-react": "^2.0.2",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
@@ -21,7 +22,7 @@
     "register-service-worker": "^1.5.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "dotenv -e env.development react-scripts start",
     "build": "react-scripts build",
     "build-dev": "dotenv -e .env.development react-scripts build",
     "build-prod": "dotenv -e .env.production react-scripts build",

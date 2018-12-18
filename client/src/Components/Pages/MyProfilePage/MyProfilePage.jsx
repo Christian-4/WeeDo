@@ -3,7 +3,7 @@ import UserService from '../../UserService';
 import FormSinUp from '../../FormSingUp/FormSingUp.jsx';
 import { Link } from "react-router-dom";
 import Logout from "../../Logout/Logout.jsx"
-
+import Nav from "../../Nav/Nav"
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -26,13 +26,19 @@ export default class ProfilePage extends Component {
 
   printUser = () =>{
     return (
-      <div>
-        <FormSinUp profile={true}/>
+      <React.Fragment>
+        <Nav/>
+        <section className="personal-data">
+          <div className="div-photo">
+           <img className="user-photo" src={this.state.user.image}></img>
+          </div>
+          {this.state.user.username}
+        </section>
         <div>
         <Logout></Logout>
       </div>
 
-      </div>
+      </React.Fragment>
      
     )
   }

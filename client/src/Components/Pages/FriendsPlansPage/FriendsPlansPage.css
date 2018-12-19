@@ -14,8 +14,8 @@
   color: #5e5e5e;
 }
 
-.allPlanSelected .enMadrid hr{
-    width: 80.5px;
+.allPlanSelected .misConexiones hr{
+    width: 126px;
     height: 2px;
     background-image: linear-gradient(252deg, #c9a1f0, #7ab2eb);
     margin-top: -10px;

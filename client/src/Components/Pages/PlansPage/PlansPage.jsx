@@ -62,7 +62,10 @@ export default class PlansPage extends Component {
       <React.Fragment>
         <Nav></Nav>
         <div className="allPlanSelected">
-          <p><Link to={"/plans"}>En Madrid</Link></p>
+          <div className="enMadrid">
+            <p><Link to={"/plans"}>En Madrid</Link></p>
+            <hr></hr>
+          </div>
           <p><Link to={"/friendsplans"}>Mis conexiones</Link></p>
         </div>
         <div className="allPlans">

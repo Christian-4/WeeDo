@@ -38,13 +38,27 @@ export default class ProfilePage extends Component {
             </div>
           </div>
           <div className="sobreMi">
-            <label>Sobre Mi</label><br></br>
+            <label>Sobre mi</label><br></br>
             <textarea placeholder="Escribe una pequeña descripción sobre ti"></textarea>
           </div>
           <div className="educacionYTrabajo">
-            <label>Educación y trabajo</label>
+            <label>Educación y trabajo</label><br></br>
+            <input type="text" placeholder="Añade educación"></input><br></br>
+            <input type="text" placeholder="Añade trabajo"></input>
           </div>
-          <div>
+          <div className="myIntereses">
+            <label>Intereses</label>
+            <div className="myInteresesDivs">
+              {this.state.user.hobbies.map(function(hobby,index){
+                return(
+                  <div className="myInteresesDiv">
+                   
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="logoutButton">
             <Logout></Logout>
           </div>
         </div>

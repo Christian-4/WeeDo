@@ -1,66 +1,78 @@
 import React, { Component } from 'react'
 import PlanService from '../../PlansService'
 import { Link } from "react-router-dom";
+import FavIcon from "../../../icons/icons/Group4.png"
+import "./FavouritesPage.css"
 
 export default class FavouritesPage extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            plans: null
-        }
-
-        this.planService = new PlanService()
+    this.state = {
+      plans: null
     }
 
-
-    componentDidMount() {
-        this.planService.getFavouritePlans()
-            .then(response => {
-                console.log(response)
-                this.setState({ ...this.state, plans: response.favouriteplans })
-            })
-    }
+    this.planService = new PlanService()
+  }
 
 
+  componentDidMount() {
+    this.planService.getFavouritePlans()
+      .then(response => {
+        console.log(response)
+        this.setState({ ...this.state, plans: response.favouriteplans })
+      })
+  }
 
-    printPlans = () => {
-        return (
-            <React.Fragment>
+  addPlanFav = (id) => {
+    this.planService.addPlanFav(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
+
+  delPlanFav = (id) => {
+    this.planService.delPlanFav(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
+
+
+
+  printPlans = (addPlanFav, delPlanFav) => {
+    return (
+      <React.Fragment>
         {this.state.plans.map(function (plan, index) {
           return (
-            <div className="planDiv">
-              <div className="planCard">
-                <div className="topPlanCard">
-                  <div className="imagePlan">
-                    <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
-                  </div>
-                  <div className="fechaHoraDiv">
-                    <p className="fechaYHoraPlan">{plan.date}</p>
-                    <Link to={`/plan/${plan._id}`}><p className="nombrePlan">{plan.title}</p></Link>
-                  </div>
-                  <div>
-                    <Link to={`/chat/${plan.chat}`}>Chat icon</Link>
-                  </div>
+            <div className="allPlanCard">
+              <div className="allPlanCardLeft">
+                <div className="allPlanCardImagePlan">
+                  <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
                 </div>
-                <div className="botPlanCard">
-                <p className="assistantsPlan">Van a asistir:</p><span>{plan.users.map(function (user, index) {
-                    return (
-                      <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
-                    )
-                  })}</span>
+                <div className="allPlanCardImageOwner">
+                  <img src={plan.owner.image} />
                 </div>
+              </div>
+              <div className="allPlanCardRight">
+                <div className="allPlanCardDate">{plan.date}<img onClick={() => addPlanFav(plan._id)} src={FavIcon} /></div>
+                <div className="allPlanCardTitle">{plan.title}</div>
+                <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
+                  return (
+                    <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+                  )
+                })}</span></div>
               </div>
             </div>
           )
         })}
       </React.Fragment>
-        )
-    }
+    )
+  }
 
-    render() {
-        return (
-            <React.Fragment>
+  render() {
+    return (
+      <React.Fragment>
         <div className="headerPlans">
           <h3 className="titlePlans">Mis planes</h3>
         </div>
@@ -69,13 +81,15 @@ export default class FavouritesPage extends Component {
           <p><Link to={"/plansgo"}>Voy a ir</Link></p>
           <p><Link to={"/favourites"}>Guardados</Link></p>
         </div>
-        {
-          this.state.plans !== null &&
-          <div>
-            {this.printPlans()}
-          </div>
-        }
+        <div className="allPlans">
+          {
+            this.state.plans !== null &&
+            <div>
+              {this.printPlans(this.addPlanFav, this.delPlanFav)}
+            </div>
+          }
+        </div>
       </React.Fragment>
-        )
-    }
+    )
+  }
 }

@@ -375,7 +375,7 @@ router.get("/favouriteplans", function (req, res, next) {
     User.findById(req.user._id)
         .then(user => {
             user.favourites.forEach(function (plan) {
-                promises.push(Plan.findById(plan._id).populate('users'))
+                promises.push(Plan.findById(plan._id).populate('users').populate("owner"))
             })
             Promise.all(promises)
                 .then(plans => {

@@ -3,6 +3,7 @@ import PlanService from '../../PlansService'
 import { Link } from "react-router-dom";
 import Nav from "../../Nav/Nav"
 import "./FriendsPlansPage.css"
+import FavIcon from "../../../icons/icons/Group4.png"
 
 export default class FriendsPlansPage extends Component {
   constructor(props) {
@@ -24,30 +25,44 @@ export default class FriendsPlansPage extends Component {
       })
   }
 
+  addPlanFav = (id) => {
+    this.planService.addPlanFav(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
+
+  delPlanFav = (id) => {
+    this.planService.delPlanFav(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
 
 
-  printPlans = () => {
+
+  printPlans = (addPlanFav, delPlanFav) => {
     return (
       <React.Fragment>
         {this.state.plans.map(function (plan, index) {
           return (
             <div className="allPlanCard">
-              <div className="allPlanCardTop">
-                <div className="imageAllPlanCard">
+              <div className="allPlanCardLeft">
+                <div className="allPlanCardImagePlan">
                   <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
                 </div>
-                <div className="allPlanCardTopRight">
-                  <p className="allPlanCardFecha">{plan.date}<span className="allPlanCardIcon">Icon</span></p>
-                  <p className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></p>
-                  <span className="allPlanCardOwner">Creado por <Link to={`/profile/${plan.owner._id}`}><img src={plan.owner.image} /></Link></span>
+                <div className="allPlanCardImageOwner">
+                  <img src={plan.owner.image} />
                 </div>
               </div>
-              <div className="allPlanCardBot">
-                <p>Van a asistir:</p> <span>{plan.users.map(function (user, index) {
+              <div className="allPlanCardRight">
+                <div className="allPlanCardDate">{plan.date}<img onClick={() => addPlanFav(plan._id)} src={FavIcon} /></div>
+                <div className="allPlanCardTitle">{plan.title}</div>
+                <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
                     <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
                   )
-                })}</span>
+                })}</span></div>
               </div>
             </div>
           )

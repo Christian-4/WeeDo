@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PlanService from '../../PlansService'
 import "./PlansToGoPage.css"
 import { Link } from "react-router-dom";
+import ChatIcon from "../../../icons/icons/charlas.png"
 
 
 export default class PlansToGoPage extends Component {
@@ -26,38 +27,34 @@ export default class PlansToGoPage extends Component {
 
 
 
-    printPlans = () => {
-        return (
-            <React.Fragment>
-        {this.state.plans.map(function (plan, index) {
-          return (
-            <div className="planDiv">
-              <div className="planCard">
-                <div className="topPlanCard">
-                  <div className="imagePlan">
+    printPlans = (addPlanFav, delPlanFav) => {
+      return (
+        <React.Fragment>
+          {this.state.plans.map(function (plan, index) {
+            return (
+              <div className="allPlanCard">
+                <div className="allPlanCardLeft">
+                  <div className="allPlanCardImagePlan">
                     <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
                   </div>
-                  <div className="fechaHoraDiv">
-                    <p className="fechaYHoraPlan">{plan.date}</p>
-                    <Link to={`/plan/${plan._id}`}><p className="nombrePlan">{plan.title}</p></Link>
-                  </div>
-                  <div>
-                    <Link to={`/chat/${plan.chat}`}>Chat icon</Link>
+                  <div className="allPlanCardImageOwner">
+                    <img src={plan.owner.image} />
                   </div>
                 </div>
-                <div className="botPlanCard">
-                <p className="assistantsPlan">Van a asistir:</p><span>{plan.users.map(function (user, index) {
+                <div className="allPlanCardRight">
+                <div className="allPlanCardDate">{plan.date}<Link to={`/chat/${plan.chat}`}><img src={ChatIcon} /></Link></div>
+                  <div className="allPlanCardTitle">{plan.title}</div>
+                  <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                     return (
                       <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
                     )
-                  })}</span>
+                  })}</span></div>
                 </div>
               </div>
-            </div>
-          )
-        })}
-      </React.Fragment>
-        )
+            )
+          })}
+        </React.Fragment>
+      )
     }
 
     render() {
@@ -71,12 +68,15 @@ export default class PlansToGoPage extends Component {
           <p><Link to={"/plansgo"}>Voy a ir</Link></p>
           <p><Link to={"/favourites"}>Guardados</Link></p>
         </div>
+        <div className="allPlans">
         {
           this.state.plans !== null &&
           <div>
             {this.printPlans()}
           </div>
         }
+        </div>
+        
       </React.Fragment>
         )
     }

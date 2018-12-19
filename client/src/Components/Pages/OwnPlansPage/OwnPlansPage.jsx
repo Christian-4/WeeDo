@@ -43,7 +43,7 @@ export default class OwnPlansPage extends Component {
                 <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
-                    <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+                    <Link to={`/participants/${plan._id}`}><img src={user.image} /></Link>
                   )
                 })}</span></div>
               </div>

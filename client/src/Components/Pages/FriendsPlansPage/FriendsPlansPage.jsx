@@ -52,7 +52,7 @@ export default class FriendsPlansPage extends Component {
                   <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
                 </div>
                 <div className="allPlanCardImageOwner">
-                  <img src={plan.owner.image} />
+                  <Link to={`/profile/${plan.owner._id}`}><img src={plan.owner.image} /></Link>
                 </div>
               </div>
               <div className="allPlanCardRight">
@@ -60,7 +60,7 @@ export default class FriendsPlansPage extends Component {
                 <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
-                    <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+                    <Link to={`/participants/${plan._id}`}><img src={user.image} /></Link>
                   )
                 })}</span></div>
               </div>

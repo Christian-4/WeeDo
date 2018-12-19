@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PlanService from '../../PlansService'
 import "./OwnPlansPage.css"
 import { Link } from "react-router-dom";
-import ChatIcon from "../../../icons/icons/charlas.png"
+import ChatIcon from "../../../icons/icons/chat.png"
 
 export default class OwnPlansPage extends Component {
     constructor(props) {
@@ -38,8 +38,8 @@ export default class OwnPlansPage extends Component {
                   </div>
                 </div>
                 <div className="allPlanCardRight">
-                  <div className="allPlanCardDate">{plan.date}<Link to={`/chat/${plan.chat}`}><img src={ChatIcon} /></Link></div>
-                  <div className="allPlanCardTitle">{plan.title}</div>
+                  <div className="allPlanCardDate">{plan.date}<Link to={`/chat/${plan.chat}`}><img className="chat" src={ChatIcon} /></Link></div>
+                  <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                   <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                     return (
                       <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PlanService from '../../PlansService'
 import { Link } from "react-router-dom";
-import FavIcon from "../../../icons/icons/Group4.png"
+import FavIcon from "../../../icons/icons/saved.png"
 import "./FavouritesPage.css"
 
 export default class FavouritesPage extends Component {
@@ -55,8 +55,8 @@ export default class FavouritesPage extends Component {
                 </div>
               </div>
               <div className="allPlanCardRight">
-                <div className="allPlanCardDate">{plan.date}<img onClick={() => addPlanFav(plan._id)} src={FavIcon} /></div>
-                <div className="allPlanCardTitle">{plan.title}</div>
+                <div className="allPlanCardDate">{plan.date}<img onClick={() => delPlanFav(plan._id)} src={FavIcon} /></div>
+                <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
                     <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>

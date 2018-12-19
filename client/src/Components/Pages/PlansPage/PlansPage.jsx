@@ -3,7 +3,7 @@ import PlanService from '../../PlansService'
 import "./PlansPage.css"
 import Nav from "../../Nav/Nav.jsx"
 import { Link } from "react-router-dom";
-import FavIcon from "../../../icons/icons/Group4.png"
+import FavIcon from "../../../icons/icons/save.png"
 
 export default class PlansPage extends Component {
 
@@ -56,7 +56,7 @@ export default class PlansPage extends Component {
               </div>
               <div className="allPlanCardRight">
                 <div className="allPlanCardDate">{plan.date}<img onClick={() => addPlanFav(plan._id)} src={FavIcon} /></div>
-                <div className="allPlanCardTitle">{plan.title}</div>
+                <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
                     <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>

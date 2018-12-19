@@ -363,7 +363,7 @@ router.get("/planstogo", function (req, res, next) {
 
     User.findById(req.user._id)
         .then(user => {
-            Plan.find({ users: { $in: [user._id] } }).sort("date").populate("users")
+            Plan.find({ users: { $in: [user._id] } }).sort("date").populate("users").populate("owner")
                 .then(plans => res.status(200).json({ planstogo: plans }))
                 .catch(err => res.status(500).json({ message: "Error to show plans " + err }))
         })
@@ -375,7 +375,7 @@ router.get("/favouriteplans", function (req, res, next) {
     User.findById(req.user._id)
         .then(user => {
             user.favourites.forEach(function (plan) {
-                promises.push(Plan.findById(plan._id).populate('users'))
+                promises.push(Plan.findById(plan._id).populate('users').populate("owner"))
             })
             Promise.all(promises)
                 .then(plans => {

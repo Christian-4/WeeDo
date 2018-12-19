@@ -1,11 +1,13 @@
 .planImage{
     width: 375px;
   height: 193px;
+  margin-top: -110px;
 }
 
 .planImage img{
     width: 375px;
     height: 193px;
+    object-fit: cover;
 }
 
 .planImage .planImageOwner{
@@ -16,6 +18,7 @@
   position: absolute;
   top: 140px;
   right: 10px;
+  object-fit: cover;
 }
 
 .informationPlan{
@@ -58,8 +61,13 @@ text-align: left;
   color: #5e5e5e;
 }
 
+.locationPlan img{
+    width: 14px;
+  height: 20px;
+}
+
 .descriptionPlan .descriptionPlan2{
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: left;
   height: 16px;
   font-size: 14px;
@@ -85,7 +93,7 @@ text-align: left;
 }
 
 .usersPlan{
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: left;
   height: 16px;
   font-size: 14px;
@@ -97,14 +105,48 @@ text-align: left;
   color: #5e5e5e;
 }
 
+.usersPlan span {
+    margin-left: 10px;
+}
+
 .usersPlan img{
+    margin-left: -10px;
+    margin-top: -10px;
     width: 26px;
   height: 26px;
   border-radius: 50px;
   border: 2px solid gainsboro;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
 .buttonsPlan{
-    margin-top: 140px;
+    margin-top: 100px;
+    display: flex;
+}
+
+.buttonApuntarme{
+    outline: none;
+  height: 48px;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+    color: white;
+    width: 231px;
+  height: 48px;
+  border-radius: 24px;
+  border: 0px;
+  background-image: linear-gradient(258deg, #c9a1f0, #7ab2eb);
+}
+
+.buttonsPlan img{
+    width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin-left: 10px;
 }

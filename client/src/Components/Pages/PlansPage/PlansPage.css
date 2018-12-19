@@ -1,6 +1,5 @@
 .allPlanSelected{
     display: flex;
-    justify-content: space-around;
     width: 70%;
     margin: auto;
     color: #5e5e5e;
@@ -14,80 +13,86 @@
   color: #5e5e5e;
 }
 
+.allPlanSelected .enMadrid hr{
+    width: 80.5px;
+    height: 2px;
+    background-image: linear-gradient(252deg, #c9a1f0, #7ab2eb);
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
 .allPlans{
     display: flex;
     justify-content: center;
 }
 
 .allPlans :last-child{
-    position: relative;
     margin-bottom: 30px;
 }
 
-.allPlanCard{
+.allPlans .allPlanCard{
     margin-top: 31px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     width: 311px;
-    height: 128px;
+    height: 104px;
     border-radius: 8px;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
 }
 
-.allPlans :first-child{
-    margin-top: 0
+.allPlanCardLeft{
+    width: 104px;
+  height: 104px;
+  margin-right: 16px;
 }
 
-.allPlanCardTop{
+.allPlanCardLeft .allPlanCardImagePlan img{
+    width: 104px;
+  height: 104px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  object-fit: cover;
+}
+
+.allPlanCardLeft .allPlanCardImageOwner img{
+    width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  position: relative;
+  bottom: 68px;
+  left: 32px;
+  object-fit: cover;
+  border: 2px solid gainsboro;
+}
+
+.allPlanCardRight{
+    width: 100%;
+}
+
+.allPlanCardRight .allPlanCardDate{
     display: flex;
-}
-
-.allPlanCardTopRight{
-    margin-left: 16px;
+    padding-top: 10px;
+    height: 14px;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #5e5e5e;
     text-align: left;
 }
 
-.allPlanCardFecha{
-    width: 82px;
-  height: 14px;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #5e5e5e;
-  position: relative;
-  top: 5px;
+.allPlanCardRight .allPlanCardDate img{
+    width: 22px;
+  height: 22px;
+  margin-left: 6px;
+  object-fit: cover;
 }
 
-.allPlanCardIcon{
-    margin-left: 50px;
-}
-
-.allPlanCardOwner{
-    width: 64px;
-  height: 14px;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #4a4a4a;
-  position: relative;
-  bottom: 36px;
-}
-
-.allPlanCardOwner img{
-    position: relative;
-    top: 38px;
-}
-
-.allPlanCardTitle{
-    width: 148px;
+.allPlanCardRight .allPlanCardTitle{
   height: 16px;
   font-size: 14px;
   font-weight: 500;
@@ -96,54 +101,20 @@
   line-height: normal;
   letter-spacing: normal;
   color: #4a4a4a;
-  position: relative;
-  top: 10px;
+  text-align: left;
 }
 
-.imageAllPlanCard{
-    width: 88px;
-    height: 88px;
+.allPlanCardRight .allPlanCardUsers{
+  display: flex;
+  margin-top: 30px;
 }
 
-.imageAllPlanCard img{
-    width: 88px;
-    height: 88px;
-    border-top-left-radius: 8px;
-}
-
-.allPlanCardTopRight img{
- width: 24px;
- height: 24px;
- border-radius: 50px;
- border: 1px solid rgb(190, 189, 189);
-}
-
-.allPlanCardBot{
-    display: flex;
-    align-items: center;
-}
-
-.allPlanCardBot img{
-    width: 24px;
-    height: 24px;
-    border-radius: 50px;
-    border: 1px solid rgb(190, 189, 189);
-    margin-left: -5px;
+.allPlanCardRight .textasist{
     position: relative;
-    bottom: 20px;
-   }
-
-   .allPlanCardBot span{
-       margin-right: 5px;
-       position: relative;
-       top: 77px;
-   }
-
-.allPlanCardBot p {
-width: 76px;
+    left: 0px;
+    width: 69px;
   height: 14px;
   font-size: 12px;
-  margin-left: 16px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -151,6 +122,14 @@ width: 76px;
   letter-spacing: normal;
   color: #4a4a4a;
   margin-right: 15px;
-  position: relative;
-  top: 30px;
+}
+
+.allPlanCardRight .allPlanCardUsers img{
+    width: 24px;
+  height: 24px;
+  border-radius: 40px;
+  border: 2px solid gainsboro;
+  object-fit: cover;
+  bottom: 5px;
+  margin-left: -10px;
 }

@@ -80,6 +80,14 @@ width: 134px;
   border-top-left-radius: 8px;
 }
 
+.allPlanCardRight .allPlanCardDate .chat{
+    width: 40px;
+  height: 40px;
+  position: absolute;
+  left: -15px;
+  object-fit: cover;
+}
+
 .fechaHoraDiv{
     text-align: left;
 }
@@ -135,4 +143,12 @@ width: 134px;
   letter-spacing: normal;
   color: #4a4a4a;
   margin-right: 15px;
+}
+
+.selectPlans .voy hr{
+    width: 60.5px;
+    height: 2px;
+    background-image: linear-gradient(252deg, #c9a1f0, #7ab2eb);
+    margin-top: -10px;
+    margin-bottom: 20px;
 }

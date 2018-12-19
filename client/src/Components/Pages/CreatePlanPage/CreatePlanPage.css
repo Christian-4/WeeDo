@@ -1,13 +1,24 @@
-.new-plan-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   margin-bottom: 80px;
+.new-plan-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
 }
 
-.new-plan-form{
-    background-color: "F7F9FA";
-    border-top: 1px solid "F7F9FA"
-    
+.new-plan-form {
+  background-color: "F7F9FA";
+  border-top: 1px solid "F7F9FA";
+}
+
+.div-date-time{
+  display: flex;
+  margin-bottom: 60px;
+  margin-bottom: 30px;
+}
+
+.date-label{
+  display: block;
+  text-align: left;
+  margin-bottom: 12px;
 }

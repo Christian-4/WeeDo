@@ -14,7 +14,8 @@ class PlansService {
     createNewPlan = (dataPlan) => {
         return this.service.post('/newplan', dataPlan)
             .then(response => response.data)
-    }
+            .catch(err => err.response.data)
+    }   
 
 
     deletePlan = (id) => {

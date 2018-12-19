@@ -86,7 +86,7 @@ export default class FriendsPlansPage extends Component {
           {
             this.state.plans !== null &&
             <div>
-              {this.printPlans()}
+              {this.printPlans(this.addPlanFav, this.delPlanFav)}
             </div>
           }
         </div>

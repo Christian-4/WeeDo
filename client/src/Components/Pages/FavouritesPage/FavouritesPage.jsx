@@ -35,6 +35,11 @@ export default class FavouritesPage extends Component {
     this.planService.delPlanFav(id)
       .then(response => {
         console.log(response)
+        this.planService.getFavouritePlans()
+          .then(response => {
+            console.log(response)
+            this.setState({ ...this.state, plans: response.favouriteplans })
+          })
       })
   }
 

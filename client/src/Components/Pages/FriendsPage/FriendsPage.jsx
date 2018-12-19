@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import FriendService from '../../FriendsService'
+import ChatService from '../../ChatService'
 import { Link } from "react-router-dom";
+import Nav from "../../Nav/Nav.jsx"
+import Tapbar from "../../Tapbar/Tapbar.jsx"
+import "./FriendsPage.css"
+import Accept from "../../../icons/icons/ConexionAdd.png"
+import Decline from "../../../icons/icons/ConexionDecline.png"
 
 
 export default class FriendsPage extends Component {
@@ -8,43 +14,95 @@ export default class FriendsPage extends Component {
     super(props);
 
     this.state = {
-      friends: null
+      user: null,
+      friendchats: null,
+      notificationsFriends: null
     };
 
     this.friendService = new FriendService()
+    this.chatService = new ChatService()
   }
 
   componentDidMount() {
-    this.friendService.getFriends()
-      .then(response => {
-        console.log(response.friends)
-        this.setState({ ...this.state, friends: response.friends })
+    this.friendService.getNotifications()
+      .then(responsefriend => {
+        console.log(responsefriend)
+        this.chatService.getChats()
+          .then(response => {
+            console.log(response)
+            this.setState({ ...this.state, notificationsFriends: responsefriend.confirmations, friendchats: response.friendchats, user: response.user })
+          })
       })
   }
 
-  deleteFriend = (id) => {
-    this.friendService.deleteFriend(id)
+  acceptFriend = (id) => {
+    this.friendService.acceptFriend(id)
       .then(response => {
-        console.log(response.friends)
-        this.setState({ ...this.state, friends: response.friends })
+        console.log(response)
       })
   }
 
-  printFriends = (deleteFriend) => {
+  declineFriend = (id) => {
+    this.friendService.declineFriend(id)
+      .then(response => {
+        console.log(response)
+      })
+  }
+
+  printFriendNotifications = (acceptFriend, declineFriend) => {
     return (
       <React.Fragment>
-        {this.state.friends.map(function (friend, index) {
-          return (
-            <div>
-              <div>{friend.username}</div>
-              <img src={friend.image} />
-              <p>{friend.hobbies}</p>
-              <p>{friend.location}</p>
-              <button onClick={() => deleteFriend(friend._id)}>Delete friend</button>
-              <Link to={`/profile/${friend._id}`}><p>View friend</p></Link>
-            </div>
-          )
-        })}
+        <div className="findNewConections">
+          <Link to={`/allusers`}><button>Encontrar nuevas conexiones</button></Link>
+        </div>
+        <div className="notificationsConections">
+          <p>Quieren añadirte a sus conexiones</p>
+          <div className="notificationsConectionsPeople">
+            {this.state.notificationsFriends.map(function (notification, index) {
+              return (
+                <React.Fragment>
+                  <div className="notificationConectionsPerson">
+                    <Link to={`/profile/${notification.originUser._id}`}><img src={notification.originUser.image} /></Link>
+                    <span>{notification.originUser.username}</span>
+                    <div className="notificationConectionsPersonButtons">
+                      <img src={Accept} onClick={() => acceptFriend(notification._id)} />
+                      <img src={Decline} onClick={() => declineFriend(notification._id)} />
+                    </div>
+                  </div>
+                </React.Fragment>
+              )
+            })}
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  printChats = () => {
+    let actualUser = this.state.user
+    let otherUser
+    return (
+      <React.Fragment>
+        <div className="chatsConections">
+          <p>Tus conexiones</p>
+          {this.state.friendchats.map(function (chat, index) {
+            chat.users.map(function (user) {
+              if (actualUser._id !== user._id) {
+                otherUser = user
+              }
+            })
+            return (
+              <React.Fragment>
+                <Link to={`/chat/${chat._id}`}><div className="chatConections">
+                  <div className="chatConectionsImage"><img src={otherUser.image} /></div>
+                  <div className="chatConectionsName">{otherUser.username}</div>
+                </div>
+                </Link>
+                <hr />
+              </React.Fragment>
+            )
+          })}
+        </div>
       </React.Fragment>
     )
   }
@@ -52,11 +110,18 @@ export default class FriendsPage extends Component {
   render() {
     return (
       <React.Fragment>
-        {
-          this.state.friends !== null &&
-          <div>{this.printFriends(this.deleteFriend)}</div>
-
-        }
+        <Nav></Nav>
+        <div className="conectionsPage">
+          {
+            this.state.notificationsFriends !== null &&
+            <div>{this.printFriendNotifications(this.acceptFriend, this.declineFriend)}</div>
+          }
+          {
+            this.state.friendchats !== null &&
+            <div>{this.printChats()}</div>
+          }
+        </div>
+        <Tapbar></Tapbar>
       </React.Fragment>
     )
   }

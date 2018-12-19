@@ -39,6 +39,15 @@ export default class FriendsPage extends Component {
     this.friendService.acceptFriend(id)
       .then(response => {
         console.log(response)
+        this.friendService.getNotifications()
+          .then(responsefriend => {
+            console.log(responsefriend)
+            this.chatService.getChats()
+              .then(response => {
+                console.log(response)
+                this.setState({ ...this.state, notificationsFriends: responsefriend.confirmations, friendchats: response.friendchats })
+              })
+          })
       })
   }
 
@@ -46,6 +55,15 @@ export default class FriendsPage extends Component {
     this.friendService.declineFriend(id)
       .then(response => {
         console.log(response)
+        this.friendService.getNotifications()
+          .then(responsefriend => {
+            console.log(responsefriend)
+            this.chatService.getChats()
+              .then(response => {
+                console.log(response)
+                this.setState({ ...this.state, notificationsFriends: responsefriend.confirmations, friendchats: response.friendchats })
+              })
+          })
       })
   }
 

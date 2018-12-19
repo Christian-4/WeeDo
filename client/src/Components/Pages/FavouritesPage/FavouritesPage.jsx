@@ -3,6 +3,7 @@ import PlanService from '../../PlansService'
 import { Link } from "react-router-dom";
 import FavIcon from "../../../icons/icons/saved.png"
 import "./FavouritesPage.css"
+import Nav from "../../Nav/Nav.jsx"
 
 export default class FavouritesPage extends Component {
   constructor(props) {
@@ -78,9 +79,7 @@ export default class FavouritesPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="headerPlans">
-          <h3 className="titlePlans">Mis planes</h3>
-        </div>
+        <Nav></Nav>
         <div className="selectPlans">
           <div className="creados">
             <p><Link to={"/ownplans"}>Creados</Link></p>

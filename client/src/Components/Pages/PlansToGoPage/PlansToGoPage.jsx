@@ -3,6 +3,7 @@ import PlanService from '../../PlansService'
 import "./PlansToGoPage.css"
 import { Link } from "react-router-dom";
 import ChatIcon from "../../../icons/icons/chat.png"
+import Nav from "../../Nav/Nav.jsx"
 
 
 export default class PlansToGoPage extends Component {
@@ -60,9 +61,7 @@ export default class PlansToGoPage extends Component {
     render() {
         return (
             <React.Fragment>
-        <div className="headerPlans">
-          <h3 className="titlePlans">Mis planes</h3>
-        </div>
+        <Nav></Nav>
         <div className="selectPlans">
           <div className="creados">
             <p><Link to={"/ownplans"}>Creados</Link></p>

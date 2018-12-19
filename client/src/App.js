@@ -21,6 +21,7 @@ import OwnPlansPage from './Components/Pages/OwnPlansPage/OwnPlansPage';
 import FriendsPlansPage from './Components/Pages/FriendsPlansPage/FriendsPlansPage';
 import Tapbar from './Components/Tapbar/Tapbar';
 import NotificationsPlanPage from './Components/Pages/NotificationsPlanPage/NotificationsPlanPage';
+import ParticipantsPage from './Components/Pages/ParticipantsPage/ParticipantsPage';
 
 class App extends Component {
 
@@ -83,6 +84,7 @@ class App extends Component {
           <Route exact path="/ownplans" render={() => <OwnPlansPage />} />
           <Route exact path="/friendsplans" render={() => <FriendsPlansPage />} />
           <Route exact path="/notifications/:id" component={NotificationsPlanPage} />
+          <Route exact path="/participants/:id" component={ParticipantsPage} />
           
         </Switch>
 

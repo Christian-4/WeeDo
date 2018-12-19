@@ -64,9 +64,16 @@ export default class PlansToGoPage extends Component {
           <h3 className="titlePlans">Mis planes</h3>
         </div>
         <div className="selectPlans">
-          <p><Link to={"/ownplans"}>Creados</Link></p>
-          <p><Link to={"/plansgo"}>Voy a ir</Link></p>
-          <p><Link to={"/favourites"}>Guardados</Link></p>
+          <div className="creados">
+            <p><Link to={"/ownplans"}>Creados</Link></p>
+          </div>
+          <div className="voy">
+            <p><Link to={"/plansgo"}>Voy a ir</Link></p>
+            <hr></hr>
+          </div>
+          <div>
+            <p><Link to={"/favourites"}>Guardados</Link></p>
+          </div>
         </div>
         <div className="allPlans">
         {

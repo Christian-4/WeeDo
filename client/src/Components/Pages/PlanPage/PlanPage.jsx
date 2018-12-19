@@ -96,23 +96,23 @@ export default class PlanPage extends Component {
           </div>
           <div className="usersPlan">
             <p>{users} personas van a acudir</p>
-            <span>{this.state.plan.users.map(function (user, index) {
+            <Link to={`/participants/${this.state.plan._id}`}><span>{this.state.plan.users.map(function (user, index) {
               return (
-                <Link to={`/profile/${user._id}`}><img src={user.image} /></Link>
+                <img src={user.image} />
               )
-            })}</span>
-          </div>
-          <div className="buttonsPlan">
-            <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>¡Quiero apuntarme!</button>
-            <Link to={`/chat/${chat}`}><img src={group5} /></Link>
-            <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
-            {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
-            {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+            })}</span></Link>
+        </div>
+        <div className="buttonsPlan">
+          <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>¡Quiero apuntarme!</button>
+          <Link to={`/chat/${chat}`}><img src={group5} /></Link>
+          <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
+          {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
+          {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
             </form> */}
-          </div>
         </div>
-      </React.Fragment>
+        </div>
+      </React.Fragment >
     )
   }
 

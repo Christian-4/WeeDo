@@ -55,8 +55,8 @@ export default class FriendsPage extends Component {
         <div className="findNewConections">
           <Link to={`/allusers`}><button>Encontrar nuevas conexiones</button></Link>
         </div>
+        <p className="notificationsTitle">Quieren añadirte a sus conexiones</p>
         <div className="notificationsConections">
-          <p>Quieren añadirte a sus conexiones</p>
           <div className="notificationsConectionsPeople">
             {this.state.notificationsFriends.map(function (notification, index) {
               return (

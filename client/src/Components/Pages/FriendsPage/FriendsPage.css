@@ -26,17 +26,22 @@
     overflow-x: scroll;
 }
 
-.notificationsConections p{
-    width: 299px;
-  height: 21px;
-  font-size: 18px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #4a4a4a;
+.notificationsConections::-webkit-scrollbar{
+    width: 0;
+    height: 0;
 }
+
+
+.notificationsTitle{
+    height: 21px;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4a4a4a;
+  }
 
 .notificationsConectionsPeople{
     display: flex;

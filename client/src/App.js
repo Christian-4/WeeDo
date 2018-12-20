@@ -23,6 +23,7 @@ import Tapbar from './Components/Tapbar/Tapbar';
 import NotificationsPlanPage from './Components/Pages/NotificationsPlanPage/NotificationsPlanPage';
 import ParticipantsPage from './Components/Pages/ParticipantsPage/ParticipantsPage';
 import PlanMap from "./Components/Pages/PlanMap/PlanMap.jsx"
+import IndividualChat from "./Components/Pages/IndividualChat/IndividualChat.jsx"
 
 
 class App extends Component {
@@ -79,6 +80,7 @@ class App extends Component {
           <Route exact path="/profile/:id" component={ProfilePage} />
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:id" component={ChatPage} />
+          <Route exact path="/individualchat/:id" component={IndividualChat} />
           <Route exact path="/friends" render={() => <FriendsPage />} />
           <Route exact path="/allusers" render={() => <UserPage />} />
           <Route exact path="/notifications" render={() => <NotificationsPage />} />

@@ -5,6 +5,17 @@ const User = require("../models/User")
 const Plan = require("../models/Plan")
 
 
+
+
+router.get("/getindividualchat/:_id", (req,res,next) => {
+  
+  Chat.findById(req.params._id).populate("users").populate('plan')
+    .then(chat => {
+      res.status(200).json({chat, user: req.user})
+    })
+    .catch(err => console.log(err))
+})
+
 router.get("/getchat/:_id", (req, res, next) => {
   let owner
   Chat.findById(req.params._id).populate("users").populate('plan')

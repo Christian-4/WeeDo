@@ -107,7 +107,7 @@ export default class PlanPage extends Component {
               <div className="day">
                  {this.parserDate().getUTCDate()}
               </div> 
-              <div className="plan-hour">
+              <div className="plan-hour-plan">
                 {this.parserDate().getUTCHours() +
                   ":" +
                   this.parserDate().getMinutes()}
@@ -128,15 +128,20 @@ export default class PlanPage extends Component {
           </div>
           <div className="usersPlan">
             <p>{users} personas van a acudir</p>
-            <Link to={`/participants/${this.state.plan._id}`}>
+            
               <span>
                 {this.state.plan.users.map(function(user, index) {
                   return <img src={user.image} />;
                 })}
               </span>
-            </Link>
+           
           </div>
+          <div>
+          <Link to={`/participants/${this.state.plan._id}`}>
           <img src={RightIcon} className="right-icon"></img>
+          </Link>
+          </div>
+        
           <div className="buttonsPlan">
             <button
               className="buttonApuntarme"

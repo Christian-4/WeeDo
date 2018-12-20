@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Hobbies from "../HobbiesDiv/Hobbies.jsx"
 import InputCreatePlan from "../InputCreatePlan/InputCreatePlan";
+import Logo from "../../icons/icons/logo.png"
 import "./FormSingUp.css"
 
 
@@ -134,7 +135,7 @@ export default class FormSingUp extends Component {
 
     return (
       <div className="signUp">
-        <h2>Logo</h2>
+        <img className="logoSignup" src={Logo}/>
         <form onSubmit={this.handleFormSubmit}>
           <InputCreatePlan label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
           <InputCreatePlan label="Password" placeholder="Tu password" name="password" handleChange= {this.handleChange} type={"password"}/>

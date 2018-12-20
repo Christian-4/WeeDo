@@ -29,14 +29,11 @@ export default class ChatPage extends Component {
   constructor(props) {
     super(props);
 
-    this.chatManager = new ChatManager(() => {
-      console.log(this.chatManager.getMessages())
-      this.setState({messages: this.chatManager.getMessages()})
-    });
+   
 
     this.state = {
       name: null,
-      messages: this.chatManager.getMessages(),
+      messages: null,
       id: this.props.match.params.id,
       plan: null,
       owner: null,
@@ -47,8 +44,22 @@ export default class ChatPage extends Component {
   }
 
   componentDidMount() {
+
+    this.socket = io("http://localhost:5000");
+    this.socket.on("connect", () =>
+      console.log("connected to back via websockets")
+    );
+    this.socket.on("disconnect", () =>
+      console.log("DISconnected to back via websockets")
+    );
+
+    this.socket.on("chatMsg", data => this.addMessage(data));
+
+
+
+
     this.chatService.getChat(this.state.id).then(response => {
-      console.log(response);
+
       this.setState({
         ...this.state,
         name: response.user,
@@ -63,7 +74,6 @@ export default class ChatPage extends Component {
 
   addMessage = message => {
     this.setState(state => ({ messages: [...state.messages, message] }));
-    this.chatManager.callbackMesgChange();
     this.chatService.addMessage(this.state.id, message);
   };
 
@@ -76,7 +86,8 @@ export default class ChatPage extends Component {
       id: this.state.id,
       image: this.state.name.image
     };
-    this.chatManager.sendMessage(message);
+
+    this.socket.emit("chatMsg", message);
     this.addMessage(message);
   };
 

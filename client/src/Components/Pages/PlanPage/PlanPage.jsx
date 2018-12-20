@@ -1,15 +1,31 @@
-import React, { Component } from 'react'
-import PlansService from '../../PlansService'
+import React, { Component } from "react";
+import PlansService from "../../PlansService";
 import { Link, Redirect, Route } from "react-router-dom";
 
-import Map from "../../Map/Map.jsx"
-import "./PlanPage.css"
-import group5 from "../../../icons/icons/Group5.png"
-import group4 from "../../../icons/icons/Group4.png"
-import locationIcon from "../../../icons/icons/location.png"
+import Map from "../../Map/Map.jsx";
+import "./PlanPage.css";
+import group5 from "../../../icons/icons/Group5.png";
+import group4 from "../../../icons/icons/Group4.png";
+import locationIcon from "../../../icons/icons/location.png";
+import RightIcon from "../../../icons/icons/right.png"
+
+
+const monthNames = [
+  "ENE",
+  "FEB",
+  "MAR",
+  "ABR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AGO",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC"
+];
 
 export default class PlanPage extends Component {
-
   constructor(props) {
     super(props);
 
@@ -18,20 +34,17 @@ export default class PlanPage extends Component {
       plan: null,
       notifications: null,
       redirectWhenDelete: false,
-      showthemap:false
-    }
+      showthemap: false
+    };
 
     this.plansService = new PlansService();
-
-
   }
 
   componentDidMount() {
-    this.plansService.getPlan(this.state.plan_id)
-      .then(response => {
-        console.log(response)
-        this.setState({ ...this.state, plan: response.plan })
-      })
+    this.plansService.getPlan(this.state.plan_id).then(response => {
+      console.log(response);
+      this.setState({ ...this.state, plan: response.plan });
+    });
   }
 
   // handleDeletePlan = (e) => {
@@ -53,53 +66,60 @@ export default class PlanPage extends Component {
     return newDate;
   };
 
-  planRequest = (id) => {
-    this.plansService.planRequest(id)
-      .then(response => {
-        console.log(response)
-      })
-  }
+  planRequest = id => {
+    this.plansService.planRequest(id).then(response => {
+      console.log(response);
+    });
+  };
 
-  addPlanFav = (id) => {
-    this.plansService.addPlanFav(id)
-      .then(response => {
-        console.log(response)
-      })
-  }
+  addPlanFav = id => {
+    this.plansService.addPlanFav(id).then(response => {
+      console.log(response);
+    });
+  };
 
-  delPlanFav = (id) => {
-    this.plansService.delPlanFav(id)
-      .then(response => {
-        console.log(response)
-      })
-  }
+  delPlanFav = id => {
+    this.plansService.delPlanFav(id).then(response => {
+      console.log(response);
+    });
+  };
 
-  showMap = () => {
-  
-  }
+  showMap = () => {};
 
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
-    const { title, description, date, chat } = this.state.plan
-    const users = this.state.plan.users.length
+    const { title, description, date, chat } = this.state.plan;
+    const users = this.state.plan.users.length;
     return (
-      
       <React.Fragment>
-      
         <div className="planImage">
           <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
-          <Link to={`/profile/${this.state.plan.owner._id}`}><img className="planImageOwner" src={this.state.plan.owner.image} /></Link>
+          <Link to={`/profile/${this.state.plan.owner._id}`}>
+            <img className="planImageOwner" src={this.state.plan.owner.image} />
+          </Link>
         </div>
         <div className="informationPlan">
           <div className="headerPlan">
             <div className="datePlan">
-              {date}
+              <div className="month">
+                {monthNames[this.parserDate().getMonth()]}
+              </div>
+
+              <div className="day">
+                 {this.parserDate().getUTCDate()}
+              </div> 
+              <div className="plan-hour">
+                {this.parserDate().getUTCHours() +
+                  ":" +
+                  this.parserDate().getMinutes()}
+              </div>
             </div>
-            <div className="titlePlan">
-              {title}
-            </div>
+            <div className="titlePlan">{title}</div>
           </div>
           <div className="locationPlan">
-           <Link to={`/planmap/${this.state.plan_id}`} plan={this.state.plan}> <img src={locationIcon} /> </Link> 
+            <Link to={`/planmap/${this.state.plan_id}`} plan={this.state.plan}>
+              {" "}
+              <img src={locationIcon} />{" "}
+            </Link>
             {this.state.plan.location.place}
           </div>
           <div className="descriptionPlan">
@@ -108,83 +128,91 @@ export default class PlanPage extends Component {
           </div>
           <div className="usersPlan">
             <p>{users} personas van a acudir</p>
-            <Link to={`/participants/${this.state.plan._id}`}><span>{this.state.plan.users.map(function (user, index) {
-              return (
-                <img src={user.image} />
-              )
-            })}</span></Link>
-        </div>
-        <div className="buttonsPlan">
-          <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>¡Quiero apuntarme!</button>
-          <Link to={`/chat/${chat}`}><img src={group5} /></Link>
-          <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
-          {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
-          {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
+            <Link to={`/participants/${this.state.plan._id}`}>
+              <span>
+                {this.state.plan.users.map(function(user, index) {
+                  return <img src={user.image} />;
+                })}
+              </span>
+            </Link>
+          </div>
+          <img src={RightIcon} className="right-icon"></img>
+          <div className="buttonsPlan">
+            <button
+              className="buttonApuntarme"
+              onClick={() => planRequest(this.state.plan_id)}
+            >
+              ¡Quiero apuntarme!
+            </button>
+            <Link to={`/chat/${chat}`}>
+              <img src={group5} />
+            </Link>
+            <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
+            {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
+            {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
             </form> */}
+          </div>
         </div>
-        </div>
-      </React.Fragment >
-    )
-  }
+      </React.Fragment>
+    );
+  };
 
   printMap = () => {
-    console.log(this.state.plan)
+    console.log(this.state.plan);
     return (
       <React.Fragment>
-
         <Map center={this.state.plan.location} view={false} />
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   printNotifications = (acceptPlan, declinePlan) => {
     return (
       <React.Fragment>
-        {this.state.notifications.map(function (notification, index) {
+        {this.state.notifications.map(function(notification, index) {
           return (
             <div>
               <div>{notification.plan.title}</div>
               <div>{notification.user.username}</div>
-              <div><img src={notification.user.image} /></div>
+              <div>
+                <img src={notification.user.image} />
+              </div>
               <div>
                 <button onClick={() => acceptPlan(notification._id)}>✓</button>
                 <button onClick={() => declinePlan(notification._id)}>X</button>
               </div>
-              <Link to={`/profile/${notification.user._id}`}><p>View profile</p></Link>
+              <Link to={`/profile/${notification.user._id}`}>
+                <p>View profile</p>
+              </Link>
             </div>
-          )
+          );
         })}
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   render() {
-
     if (this.state.redirectWhenDelete) {
-      return <Redirect to={"/ownplans"} />
+      return <Redirect to={"/ownplans"} />;
     }
 
     return (
-
       <div>
-        {
-          this.state.plan !== null &&
+        {this.state.plan !== null && (
           <div>
             {this.printPlan(this.planRequest, this.addPlanFav, this.delPlanFav)}
-            <br></br>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
+            <br />
           </div>
-
-        }
+        )}
 
         {/* {this.state.plan !== null && this.state.showthemap &&
 
           <div> {this.printMap()} </div>
         } */}
-
       </div>
-    )
+    );
   }
 }

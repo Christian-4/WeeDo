@@ -136,8 +136,8 @@ text-align: left;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-    color: white;
-    width: 231px;
+  color: white;
+  width: 231px;
   height: 48px;
   border-radius: 24px;
   border: 0px;
@@ -149,4 +149,42 @@ text-align: left;
   height: 48px;
   border-radius: 24px;
   margin-left: 10px;
+}
+
+.month{
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #bf0218;
+}
+
+.day{
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #9b9b9b;
+}
+
+.plan-hour{
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.right-icon{
+  width: 7px;
+  height: 11px;
+
 }

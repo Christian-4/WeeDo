@@ -4,7 +4,12 @@ const http = require('http');
 
 let app = require('../app');
 
-const websockets = require('../webSockets/websockets');
+const socketio = require("socket.io");
+
+
+
+// const websockets = require('../webSockets/websockets');
+
 
 
 // catch 404 and render a not-found.hbs template
@@ -25,7 +30,9 @@ app.use((err, req, res, next) => {
 });
 
 let server = http.createServer(app);
-websockets(server)
+let io = socketio(server);
+require('../webSocket/websockets')(io);
+
 
 server.on('error', error => {
   if (error.syscall !== 'listen') { throw error }

@@ -34,45 +34,46 @@ class App extends Component {
     }
 
     this.IsredirectHome = false
-    
+
 
   }
 
   getUserSession = (user) => {
-   this.setState({...this.state, userSession: user, userSessionId: user})
+    this.setState({ ...this.state, userSession: user, userSessionId: user })
 
   }
 
 
   redirectHome = () => {
-    return  <Redirect to='/plans' />
-  } 
+    return <Redirect to='/plans' />
+  }
 
-  
+
 
 
 
 
   render() {
+    console.log(window.location.href)
     return (
-      
-     
+
+
       <div className="App">
 
         {
-           this.state.userSessionId !== null && 
-           this.redirectHome()
-     
+          this.state.userSessionId !== null &&
+          this.redirectHome()
+
         }
 
         <Switch>
           {/* <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} /> */}
           <Route exact path="/signup" render={() => <SignupPage />} />
-          <Route exact path="/" render={() => <LoginPage  getUserSession = {this.getUserSession}/>} />
+          <Route exact path="/" render={() => <LoginPage getUserSession={this.getUserSession} />} />
           <Route exact path="/plans" render={() => <PlansPage />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
-          <Route exact path="/profile"render={() => <MyProfilePage />} />
+          <Route exact path="/profile" render={() => <MyProfilePage />} />
           <Route exact path="/profile/:id" component={ProfilePage} />
           <Route exact path="/chats" render={() => <ChatsPage />} />
           <Route exact path="/chat/:id" component={ChatPage} />
@@ -85,10 +86,12 @@ class App extends Component {
           <Route exact path="/friendsplans" render={() => <FriendsPlansPage />} />
           <Route exact path="/notifications/:id" component={NotificationsPlanPage} />
           <Route exact path="/participants/:id" component={ParticipantsPage} />
-          
-        </Switch>
 
-        <Tapbar></Tapbar>
+        </Switch>
+        {window.location.href !== `${process.env.REACT_APP_API_URL}` && window.location.href !== `${process.env.REACT_APP_API_URL}/signup` ?
+          <Tapbar></Tapbar>
+          : ""
+        }
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Nav from "../../Nav/Nav"
 import "./FriendsPlansPage.css"
 import FavIcon from "../../../icons/icons/save.png"
+import SearchIcon from "../../../icons/icons/white.png"
 
 export default class FriendsPlansPage extends Component {
   constructor(props) {
@@ -74,7 +75,14 @@ export default class FriendsPlansPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
+          <Nav  title={"Mis conexiones"} 
+        iconleft={SearchIcon} 
+        iconright={""} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"20px"} 
+        heigthL={"20px"}
+        />
         <div className="allPlanSelected">
           <p><Link to={"/plans"}>En Madrid</Link></p>
           <div className="misConexiones">

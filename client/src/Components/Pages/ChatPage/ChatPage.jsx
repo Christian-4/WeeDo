@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import ChatInput from "../../ChatInput/ChatInput.jsx";
 import ChatMessage from "../../ChatMessage/ChatMessage.jsx";
 import ChatService from "../../ChatService";
+import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
+import io from "socket.io-client";
 import "./ChatPage.css";
-
-const URL = "ws://localhost:3030";
-//  const URL = "ws://https://weed0.herokuapp.com/"
+import Notifications from "../../../icons/icons/notifications.png"
+import Left from "../../../icons/icons/left.png"
 
 const monthNames = [
   "ENE",
@@ -28,20 +29,22 @@ export default class ChatPage extends Component {
   constructor(props) {
     super(props);
 
+    this.chatManager = new ChatManager(() => {
+      console.log(this.chatManager.getMessages())
+      this.setState({messages: this.chatManager.getMessages()})
+    });
+
     this.state = {
       name: null,
-      messages: null,
+      messages: this.chatManager.getMessages(),
       id: this.props.match.params.id,
       plan: null,
       owner: null,
       users: null,
-      image:null
+      image: null
     };
-
     this.chatService = new ChatService();
   }
-
-  ws = new WebSocket(URL);
 
   componentDidMount() {
     this.chatService.getChat(this.state.id).then(response => {
@@ -54,35 +57,13 @@ export default class ChatPage extends Component {
         owner: response.owner,
         users: response.chat.users,
         image: response.user
-
       });
     });
-
-    this.ws.onopen = () => {
-      // on connecting, do nothing but log it to the console
-      console.log("connected", "you chat id is " + this.state.id);
-    };
-
-    this.ws.onmessage = evt => {
-      // on receiving a message, add it to the list of messages
-      const message = JSON.parse(evt.data);
-      if (message.id === this.state.id) {
-        this.addMessage(message);
-      }
-    };
-
-    this.ws.onclose = () => {
-      console.log("disconnected");
-      // automatically try to reconnect on connection loss
-      this.setState({
-        ws: new WebSocket(URL)
-      });
-    };
   }
-
 
   addMessage = message => {
     this.setState(state => ({ messages: [...state.messages, message] }));
+    this.chatManager.callbackMesgChange();
     this.chatService.addMessage(this.state.id, message);
   };
 
@@ -94,9 +75,8 @@ export default class ChatPage extends Component {
       message: messageString,
       id: this.state.id,
       image: this.state.name.image
-
     };
-    this.ws.send(JSON.stringify(message));
+    this.chatManager.sendMessage(message);
     this.addMessage(message);
   };
 
@@ -108,7 +88,14 @@ export default class ChatPage extends Component {
   printChat = () => {
     return (
       <React.Fragment>
-        <Nav />
+         <Nav  title={this.state.plan.title} 
+        iconleft={Left} 
+        iconright={Notifications} 
+        widthR={"17px"} 
+        heigthR={"17px"} 
+        widthL={"9px"} 
+        heigthL={"6px"}
+        />
         <section className="plan-data-section">
           <div className="plan-data">
             <div className="plan-date">
@@ -165,7 +152,6 @@ export default class ChatPage extends Component {
       </React.Fragment>
     );
   };
-
 
   render() {
     return (

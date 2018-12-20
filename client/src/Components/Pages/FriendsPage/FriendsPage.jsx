@@ -7,6 +7,8 @@ import Tapbar from "../../Tapbar/Tapbar.jsx"
 import "./FriendsPage.css"
 import Accept from "../../../icons/icons/ConexionAdd.png"
 import Decline from "../../../icons/icons/ConexionDecline.png"
+import SearchIcon from "../../../icons/icons/white.png"
+import FilterBars from "../../../icons/icons/filterBars.png"
 
 
 export default class FriendsPage extends Component {
@@ -128,7 +130,14 @@ export default class FriendsPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
+         <Nav  title={"Encontrar conexiones"} 
+        iconleft={SearchIcon} 
+        iconright={FilterBars} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"20px"} 
+        heigthL={"20px"}
+        />
         <div className="conectionsPage">
           {
             this.state.notificationsFriends !== null &&

@@ -87,8 +87,7 @@ export default class PlanPage extends Component {
           </div>
           <div className="locationPlan">
             <img src={locationIcon} />
-            {this.state.plan.location.lat}
-            {this.state.plan.location.lat}
+            {this.state.plan.location.place}
           </div>
           <div className="descriptionPlan">
             <p className="descriptionPlan2">Descripción del plan</p>

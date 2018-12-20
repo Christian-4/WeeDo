@@ -6,6 +6,10 @@
   margin-bottom: 30px;
 }
 
+.div-input .input{
+  font-size: 18px;
+}
+
 .input {
   background-color: transparent;
   border: none;

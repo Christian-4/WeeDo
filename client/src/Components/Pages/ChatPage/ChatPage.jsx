@@ -65,7 +65,13 @@ export default class ChatPage extends Component {
       console.log("DISconnected to back via websockets")
     );
 
-    this.socket.on("chatMsg", data => this.addMessage(data));
+    this.socket.on("chatMsg", data => {
+      if (data.id === this.state.id) {
+        this.addMessage(data);
+      }
+      
+    
+    });
 
 
 
@@ -186,10 +192,7 @@ export default class ChatPage extends Component {
   render() {
     return (
       <div>
-
-        
-
-        {this.state.name !== null &&
+       {this.state.name !== null &&
           this.state.messages !== null &&
           this.state.owner !== null &&
           this.state.users !== null &&

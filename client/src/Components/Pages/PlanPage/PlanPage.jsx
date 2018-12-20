@@ -92,7 +92,7 @@ export default class PlanPage extends Component {
     return (
       <React.Fragment>
         <div className="planImage">
-          <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
+          <img src= {this.state.plan.image} />
           <Link to={`/profile/${this.state.plan.owner._id}`}>
             <img className="planImageOwner" src={this.state.plan.owner.image} />
           </Link>

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import "./MyProfilePage.css"
 import Logout from "../../Logout/Logout.jsx"
 import Nav from "../../Nav/Nav"
+import Edit from "../../../icons/icons/edit.png"
+import Notifications from "../../../icons/icons/notifications.png"
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -28,6 +30,14 @@ export default class ProfilePage extends Component {
   printUser = () => {
     return (
       <React.Fragment>
+         <Nav  title={"Mi perfil"} 
+        iconleft={Notifications} 
+        iconright={Edit} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"17px"} 
+        heigthL={"17px"}
+        />
         <div className="myProfile">
           <div className="myProfileHeader">
             <img src={this.state.user.image} />

@@ -6,6 +6,9 @@ import Nav from "../../Nav/Nav.jsx"
 import { Link } from "react-router-dom";
 import FavIcon from "../../../icons/icons/save.png"
 import SavedIcon from "../../../icons/icons/saved.png"
+import SearchIcon from "../../../icons/icons/white.png"
+import Location from "../../../icons/icons/location.png"
+ 
 
 export default class PlansPage extends Component {
 
@@ -102,7 +105,15 @@ export default class PlansPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
+        <Nav 
+        title={"Planes"}
+         iconleft={SearchIcon}
+        iconright={Location}
+        widthR={"14px"} 
+        heigthR={"20px"} 
+        widthL={"20px"} 
+        heigthL={"20px"}
+          />
         <div className="allPlanSelected">
           <div className="enMadrid">
             <p><Link to={"/plans"}>En Madrid</Link></p>

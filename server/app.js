@@ -7,11 +7,11 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 const cors = require('cors');
-
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
-const WebSocket = require('ws');
 
+
+const io = require('socket.io-client')
 
 
 mongoose
@@ -58,19 +58,6 @@ app.use((req, res) => {
 });
 
 
-const wss = new WebSocket.Server({ port: 3030 });
 
-let clients = []
-
-
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(data) {
-    wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
-  });
-});
 
 module.exports = app;

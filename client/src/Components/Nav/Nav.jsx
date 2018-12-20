@@ -8,7 +8,9 @@ export default class Nav extends Component {
     this.state = {
       title: this.props.title,
       left: this.props.iconleft,
-      right: this.props.iconright
+      right: this.props.iconright,
+      widthR: this.props.width,
+      heightR: this.props.height
     };
   }
 
@@ -16,9 +18,9 @@ export default class Nav extends Component {
     return (
       <React.Fragment>
         <nav className="nav-upper">
-            <div className="tittle-inside">{this.state.left}</div>
-            <div className="tittle-inside">{this.state.title}</div>
-            <div className="tittle-inside" >{this.state.right}</div>
+            <div className="title-inside left"><img src= {this.state.left}  width={this.props.widthL} height={this.props.heightL}></img></div>
+            <div className="title-inside">{this.state.title}</div>
+            <div className="title-inside right" ><img src= {this.state.right}  width={this.props.widthR} height={this.props.heightR}></img></div>
         </nav>
       </React.Fragment>
     );

@@ -30,7 +30,8 @@
     "react-select": "^2.1.2",
     "react-service-worker": "^0.1.1",
     "react-time-picker": "^3.1.1",
-    "register-service-worker": "^1.5.2"
+    "register-service-worker": "^1.5.2",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "dotenv -e env.development react-scripts start",

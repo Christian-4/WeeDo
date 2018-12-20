@@ -45,7 +45,7 @@ class App extends Component {
 
 
   redirectHome = () => {
-    return  <Redirect to='/' />
+    return  <Redirect to='/plans' />
   } 
 
   

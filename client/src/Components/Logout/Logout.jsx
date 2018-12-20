@@ -23,7 +23,7 @@ export default class Logout extends Component {
     render() {
 
         if(this.state.user === null) {
-            return <Redirect to="/login" />
+            return <Redirect to="/" />
           }
     
         return (

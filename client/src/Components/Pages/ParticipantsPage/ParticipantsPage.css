@@ -42,6 +42,12 @@
   margin-right: 10px;
 }
 
+.expulsarParticipantDiv img{
+  width: 20px;
+  height: 20px;
+  margin-left: 80px;
+}
+
 hr{
     width: 311px;
   height: 2px;

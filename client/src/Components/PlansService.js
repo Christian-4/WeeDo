@@ -15,7 +15,7 @@ class PlansService {
         return this.service.post('/newplan', dataPlan)
             .then(response => response.data)
             .catch(err => err.response.data)
-    }   
+    }
 
 
     deletePlan = (id) => {
@@ -53,8 +53,8 @@ class PlansService {
             .then(response => response.data)
     }
 
-    kickUserOfPlan = () => {
-        return this.service.post("/kickuserofplan")
+    kickUserOfPlan = (userId, planId) => {
+        return this.service.post("/kickuserofplan", {userId, planId})
             .then(response => response.data)
     }
 

@@ -50,9 +50,22 @@ export default class UserPage extends Component {
     this.setState({ users: newArray })
   }
 
-  addFriend(id, service) {
+  addFriend = (id, service) => {
     service.addFriend(id).then(response => {
       console.log(response);
+      this.UserService.getUser().then(res => {
+        this.setState({ ...this.state, userSessionId: res.user._id });
+        this.FriendsService.getAllUsers(this.state.userSessionId).then(
+          response => {
+            this.setState({
+              ...this.state,
+              users: response.users,
+              usersreset: response.users,
+              userSession: response.userSession
+            });
+          }
+        );
+      });
     });
   }
 
@@ -133,7 +146,7 @@ export default class UserPage extends Component {
                   userSession[0].sendRequestUser.includes(user._id) ?
                     this.showCardPendient({ user })
                     :
-                    this.showCard({ user })
+                    this.showCard({ user }, addFriend, service)
               }
             </React.Fragment>
 

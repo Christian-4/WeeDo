@@ -93,14 +93,16 @@ export default class IndividualChat extends Component {
     })
     return (
       <React.Fragment>
-        <Nav title={`${otherUser.username}`}
-          iconleft={Left}
-          iconright={Notifications}
-          widthR={"17px"}
-          heigthR={"17px"}
-          widthL={"9px"}
-          heigthL={"6px"}
-        />
+        <Link to={`/profile/${otherUser._id}`}>
+          <Nav title={`${otherUser.username}`}
+            iconleft={Left}
+            iconright={Notifications}
+            widthR={"17px"}
+            heigthR={"17px"}
+            widthL={"9px"}
+            heigthL={"6px"}
+          />
+        </Link>
 
         <section className="section-chat section-chat-individual" id="chat">
           {this.state.messages.map((message, index) => (

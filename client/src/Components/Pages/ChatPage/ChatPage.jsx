@@ -9,6 +9,9 @@ import io from "socket.io-client";
 import "./ChatPage.css";
 import Notifications from "../../../icons/icons/notifications.png"
 import Left from "../../../icons/icons/left.png"
+import Calendar from "../../../icons/icons/calendarcopy.png"
+import LocationIcon from "../../../icons/icons/location.png"
+import ClockIcon from "../../../icons/icons/hour.png"
 
 const monthNames = [
   "ENE",
@@ -25,13 +28,23 @@ const monthNames = [
   "DEC"
 ];
 
+const weekDays = [
+  "Dom",
+  "Lun",
+  "Mar",
+  "Mie",
+  "Jue",
+  "Vie",
+  "Sab"
+]
+
 export default class ChatPage extends Component {
   constructor(props) {
     super(props);
 
     this.chatManager = new ChatManager(() => {
       console.log(this.chatManager.getMessages())
-      this.setState({messages: this.chatManager.getMessages()})
+      this.setState({ messages: this.chatManager.getMessages() })
     });
 
     this.state = {
@@ -86,42 +99,49 @@ export default class ChatPage extends Component {
   };
 
   printChat = () => {
+    let plan = this.state.plan
     return (
       <React.Fragment>
-         <Nav  title={this.state.plan.title} 
-        iconleft={Left} 
-        iconright={Notifications} 
-        widthR={"17px"} 
-        heigthR={"17px"} 
-        widthL={"9px"} 
-        heigthL={"6px"}
+        <Nav title={this.state.plan.title}
+          iconleft={Left}
+          iconright={Notifications}
+          widthR={"17px"}
+          heigthR={"17px"}
+          widthL={"9px"}
+          heigthL={"6px"}
         />
         <section className="plan-data-section">
           <div className="plan-data">
             <div className="plan-date">
               <div className="month">
-                {this.parserDate().getUTCDate()}
+                {<img src={Calendar} />}
+                {weekDays[this.parserDate().getDay()] + ", "}
+                {this.parserDate().getUTCDate() + " "}
                 {monthNames[this.parserDate().getMonth()]}
               </div>
               <div className="plan-hour">
+                <img src={ClockIcon} />
                 {this.parserDate().getUTCHours() +
                   ":" +
                   this.parserDate().getMinutes()}
               </div>
             </div>
             <div className="plan-location">
-              <div>{"location"}</div>
+              {<img src={LocationIcon} />}
+              <div>{"this.state.plan.location"}</div>
             </div>
             <div className="div-data-users">
               <div className="bot-plan-card">
                 <p className="assistantsPlan">Van a acudir</p>
-                {this.state.users.map(function(user, index) {
-                  return (
-                    <Link to={`/profile/${user._id}`} className="link-profiles">
-                      <img className="image-asisentes" src={user.image} />
-                    </Link>
-                  );
-                })}
+                <div className="assistantsUsers">
+                  {this.state.users.map(function (user, index) {
+                    return (
+                      <Link to={`/participants/${plan._id}`} className="link-profiles">
+                        <img className="image-asisentes" src={user.image} />
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
               <div>
                 <img className="owner-image" src={this.state.owner.image} />

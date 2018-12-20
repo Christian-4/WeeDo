@@ -23,7 +23,6 @@ export default class ChatInput extends Component {
         <input
           className="input-chat"
           type="text"
-          placeholder={"Enter message..."}
           value={this.state.message}
           onChange={e => this.setState({ message: e.target.value })}
         />

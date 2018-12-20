@@ -15,8 +15,8 @@ export default class SearchInput extends Component {
   render() {
     return (
       <div>
-        <div className="div-input-search">
         <label className="name-label-search">{this.state.label}</label>
+        <div className="div-input-search locationCreatePlan">
           <GoogleComponent
             apiKey={API_KEY}
             language={"eS"}

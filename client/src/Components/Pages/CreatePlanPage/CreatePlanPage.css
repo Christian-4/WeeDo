@@ -21,4 +21,20 @@
   display: block;
   text-align: left;
   margin-bottom: 12px;
+  margin-left: 8px;
+}
+
+.new-plan-form Input{
+  font-size: 16px;
+  padding-top: 5px;
+}
+
+.input-time{
+  text-align: center;
+  outline: none;
+}
+
+.date-div{
+  text-align: center;
+  outline: none;
 }

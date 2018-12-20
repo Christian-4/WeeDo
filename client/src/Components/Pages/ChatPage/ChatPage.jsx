@@ -142,7 +142,7 @@ export default class ChatPage extends Component {
             </div>
             <div className="plan-location">
               {<img src={LocationIcon} />}
-              <div>{"this.state.plan.location"}</div>
+              <div className="location">{this.state.plan.location.place}</div>
             </div>
             <div className="div-data-users">
               <div className="bot-plan-card">

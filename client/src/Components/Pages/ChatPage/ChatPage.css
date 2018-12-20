@@ -186,3 +186,13 @@
   text-align: left;
   padding-left: 8px;
 }
+
+.plan-location .location{
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgb(74, 74, 74);
+}

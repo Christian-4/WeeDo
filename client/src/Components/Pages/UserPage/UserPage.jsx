@@ -56,6 +56,68 @@ export default class UserPage extends Component {
     });
   }
 
+  showCardPendient = ({ user }) => {
+    return (
+      <React.Fragment>
+        <div className="allUsersCard">
+          <div className="allUsersCardTop">
+            <Link to={`/profile/${user._id}`}><img src={user.image} width="50" height="50" /></Link>
+            <Link to={`/profile/${user._id}`}><p>{user.username}</p></Link>
+          </div>
+          <div className="allUsersCardHobbies">
+            <p>Intereses del usuario</p>
+            <div className="allUsersCardHobbiesDivs">
+              {user.hobbies.map(function (hobby) {
+                console.log(hobby)
+                return (
+                  <div className="allUsersCardHobby">
+                    <img src="" />
+                    <p>{hobby}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <button className="addFriendButton">Petición enviada</button>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  showCard = ({ user }, addFriend, service) => {
+    return (
+      <React.Fragment>
+        <div className="allUsersCard">
+          <div className="allUsersCardTop">
+            <Link to={`/profile/${user._id}`}><img src={user.image} width="50" height="50" /></Link>
+            <Link to={`/profile/${user._id}`}><p>{user.username}</p></Link>
+          </div>
+          <div className="allUsersCardHobbies">
+            <p>Intereses del usuario</p>
+            <div className="allUsersCardHobbiesDivs">
+              {user.hobbies.map(function (hobby) {
+                console.log(hobby)
+                return (
+                  <div className="allUsersCardHobby">
+                    <img src="" />
+                    <p>{hobby}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <button className="addFriendButton" onClick={() => addFriend(user._id, service)}>
+              Conectar
+                </button>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
   printAllUsers = (addFriend, service, userSession) => {
     return (
       <div className="allUsers">
@@ -63,41 +125,20 @@ export default class UserPage extends Component {
         <input className="inputFindUsers" type="text" placeholder="Busca algún amigo" onChange={(e) => this.searchHandler(e)}></input>
         {this.state.users.map(function (user) {
           return (
-            <div className="allUsersCard">
-              <div className="allUsersCardTop">
-                <Link to={`/profile/${user._id}`}><img src={user.image} width="50" height="50" /></Link>
-                <Link to={`/profile/${user._id}`}><p>{user.username}</p></Link>
-              </div>
-              <div className="allUsersCardHobbies">
-                <p>Intereses del usuario</p>
-                <div className="allUsersCardHobbiesDivs">
-                  {user.hobbies.map(function (hobby) {
-                    console.log(hobby)
-                    return (
-                      <div className="allUsersCardHobby">
-                        <img src="" />
-                        <p>{hobby}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div>
-                {
-                  userSession[0].friends.includes(user._id) ?
-                    <button className="addFriendButton">Ya es amigo!</button>
+            <React.Fragment>
+              {
+                userSession[0].friends.includes(user._id) ?
+                  ""
+                  :
+                  userSession[0].sendRequestUser.includes(user._id) ?
+                    this.showCardPendient({ user })
                     :
-                    userSession[0].sendRequestUser.includes(user._id) ? (
-                      <button className="addFriendButton">Petición enviada</button>
-                    ) : (
-                        <button className="addFriendButton" onClick={() => addFriend(user._id, service)}>
-                          Conectar
-                </button>
-                      )}
-              </div>
-            </div>
+                    this.showCard({ user })
+              }
+            </React.Fragment>
+
           );
-        })}
+        }.bind(this))}
       </div>
     );
   };

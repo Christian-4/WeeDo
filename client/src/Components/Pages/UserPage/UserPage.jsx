@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FriendsService from "../../FriendsService";
 import UserService from "../../UserService";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import Nav from "../../Nav/Nav.jsx"
 import "./UserPage.css"
 import SearchIcon from "../../../icons/icons/search.png"
@@ -13,6 +13,7 @@ export default class UserPage extends Component {
 
     this.state = {
       users: null,
+      usersreset: null,
       userSession: null,
       userSessionId: null
     };
@@ -29,11 +30,22 @@ export default class UserPage extends Component {
           this.setState({
             ...this.state,
             users: response.users,
+            usersreset: response.users,
             userSession: response.userSession
           });
         }
       );
     });
+  }
+
+  searchHandler = (e) => {
+    this.state.users = this.state.usersreset
+    let newArray = [...this.state.users].filter((user) => {
+      if (user.username.includes(e.target.value)) {
+        return user
+      }
+    });
+    this.setState({ users: newArray })
   }
 
   addFriend(id, service) {
@@ -46,7 +58,7 @@ export default class UserPage extends Component {
     return (
       <div className="allUsers">
         <img className="searchInput" src={SearchIcon} />
-        <input className="inputFindUsers" type="text" placeholder="Busca algún amigo"></input>
+        <input className="inputFindUsers" type="text" placeholder="Busca algún amigo" onChange={(e) => this.searchHandler(e)}></input>
         {this.state.users.map(function (user) {
           return (
             <div className="allUsersCard">

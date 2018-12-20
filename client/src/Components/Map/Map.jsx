@@ -46,12 +46,12 @@ export class MapContainer extends React.Component {
     
 
     return (
-      <div style={{ height: '2vh', width: '2vh' }}>
+      <div style={{ height: '20vh', width: '20h' }}>
            <Map
         initialCenter={this.props.center}
         google={this.props.google}
         onClick={this.onMapClicked}
-        style={{ width: 200, height: 200, position: "absolute" }}
+        style={{ width: "375px", height: "510px", position: "" }}
         visible={this.props.showMap}
     
       >

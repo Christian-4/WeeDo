@@ -6,7 +6,7 @@ export default class ChatManager {
   constructor(callbackMesgChange) {
 
     this.callbackMesgChange = callbackMesgChange;
-    this.socket = io("http://localhost:3000");
+    this.socket = io("http://localhost:5000");
     this.socket.on("connect", () =>
       console.log("connected to back via websockets")
     );

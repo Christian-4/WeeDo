@@ -1,7 +1,6 @@
 const socketio = require("socket.io");
 
-module.exports = server => {
-  const io = socketio(server);
+module.exports = io => {
   console.log("Websocket Ready to connect!");
   io.on("connection", client => {
     console.log("Connected!!");

@@ -33,9 +33,9 @@ export default class CreatePlanPage extends Component {
       planId: null,
       showCalendar: false,
       date : {
-        year: "",
-        month: "",
-        day: "",
+        year: 0,
+        month: 0,
+        day: 0,
         hour: 0,
         min: 0,
         seg:0
@@ -61,24 +61,27 @@ export default class CreatePlanPage extends Component {
   handleNewPlan = e => {
     e.preventDefault();
 
-    let newDate = new Date(
+    let date = new Date(
       this.state.date.year,
-      this.state.date.month - 1,
+      this.state.date.month-1,
       this.state.date.day,
-      this.state.date.hour,
+      this.state.date.hour+1,
       this.state.date.min,
       this.state.date.seg
     );
 
+    let fecha = new Date()
+
   
     console.log(this.state.date)
+    console.log("newDate al crear", date)
      
 
 
-    const { title, description, location, date, limit, hobby } = this.state;
+    const { title, description, location, newdate, limit, hobby } = this.state;
 
     this.plansService
-      .createNewPlan({ title, description, location, newDate, date, limit, hobby })
+      .createNewPlan({ title, description, location, date, limit, hobby })
       .then(response => {
         if (response.message === "Plan create!") {
           this.setState({
@@ -94,13 +97,17 @@ export default class CreatePlanPage extends Component {
 
   dateChange = date => {
     let arrDate = date.valueText.split("/");
-    let day = arrDate[0];
-    let month = arrDate[1];
-    let year = arrDate[2];
+    let day = parseInt(arrDate[1]);
+    let month =parseInt (arrDate[0]);
+    let year = parseInt(arrDate[2]);
 
-    console.log(date)
+    let newDate = this.state.date
+    newDate.day = day
+    newDate.month = month
+    newDate.year = year
 
-    this.setState({...this.state,date: day,month,year})
+    console.log(this.state.date)
+    this.setState({...this.state,date: newDate})
   };
 
   timeChange = time => {
@@ -109,7 +116,14 @@ export default class CreatePlanPage extends Component {
     let min = parseInt(arrTime[1].split(" ")[0]);
     let seg = 0;
 
-    this.setState({...this.state,date: hour,min,seg})
+    console.log(hour,min,seg)
+    let newDate = this.state.date
+    newDate.hour = hour
+    newDate.min = min
+    newDate.seg = seg
+
+
+    this.setState({...this.state,date:newDate})
   };
 
   showMap = e => {
@@ -139,6 +153,8 @@ export default class CreatePlanPage extends Component {
   locationChange = e => {
     this.setState({...this.state, location: {coordinates: e.place.coordinates, place: e.place.place}})
   }
+
+
 
   render() {
     const { type } = this.state.hobby;
@@ -189,31 +205,6 @@ export default class CreatePlanPage extends Component {
             placeholder={"Número máximo de asistentes"}
             handleChange={this.handleChange}
           />
-
-          {/* <button onClick={e => this.showCalendar(e)}>Fecha</button> */}
-
-          {/* {
-            this.state.showCalendar &&  
-            
-            <Calendar 
-            onChange={this.dateChange}
-            value={this.state.date} 
-           />
-
-          } */}
-
-          {/* <input id="date" type="date" onChange={e => this.dateChange(e)} /> */}
-
-          {/* <input id="time" type="time" onChange={e => this.timeChange(e)} /> */}
-
-          {/* <label>Location</label>
-         <button onClick={e =>this.showMap(e)}>
-         </button>
-          {
-            this.state.showMap && <div>{map}</div>
-          } */}
-
-          {/*  <input className="create-plan-button" type="submit" value="new-plan" /> */}
 
           <button className="create-plan-button" type="submit">
             Crear Plan

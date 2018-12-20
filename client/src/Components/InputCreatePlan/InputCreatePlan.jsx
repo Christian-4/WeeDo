@@ -7,7 +7,8 @@ export default class InputCreatePlan extends Component {
     this.state = {
       label: this.props.label,
       placeholder: this.props.placeholder,
-      name: this.props.name
+      name: this.props.name,
+      type: this.props.type
     };
   }
 
@@ -18,7 +19,7 @@ export default class InputCreatePlan extends Component {
           <label className="name-label">{this.state.label}</label>
           <input
             name = {this.props.name}
-            type="text"
+            type={this.props.type}
             className="input"
             placeholder={this.state.placeholder}
             onChange={e => this.props.handleChange(e)}

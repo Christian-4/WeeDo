@@ -28,6 +28,7 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "socket.io": "^2.2.0",
+    "unsplash-api": "^1.2.0",
     "ws": "^6.1.2"
   },
   "devDependencies": {

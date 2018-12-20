@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .allUsers input{
@@ -27,6 +28,7 @@
 }
 
 .inputFindUsers::-webkit-input-placeholder{
+    text-align: left;
   font-size: 18px;
   font-weight: normal;
   font-style: normal;

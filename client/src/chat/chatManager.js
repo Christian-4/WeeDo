@@ -6,7 +6,7 @@ export default class ChatManager {
   constructor(callbackMesgChange) {
 
     this.callbackMesgChange = callbackMesgChange;
-    this.socket = io("http://localhost:5000");
+    this.socket = io(`${process.env.REACT_APP_API_URL}`);
     this.socket.on("connect", () =>
       console.log("connected to back via websockets")
     );
@@ -32,7 +32,7 @@ export default class ChatManager {
   }
 
   msgFromServer(message) {
-      console.log("llegan mensajes")
+    console.log("llegan mensajes")
     this.messages.push(message);
     this.callbackMesgChange();
   }

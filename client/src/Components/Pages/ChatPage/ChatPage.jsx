@@ -46,7 +46,7 @@ export default class ChatPage extends Component {
       console.log(this.chatManager.getMessages())
       this.setState({ messages: this.chatManager.getMessages() })
     });
-   
+
 
     this.state = {
       name: null,
@@ -62,7 +62,7 @@ export default class ChatPage extends Component {
 
   componentDidMount() {
 
-    this.socket = io("http://localhost:5000");
+    this.socket = io(`${process.env.REACT_APP_API_URL}`);
     this.socket.on("connect", () =>
       console.log("connected to back via websockets")
     );

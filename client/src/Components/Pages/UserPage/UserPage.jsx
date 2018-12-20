@@ -83,13 +83,17 @@ export default class UserPage extends Component {
                 </div>
               </div>
               <div>
-                {userSession[0].sendRequestUser.includes(user._id) ? (
-                  <button className="addFriendButton">Petición enviada</button>
-                ) : (
-                    <button className="addFriendButton" onClick={() => addFriend(user._id, service)}>
-                      Conectar
+                {
+                  userSession[0].friends.includes(user._id) ?
+                    <button className="addFriendButton">Ya es amigo!</button>
+                    :
+                    userSession[0].sendRequestUser.includes(user._id) ? (
+                      <button className="addFriendButton">Petición enviada</button>
+                    ) : (
+                        <button className="addFriendButton" onClick={() => addFriend(user._id, service)}>
+                          Conectar
                 </button>
-                  )}
+                      )}
               </div>
             </div>
           );
@@ -101,13 +105,13 @@ export default class UserPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav  title={"Encontrar conexiones"} 
-        iconleft={SearchIconNav} 
-        iconright={FilterBars} 
-        widthR={"20px"} 
-        heigthR={"20px"} 
-        widthL={"20px"} 
-        heigthL={"20px"}
+        <Nav title={"Encontrar conexiones"}
+          iconleft={SearchIconNav}
+          iconright={FilterBars}
+          widthR={"20px"}
+          heigthR={"20px"}
+          widthL={"20px"}
+          heigthL={"20px"}
         />
         {this.state.users !== null && (
           <div>

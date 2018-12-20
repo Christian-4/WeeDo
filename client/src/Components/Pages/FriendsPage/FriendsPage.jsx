@@ -148,7 +148,6 @@ export default class FriendsPage extends Component {
             <div>{this.printChats()}</div>
           }
         </div>
-        <Tapbar></Tapbar>
       </React.Fragment>
     )
   }

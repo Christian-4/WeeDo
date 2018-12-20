@@ -5,6 +5,7 @@ import "./NotificationsPlanPage.css"
 import Nav from "../../Nav/Nav"
 import Accept from "../../../icons/icons/ConexionAdd.png"
 import Decline from "../../../icons/icons/ConexionDecline.png"
+import LeftIcon from "../../../icons/icons/leftcopy.png"
 
 
 export default class NotificationsPlanPage extends Component {
@@ -85,7 +86,13 @@ export default class NotificationsPlanPage extends Component {
 
         return (
             <React.Fragment>
-                <Nav></Nav>
+                <Nav title={"Quieren añadirse"}
+                    iconleft={LeftIcon}
+                    widthR={"20px"}
+                    heigthR={"20px"}
+                    widthL={"13px"}
+                    heigthL={"10px"}
+                />
                 <div className="notificationsDivs">
                     {
                         this.state.notifications !== null &&

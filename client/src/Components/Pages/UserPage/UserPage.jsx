@@ -5,6 +5,8 @@ import { Link } from "react-router-dom"
 import Nav from "../../Nav/Nav.jsx"
 import "./UserPage.css"
 import SearchIcon from "../../../icons/icons/search.png"
+import SearchIconNav from "../../../icons/icons/white.png"
+import FilterBars from "../../../icons/icons/filterBars.png"
 
 
 export default class UserPage extends Component {
@@ -99,7 +101,14 @@ export default class UserPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
+        <Nav  title={"Encontrar conexiones"} 
+        iconleft={SearchIconNav} 
+        iconright={FilterBars} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"20px"} 
+        heigthL={"20px"}
+        />
         {this.state.users !== null && (
           <div>
             {this.printAllUsers(

@@ -3,6 +3,7 @@ import PlansService from '../../PlansService'
 import { Link, Redirect } from "react-router-dom";
 import "./ParticipantsPage.css"
 import Nav from "../../Nav/Nav"
+import LeftIcon from "../../../icons/icons/leftcopy.png"
 
 export default class ParticipantsPage extends Component {
     constructor(props) {
@@ -49,7 +50,13 @@ export default class ParticipantsPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <Nav></Nav>
+                <Nav title={"Asistentes"}
+                    iconleft={LeftIcon}
+                    widthR={"20px"}
+                    heigthR={"20px"}
+                    widthL={"13px"}
+                    heigthL={"10px"}
+                />
                 <div className="participantsDivs">
                     {
                         this.state.participants !== null &&

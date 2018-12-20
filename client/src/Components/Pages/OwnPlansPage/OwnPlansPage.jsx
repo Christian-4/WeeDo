@@ -4,6 +4,8 @@ import "./OwnPlansPage.css"
 import { Link } from "react-router-dom";
 import ChatIcon from "../../../icons/icons/chat.png"
 import Nav from "../../Nav/Nav.jsx"
+import SearchIcon from "../../../icons/icons/white.png"
+import NotificationIcon from "../../../icons/icons/notifications.png"
 
 export default class OwnPlansPage extends Component {
   constructor(props) {
@@ -57,7 +59,14 @@ export default class OwnPlansPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
+        <Nav  title={"Mis planes"} 
+        iconleft={SearchIcon} 
+        iconright={NotificationIcon} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"20px"} 
+        heigthL={"20px"}
+        />
         <div className="selectPlans">
           <div className="creados">
             <p><Link to={"/ownplans"}>Creados</Link></p>

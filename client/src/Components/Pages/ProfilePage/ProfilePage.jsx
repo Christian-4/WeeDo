@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserService from '../../UserService';
 import "./ProfilePage.css"
 import Nav from "../../Nav/Nav"
+import LeftCopy from "../../../icons/icons/leftcopy.png"
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -54,7 +55,13 @@ export default class ProfilePage extends Component {
   render() {
     return( 
       <React.Fragment>
-        <Nav></Nav>
+        <Nav  title={"Perfil"} 
+        iconleft={LeftCopy} 
+        widthR={"20px"} 
+        heigthR={"20px"} 
+        widthL={"13px"} 
+        heigthL={"20px"}
+        />
         {
           this.state.user !== null && 
           <div>{this.printUser()}</div>

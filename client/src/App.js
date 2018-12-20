@@ -66,9 +66,9 @@ class App extends Component {
         }
 
         <Switch>
-          <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} />
+          {/* <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} /> */}
           <Route exact path="/signup" render={() => <SignupPage />} />
-          <Route exact path="/login" render={() => <LoginPage  getUserSession = {this.getUserSession}/>} />
+          <Route exact path="/" render={() => <LoginPage  getUserSession = {this.getUserSession}/>} />
           <Route exact path="/plans" render={() => <PlansPage />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />

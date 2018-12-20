@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PlansService from '../../PlansService'
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
+
 import Map from "../../Map/Map.jsx"
 import "./PlanPage.css"
 import group5 from "../../../icons/icons/Group5.png"
@@ -16,7 +17,8 @@ export default class PlanPage extends Component {
       plan_id: this.props.match.params.id,
       plan: null,
       notifications: null,
-      redirectWhenDelete: false
+      redirectWhenDelete: false,
+      showthemap:false
     }
 
     this.plansService = new PlansService();
@@ -67,11 +69,17 @@ export default class PlanPage extends Component {
       })
   }
 
+  showMap = () => {
+  
+  }
+
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan
     const users = this.state.plan.users.length
     return (
+      
       <React.Fragment>
+      
         <div className="planImage">
           <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
           <Link to={`/profile/${this.state.plan.owner._id}`}><img className="planImageOwner" src={this.state.plan.owner.image} /></Link>
@@ -86,7 +94,7 @@ export default class PlanPage extends Component {
             </div>
           </div>
           <div className="locationPlan">
-            <img src={locationIcon} />
+           <Link to={`/planmap/${this.state.plan_id}`} plan={this.state.plan}> <img src={locationIcon} /> </Link> 
             {this.state.plan.location.place}
           </div>
           <div className="descriptionPlan">
@@ -166,7 +174,7 @@ export default class PlanPage extends Component {
 
         }
 
-        {/* {this.state.plan !== null &&
+        {/* {this.state.plan !== null && this.state.showthemap &&
 
           <div> {this.printMap()} </div>
         } */}

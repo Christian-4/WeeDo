@@ -6,12 +6,9 @@ import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
-import "../ChatPage/ChatPage.css";
+import "./IndividualChat.css";
 import Notifications from "../../../icons/icons/notifications.png"
 import Left from "../../../icons/icons/left.png"
-import Calendar from "../../../icons/icons/calendarcopy.png"
-import LocationIcon from "../../../icons/icons/location.png"
-import ClockIcon from "../../../icons/icons/hour.png"
 
 
 
@@ -25,14 +22,14 @@ export default class IndividualChat extends Component {
       messages: null,
       id: this.props.match.params.id,
       image: null,
-      users:null
+      users: null
     };
     this.chatService = new ChatService();
   }
 
   componentDidMount() {
 
-    this.socket = io("http://localhost:5000");
+    this.socket = io(`${process.env.REACT_APP_API_URL}`);
     this.socket.on("connect", () =>
       console.log("connected to back via websockets")
     );
@@ -47,7 +44,7 @@ export default class IndividualChat extends Component {
     console.log(this.state.id)
 
     this.chatService.getIndividualChat(this.state.id).then(response => {
-    console.log("holaaaa",response)
+      console.log("holaaaa", response)
       this.setState({
         ...this.state,
         name: response.user,
@@ -65,7 +62,6 @@ export default class IndividualChat extends Component {
 
   submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-
     const message = {
       name: this.state.name.username,
       message: messageString,
@@ -83,10 +79,21 @@ export default class IndividualChat extends Component {
   };
 
   printChat = () => {
+    setTimeout(() => {
+      var elmnt = document.getElementById("chat");
+      elmnt.scrollTop = elmnt.scrollHeight
+    }, 1)
+    let actualUser = this.state.name
+    let otherUser
     let plan = this.state.plan
+    this.state.users.map(function (user) {
+      if (actualUser._id !== user._id) {
+        otherUser = user
+      }
+    })
     return (
       <React.Fragment>
-        <Nav title={"Chat"}
+        <Nav title={`${otherUser.username}`}
           iconleft={Left}
           iconright={Notifications}
           widthR={"17px"}
@@ -94,8 +101,8 @@ export default class IndividualChat extends Component {
           widthL={"9px"}
           heigthL={"6px"}
         />
-       
-        <section className="section-chat">
+
+        <section className="section-chat section-chat-individual" id="chat">
           {this.state.messages.map((message, index) => (
             <ChatMessage
               image={message.image}
@@ -106,7 +113,7 @@ export default class IndividualChat extends Component {
             />
           ))}
         </section>
-        <div className="input-chat-page">
+        <div className="input-chat-page input-chat-page-individual">
           <ChatInput
             ws={this.ws}
             onSubmitMessage={messageString => this.submitMessage(messageString)}
@@ -118,11 +125,11 @@ export default class IndividualChat extends Component {
 
   render() {
     return (
-      <div>
+      <div className="individualChatPage">
         {this.state.name !== null &&
-         this.state.messages !== null &&
-         <div>{this.printChat()}</div>
-         }
+          this.state.messages !== null &&
+          <div>{this.printChat()}</div>
+        }
       </div>
     );
   }

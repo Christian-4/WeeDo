@@ -109,6 +109,10 @@ export default class ChatPage extends Component {
   };
 
   printChat = () => {
+    setTimeout(() => {
+      var elmnt = document.getElementById("chat");
+      elmnt.scrollTop = elmnt.scrollHeight
+    }, 1)
     let plan = this.state.plan
     return (
       <React.Fragment>
@@ -162,7 +166,7 @@ export default class ChatPage extends Component {
         <section className="state-plan-div">
           <p>En proceso</p>
         </section>
-        <section className="section-chat">
+        <section className="section-chat" id="chat">
           {this.state.messages.map((message, index) => (
             <ChatMessage
               image={message.image}
@@ -187,7 +191,7 @@ export default class ChatPage extends Component {
     return (
       <div>
 
-        
+
 
         {this.state.name !== null &&
           this.state.messages !== null &&

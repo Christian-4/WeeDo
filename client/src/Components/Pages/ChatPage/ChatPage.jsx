@@ -144,7 +144,7 @@ export default class ChatPage extends Component {
                 </div>
               </div>
               <div>
-                <img className="owner-image" src={this.state.owner.image} />
+                <Link to={`/profile/${this.state.owner._id}`}><img className="owner-image" src={this.state.owner.image} /></Link>
               </div>
             </div>
           </div>

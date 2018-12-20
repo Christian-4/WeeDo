@@ -57,6 +57,7 @@
 import React, { Component } from "react";
 import AuthService from "../AuthService"
 import InputCreatePlan from "../InputCreatePlan/InputCreatePlan";
+import {Link} from "react-router-dom"
 import "./FormLogIn.css"
 
 
@@ -100,7 +101,7 @@ export default class FormLogIn extends Component {
           <InputCreatePlan label="Usuario" placeholder="Tu usuario" name="username" onChange={e => this.handleChange(e)}/>
           <InputCreatePlan label="Password" placeholder="Tu contraseña" name="password" onChange={e => this.handleChange(e)}/>
           <input className="loginButton" type="submit" value="Login" />
-          <button className="signupButton">Crear cuenta</button>
+          <Link to={"/signup"}><button className="signupButton">Crear cuenta</button></Link>
         </form>
       </div>
     )

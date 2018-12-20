@@ -1,0 +1,12 @@
+.section-chat-individual{
+    height: 460px;
+    overflow-y: scroll;
+}
+
+section .section-chat-individual{
+    overflow-y: scroll;
+}
+
+.individualChatPage{
+    height: 400px;
+}

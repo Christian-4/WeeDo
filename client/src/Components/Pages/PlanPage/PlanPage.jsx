@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PlansService from "../../PlansService";
+import UserService from "../../UserService";
 import { Link, Redirect, Route } from "react-router-dom";
 
 import Map from "../../Map/Map.jsx";
 import "./PlanPage.css";
 import group5 from "../../../icons/icons/Group5.png";
 import group4 from "../../../icons/icons/Group4.png";
+import savedd from "../../../icons/icons/savedd.png";
 import locationIcon from "../../../icons/icons/location.png";
 import RightIcon from "../../../icons/icons/right.png"
 
@@ -30,6 +32,7 @@ export default class PlanPage extends Component {
     super(props);
 
     this.state = {
+      user: null,
       plan_id: this.props.match.params.id,
       plan: null,
       notifications: null,
@@ -38,12 +41,16 @@ export default class PlanPage extends Component {
     };
 
     this.plansService = new PlansService();
+    this.userService = new UserService();
   }
 
   componentDidMount() {
     this.plansService.getPlan(this.state.plan_id).then(response => {
       console.log(response);
-      this.setState({ ...this.state, plan: response.plan });
+      this.userService.getUser()
+        .then(res => {
+          this.setState({ ...this.state, plan: response.plan, user: res.user });
+        })
     });
   }
 
@@ -69,26 +76,48 @@ export default class PlanPage extends Component {
   planRequest = id => {
     this.plansService.planRequest(id).then(response => {
       console.log(response);
+      this.plansService.getPlan(this.state.plan_id).then(response => {
+        console.log(response);
+        this.userService.getUser()
+          .then(res => {
+            this.setState({ ...this.state, plan: response.plan, user: res.user });
+          })
+      });
     });
   };
 
   addPlanFav = id => {
     this.plansService.addPlanFav(id).then(response => {
       console.log(response);
+      this.plansService.getPlan(this.state.plan_id).then(response => {
+        console.log(response);
+        this.userService.getUser()
+          .then(res => {
+            this.setState({ ...this.state, plan: response.plan, user: res.user });
+          })
+      });
     });
   };
 
   delPlanFav = id => {
     this.plansService.delPlanFav(id).then(response => {
       console.log(response);
+      this.plansService.getPlan(this.state.plan_id).then(response => {
+        console.log(response);
+        this.userService.getUser()
+          .then(res => {
+            this.setState({ ...this.state, plan: response.plan, user: res.user });
+          })
+      });
     });
   };
 
-  showMap = () => {};
+  showMap = () => { };
 
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan;
     const users = this.state.plan.users.length;
+    const user = this.state.plan.user
     return (
       <React.Fragment>
         <div className="planImage">
@@ -105,8 +134,8 @@ export default class PlanPage extends Component {
               </div>
 
               <div className="day">
-                 {this.parserDate().getUTCDate()}
-              </div> 
+                {this.parserDate().getUTCDate()}
+              </div>
               <div className="plan-hour-plan">
                 {this.parserDate().getUTCHours() +
                   ":" +
@@ -128,31 +157,32 @@ export default class PlanPage extends Component {
           </div>
           <div className="usersPlan">
             <p>{users} personas van a acudir</p>
-            
-              <span>
-                {this.state.plan.users.map(function(user, index) {
-                  return <img src={user.image} />;
-                })}
-              </span>
-           
+            <span>
+              {this.state.plan.users.map(function (user, index) {
+                return <img src={user.image} />;
+              })}
+            </span>
+
           </div>
           <div>
-          <Link to={`/participants/${this.state.plan._id}`}>
-          <img src={RightIcon} className="right-icon"></img>
-          </Link>
+            <Link to={`/participants/${this.state.plan._id}`}>
+              <img src={RightIcon} className="right-icon"></img>
+            </Link>
           </div>
-        
+
           <div className="buttonsPlan">
-            <button
-              className="buttonApuntarme"
-              onClick={() => planRequest(this.state.plan_id)}
-            >
+            <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>
               ¡Quiero apuntarme!
             </button>
-            <Link to={`/chat/${chat}`}>
+            <Link to={`/planmap/${this.state.plan_id}`}>
               <img src={group5} />
             </Link>
-            <img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />
+            {
+              this.state.user.favourites.includes(this.state.plan._id) ?
+                (<img src={savedd} onClick={() => delPlanFav(this.state.plan_id)} />)
+                :
+                (<img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />)
+            }
             {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
             {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
               <input type="submit" value="delete-plan" />
@@ -175,7 +205,7 @@ export default class PlanPage extends Component {
   printNotifications = (acceptPlan, declinePlan) => {
     return (
       <React.Fragment>
-        {this.state.notifications.map(function(notification, index) {
+        {this.state.notifications.map(function (notification, index) {
           return (
             <div>
               <div>{notification.plan.title}</div>

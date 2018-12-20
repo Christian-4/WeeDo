@@ -72,7 +72,12 @@ export default class PlansPage extends Component {
       <React.Fragment>
         {this.state.plans.map(function (plan, index) {
           return (
-            <div className="allPlanCard">
+            <React.Fragment>
+              { plan.owner._id === user._id
+                ?
+                ""
+                :
+                <div className="allPlanCard">
               <div className="allPlanCardLeft">
                 <div className="allPlanCardImagePlan">
                   <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
@@ -96,6 +101,8 @@ export default class PlansPage extends Component {
                 })}</span></div>
               </div>
             </div>
+              }
+            </React.Fragment>
           )
         })}
       </React.Fragment>

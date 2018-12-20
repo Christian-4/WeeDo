@@ -115,6 +115,10 @@ export default class ChatPage extends Component {
   };
 
   printChat = () => {
+    setTimeout(() => {
+      var elmnt = document.getElementById("chat");
+      elmnt.scrollTop = elmnt.scrollHeight
+    }, 1)
     let plan = this.state.plan
     return (
       <React.Fragment>
@@ -144,7 +148,7 @@ export default class ChatPage extends Component {
             </div>
             <div className="plan-location">
               {<img src={LocationIcon} />}
-              <div>{"this.state.plan.location"}</div>
+              <div className="location">{this.state.plan.location.place}</div>
             </div>
             <div className="div-data-users">
               <div className="bot-plan-card">
@@ -168,7 +172,7 @@ export default class ChatPage extends Component {
         <section className="state-plan-div">
           <p>En proceso</p>
         </section>
-        <section className="section-chat">
+        <section className="section-chat" id="chat">
           {this.state.messages.map((message, index) => (
             <ChatMessage
               image={message.image}

@@ -48,6 +48,11 @@ export default class PlanPage extends Component {
   //     });
   // }
 
+  parserDate = () => {
+    let newDate = new Date(this.state.plan.date);
+    return newDate;
+  };
+
   planRequest = (id) => {
     this.plansService.planRequest(id)
       .then(response => {

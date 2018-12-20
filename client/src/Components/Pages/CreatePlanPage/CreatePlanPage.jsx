@@ -63,7 +63,7 @@ export default class CreatePlanPage extends Component {
 
     let newDate = new Date(
       this.state.date.year,
-      this.state.date.month - 1,
+      this.state.date.month-1,
       this.state.date.day,
       this.state.date.hour,
       this.state.date.min,
@@ -72,13 +72,14 @@ export default class CreatePlanPage extends Component {
 
   
     console.log(this.state.date)
+    console.log("newDate al crear", newDate)
      
 
 
     const { title, description, location, date, limit, hobby } = this.state;
 
     this.plansService
-      .createNewPlan({ title, description, location, newDate, date, limit, hobby })
+      .createNewPlan({ title, description, location, newDate, limit, hobby })
       .then(response => {
         if (response.message === "Plan create!") {
           this.setState({
@@ -94,13 +95,17 @@ export default class CreatePlanPage extends Component {
 
   dateChange = date => {
     let arrDate = date.valueText.split("/");
-    let day = arrDate[0];
-    let month = arrDate[1];
-    let year = arrDate[2];
+    let day = parseInt(arrDate[1]);
+    let month =parseInt (arrDate[0]);
+    let year = parseInt(arrDate[2]);
 
-    console.log(date)
+    let newDate = this.state.date
+    newDate.day = day
+    newDate.month = month
+    newDate.year = year
 
-    this.setState({...this.state,date: day,month,year})
+    console.log(this.state.date)
+    this.setState({...this.state,date: newDate})
   };
 
   timeChange = time => {
@@ -109,7 +114,14 @@ export default class CreatePlanPage extends Component {
     let min = parseInt(arrTime[1].split(" ")[0]);
     let seg = 0;
 
-    this.setState({...this.state,date: hour,min,seg})
+    console.log(hour,min,seg)
+    let newDate = this.state.date
+    newDate.hour = hour
+    newDate.min = min
+    newDate.seg = seg
+
+
+    this.setState({...this.state,date:newDate})
   };
 
   showMap = e => {

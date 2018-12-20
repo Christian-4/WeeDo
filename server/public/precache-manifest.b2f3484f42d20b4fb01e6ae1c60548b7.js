@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "b35fd564e1b4c575a0a6",
-    "url": "/static/css/main.09a0fde3.chunk.css"
+    "revision": "95ae00f0a9e06165aac6",
+    "url": "/static/css/main.1c5fe736.chunk.css"
   },
   {
-    "revision": "b35fd564e1b4c575a0a6",
-    "url": "/static/js/main.b35fd564.chunk.js"
+    "revision": "95ae00f0a9e06165aac6",
+    "url": "/static/js/main.95ae00f0.chunk.js"
   },
   {
-    "revision": "f3d0da99eec38d48e96a",
+    "revision": "49df8966d81d00cf613a",
     "url": "/static/css/1.9734e49a.chunk.css"
   },
   {
-    "revision": "f3d0da99eec38d48e96a",
-    "url": "/static/js/1.f3d0da99.chunk.js"
+    "revision": "49df8966d81d00cf613a",
+    "url": "/static/js/1.49df8966.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -88,7 +88,7 @@ self.__precacheManifest = [
     "url": "/static/media/MiPerfilColor.0da4ca61.png"
   },
   {
-    "revision": "565500d1b5b1f30858d4149bea9026d2",
+    "revision": "21a098e5f102629913671fdd93ee248e",
     "url": "/index.html"
   }
 ];

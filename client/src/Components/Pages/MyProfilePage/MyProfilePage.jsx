@@ -28,7 +28,6 @@ export default class ProfilePage extends Component {
   printUser = () => {
     return (
       <React.Fragment>
-        <Nav />
         <div className="myProfile">
           <div className="myProfileHeader">
             <img src={this.state.user.image} />
@@ -62,22 +61,18 @@ export default class ProfilePage extends Component {
             <Logout></Logout>
           </div>
         </div>
-
-
       </React.Fragment>
-
     )
   }
 
   render() {
     return (
       <React.Fragment>
+        <Nav></Nav>
         {
           this.state.user !== null &&
           <div>{this.printUser()}</div>
         }
-
-
       </React.Fragment>
     )
   }

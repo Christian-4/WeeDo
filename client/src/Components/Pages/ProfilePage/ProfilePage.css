@@ -1,0 +1,152 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px
+}
+
+.profile .profileHeader{
+    display: flex;
+  margin-top: 18px;
+}
+
+.profile .profileHeader img{
+    width: 88px;
+  height: 88px;
+  border-radius: 50px;
+  object-fit: cover;
+  margin-right: 50px;
+  margin-left: -20px;
+}
+
+.profile .profileHeaderText{
+    margin-top: -10px;
+    margin-right: 30px;
+}
+
+.profile .profileHeaderText .name{
+    font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5e5e5e;
+}
+
+.profile .profileHeaderText .cumple{
+    width: 123px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5e5e5e;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.profile .sobreMi{
+    margin-top: 21px;
+    text-align: left;
+    width: 311px;
+  height: 42px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.profile .sobreMi label{
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5e5e5e;
+}
+
+.profile .sobreMi textarea{
+    outline: none;
+    width: 311px;
+  height: 38px;
+  border-radius: 8px;
+  border: 0px;
+  box-shadow: 2px 3px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  margin-top: 10px;
+}
+
+.profile .sobreMi textarea::-webkit-input-placeholder{
+    color: #cccccc;
+}
+
+.profile .educacionYTrabajo{
+    text-align: left;
+    margin-top: 24px;
+}
+
+.profile .educacionYTrabajo label{
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.profile .educacionYTrabajo input{
+    text-align: left;
+    width: 311px;
+  height: 32px;
+  border-radius: 24px;
+  box-shadow: 2px 3px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: 0px;
+  outline: none;
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.profile .educacionYTrabajo input::-webkit-input-placeholder{
+    text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #cccccc;
+}
+
+.profile .myIntereses{
+    text-align: left;
+    margin-top: 80px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.profile .myIntereses label{
+    margin-right: 250px;
+}

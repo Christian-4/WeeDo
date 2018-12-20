@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from "../AuthService"
 import {Redirect} from "react-router-dom";
+import "./Logout.css"
 
 export default class Logout extends Component {
     constructor() {
@@ -27,7 +28,7 @@ export default class Logout extends Component {
     
         return (
             <div>
-                <button onClick={this.logout}>Logout</button>
+                <button className="logoutButton" onClick={this.logout}>Logout</button>
             </div>
         )
     }

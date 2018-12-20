@@ -22,6 +22,11 @@ class ChatService {
         return this.service.post(`/addmessage/${id}`, message)
             .then(response => response.data)
     }
+
+    getIndividualChat = (id) => {
+        return this.service.get(`getindividualchat/${id}`)
+        .then(response => response.data)
+    }
 }
 
 export default ChatService;

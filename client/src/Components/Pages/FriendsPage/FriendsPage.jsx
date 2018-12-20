@@ -113,7 +113,7 @@ export default class FriendsPage extends Component {
             })
             return (
               <React.Fragment>
-                <Link to={`/chat/${chat._id}`}><div className="chatConections">
+                <Link to={`/individualchat/${chat._id}`}><div className="chatConections">
                   <div className="chatConectionsImage"><img src={otherUser.image} /></div>
                   <div className="chatConectionsName">{otherUser.username}</div>
                 </div>

@@ -6,39 +6,16 @@ import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
-import "./ChatPage.css";
+import "../ChatPage/ChatPage.css";
 import Notifications from "../../../icons/icons/notifications.png"
 import Left from "../../../icons/icons/left.png"
 import Calendar from "../../../icons/icons/calendarcopy.png"
 import LocationIcon from "../../../icons/icons/location.png"
 import ClockIcon from "../../../icons/icons/hour.png"
 
-const monthNames = [
-  "ENE",
-  "FEB",
-  "MAR",
-  "ABR",
-  "MAY",
-  "JUN",
-  "JUL",
-  "AGO",
-  "SEP",
-  "OCT",
-  "NOV",
-  "DEC"
-];
 
-const weekDays = [
-  "Dom",
-  "Lun",
-  "Mar",
-  "Mie",
-  "Jue",
-  "Vie",
-  "Sab"
-]
 
-export default class ChatPage extends Component {
+export default class IndividualChat extends Component {
   constructor(props) {
     super(props);
 
@@ -47,10 +24,8 @@ export default class ChatPage extends Component {
       name: null,
       messages: null,
       id: this.props.match.params.id,
-      plan: null,
-      owner: null,
-      users: null,
-      image: null
+      image: null,
+      users:null
     };
     this.chatService = new ChatService();
   }
@@ -69,17 +44,16 @@ export default class ChatPage extends Component {
 
 
 
+    console.log(this.state.id)
 
-    this.chatService.getChat(this.state.id).then(response => {
-
+    this.chatService.getIndividualChat(this.state.id).then(response => {
+    console.log("holaaaa",response)
       this.setState({
         ...this.state,
         name: response.user,
         messages: response.chat.messages,
-        plan: response.chat.plan,
-        owner: response.owner,
-        users: response.chat.users,
-        image: response.user
+        image: response.user,
+        users: response.chat.users
       });
     });
   }
@@ -112,7 +86,7 @@ export default class ChatPage extends Component {
     let plan = this.state.plan
     return (
       <React.Fragment>
-        <Nav title={this.state.plan.title}
+        <Nav title={"Chat"}
           iconleft={Left}
           iconright={Notifications}
           widthR={"17px"}
@@ -120,48 +94,7 @@ export default class ChatPage extends Component {
           widthL={"9px"}
           heigthL={"6px"}
         />
-        <section className="plan-data-section">
-          <div className="plan-data">
-            <div className="plan-date">
-              <div className="month">
-                {<img src={Calendar} />}
-                {weekDays[this.parserDate().getDay()] + ", "}
-                {this.parserDate().getUTCDate() + " "}
-                {monthNames[this.parserDate().getMonth()]}
-              </div>
-              <div className="plan-hour">
-                <img src={ClockIcon} />
-                {this.parserDate().getUTCHours() +
-                  ":" +
-                  this.parserDate().getMinutes()}
-              </div>
-            </div>
-            <div className="plan-location">
-              {<img src={LocationIcon} />}
-              <div>{"this.state.plan.location"}</div>
-            </div>
-            <div className="div-data-users">
-              <div className="bot-plan-card">
-                <p className="assistantsPlan">Van a acudir</p>
-                <div className="assistantsUsers">
-                  {this.state.users.map(function (user, index) {
-                    return (
-                      <Link to={`/participants/${plan._id}`} className="link-profiles">
-                        <img className="image-asisentes" src={user.image} />
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-              <div>
-                <Link to={`/profile/${this.state.owner._id}`}><img className="owner-image" src={this.state.owner.image} /></Link>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="state-plan-div">
-          <p>En proceso</p>
-        </section>
+       
         <section className="section-chat">
           {this.state.messages.map((message, index) => (
             <ChatMessage
@@ -186,14 +119,10 @@ export default class ChatPage extends Component {
   render() {
     return (
       <div>
-
-        
-
         {this.state.name !== null &&
-          this.state.messages !== null &&
-          this.state.owner !== null &&
-          this.state.users !== null &&
-          this.state.plan !== null && <div>{this.printChat()}</div>}
+         this.state.messages !== null &&
+         <div>{this.printChat()}</div>
+         }
       </div>
     );
   }

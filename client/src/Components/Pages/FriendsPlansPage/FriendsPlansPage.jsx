@@ -23,7 +23,7 @@ export default class FriendsPlansPage extends Component {
 
 
   componentDidMount() {
-    this.planService.getAllPlans()
+    this.planService.getFriendPlans()
       .then(response => {
         this.userService.getUser()
           .then(responseuser => {
@@ -37,7 +37,7 @@ export default class FriendsPlansPage extends Component {
     this.planService.addPlanFav(id)
       .then(response => {
         console.log(response)
-        this.planService.getAllPlans()
+        this.planService.getFriendPlans()
           .then(response => {
             this.userService.getUser()
               .then(responseuser => {
@@ -52,7 +52,7 @@ export default class FriendsPlansPage extends Component {
     this.planService.delPlanFav(id)
       .then(response => {
         console.log(response)
-        this.planService.getAllPlans()
+        this.planService.getFriendPlans()
           .then(response => {
             this.userService.getUser()
               .then(responseuser => {
@@ -81,7 +81,7 @@ export default class FriendsPlansPage extends Component {
                 </div>
               </div>
               <div className="allPlanCardRight">
-              {
+                {
                   user.favourites.includes(plan._id) ?
                     (<div className="allPlanCardDate">{plan.date}<img onClick={() => delPlanFav(plan._id)} src={SavedIcon} /></div>)
                     :
@@ -104,13 +104,13 @@ export default class FriendsPlansPage extends Component {
   render() {
     return (
       <React.Fragment>
-          <Nav  title={"Mis conexiones"} 
-        iconleft={SearchIcon} 
-        iconright={""} 
-        widthR={"20px"} 
-        heigthR={"20px"} 
-        widthL={"20px"} 
-        heigthL={"20px"}
+        <Nav title={"Mis conexiones"}
+          iconleft={SearchIcon}
+          iconright={""}
+          widthR={"20px"}
+          heigthR={"20px"}
+          widthL={"20px"}
+          heigthL={"20px"}
         />
         <div className="allPlanSelected">
           <p><Link to={"/plans"}>En Madrid</Link></p>

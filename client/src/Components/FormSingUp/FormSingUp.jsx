@@ -115,7 +115,7 @@ export default class FormSingUp extends Component {
     const { location } = this.state;
 
     if(this.state && this.state.redirect) {
-        return <Redirect to="/login" />
+        return <Redirect to="/" />
       }
 
     let hobbies = ""

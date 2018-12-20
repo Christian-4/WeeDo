@@ -8,6 +8,7 @@
     bottom: 0px;
     border-top: 1px solid #d8d8d8;
     background-color: white;
+    z-index: 30;
 }
 
 .Tapbar img{

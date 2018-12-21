@@ -139,7 +139,7 @@ export default class ChatPage extends Component {
         />
         <section className="plan-data-section">
           <div className="plan-data">
-            <div className="plan-date">
+            <div className="plan-date plan-chat-date">
               <div className="month">
                 {<img src={Calendar} />}
                 {weekDays[this.parserDate().getDay()] + ", "}

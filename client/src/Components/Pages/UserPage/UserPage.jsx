@@ -7,6 +7,10 @@ import "./UserPage.css"
 import SearchIcon from "../../../icons/icons/search.png"
 import SearchIconNav from "../../../icons/icons/white.png"
 import FilterBars from "../../../icons/icons/filterBars.png"
+import CineIcon from "../../../icons/icons/cine.png"
+import RugbyIcon from "../../../icons/icons/rugby.png"
+import BasketIcon from "../../../icons/icons/basket.png"
+import FutbolIcon from "../../../icons/icons/futbol.png"
 
 
 export default class UserPage extends Component {
@@ -84,7 +88,12 @@ export default class UserPage extends Component {
                 console.log(hobby)
                 return (
                   <div className="allUsersCardHobby">
-                    <img src="" />
+                    <div className="hobbiesDivColor">
+                      <img src={CineIcon} />
+                      <img src={RugbyIcon} />
+                      <img src={BasketIcon} />
+                      <img src={FutbolIcon} />
+                    </div>
                     <p>{hobby}</p>
                   </div>
                 );
@@ -114,7 +123,12 @@ export default class UserPage extends Component {
                 console.log(hobby)
                 return (
                   <div className="allUsersCardHobby">
-                    <img src="" />
+                    <div className="hobbiesDivColor">
+                      <img src={CineIcon} />
+                      <img src={RugbyIcon} />
+                      <img src={BasketIcon} />
+                      <img src={FutbolIcon} />
+                    </div>
                     <p>{hobby}</p>
                   </div>
                 );

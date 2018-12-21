@@ -122,6 +122,7 @@ export default class ChatPage extends Component {
     let plan = this.state.plan
     return (
       <React.Fragment>
+        <Link to={`/notifications/${plan._id}`}><span className="chatButtonNotifications"></span></Link>
         <Nav title={this.state.plan.title}
           iconleft={Left}
           iconright={Notifications}

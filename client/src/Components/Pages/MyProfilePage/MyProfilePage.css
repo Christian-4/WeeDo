@@ -137,10 +137,14 @@
   color: #5e5e5e;
 }
 
+.myInteresesDivs{
+  margin-top: 8px;
+}
+
 .myProfile .myIntereses label{
   margin-right: 260px;
 }
 
 .logoutButton{
-    margin-top: 30px;
+    margin-top: 15px;
 }

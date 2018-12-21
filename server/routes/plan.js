@@ -13,20 +13,14 @@ unsplash.init(
   "f486d89baf41aa7c050f122f9472f3ddd0b391fbe026928e3f03d60db9562307"
 );
 
+let lastPlanCreated;
+
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
-
-client.post('statuses/update', { status: 'Nuevo plan creado!!' })
-  .then(function (tweet) {
-    console.log(tweet);
-  })
-  .catch(function (error) {
-    throw error;
-  })
 
 router.get("/favicon.ico", (req, res, next) => {
   res.status(204).json({ message: "favicon not found" });
@@ -117,6 +111,20 @@ router.post("/newplan", function (req, res, next) {
                   )
                     .then(() => {
                       res.status(200).json({ plan, message: "Plan create!" });
+                      lastPlanCreated = plan
+                      client.post('statuses/update', {
+                        status: `Nuevo plan creado!!\n
+Plan: ${lastPlanCreated.title}\n
+Descripcion: ${lastPlanCreated.description}\n
+Lugar: ${lastPlanCreated.location.place}\n
+Pagina: https://weed0.herokuapp.com/plan/${lastPlanCreated._id}`
+                      })
+                        .then(function (tweet) {
+                          console.log(tweet);
+                        })
+                        .catch(function (error) {
+                          throw error;
+                        })
                     })
                     .catch(err => {
                       Chat.findByIdAndDelete(chat._id).then(() => {
@@ -614,7 +622,7 @@ router.get("/plan/:_id", function (req, res, next) {
       path: "confirmations",
       model: "PlanConfirmation"
     })
-    
+
 
 
 

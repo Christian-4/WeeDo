@@ -117,7 +117,7 @@ router.post("/newplan", function (req, res, next) {
 Plan: ${lastPlanCreated.title}\n
 Descripcion: ${lastPlanCreated.description}\n
 Lugar: ${lastPlanCreated.location.place}\n
-Pagina: https://weed0.herokuapp.com/plan/${lastPlanCreated._id}`
+Pagina: https://weed0.herokuapp.com`
                       })
                         .then(function (tweet) {
                           console.log(tweet);

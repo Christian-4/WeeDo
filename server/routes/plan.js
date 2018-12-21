@@ -6,18 +6,34 @@ const Chat = require("../models/Chat");
 const User = require("../models/User");
 const PlanConfirmation = require("../models/PlanConfirmation");
 const unsplash = require("unsplash-api");
+const Twitter = require("twitter");
 require("dotenv").config();
 var clientId = process.env.UNPLASH_KEY;
 unsplash.init(
   "f486d89baf41aa7c050f122f9472f3ddd0b391fbe026928e3f03d60db9562307"
 );
 
+const client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});
+
+client.post('statuses/update', { status: 'Nuevo plan creado!!' })
+  .then(function (tweet) {
+    console.log(tweet);
+  })
+  .catch(function (error) {
+    throw error;
+  })
+
 router.get("/favicon.ico", (req, res, next) => {
   res.status(204).json({ message: "favicon not found" });
   return;
 });
 
-router.post("/newplan", function(req, res, next) {
+router.post("/newplan", function (req, res, next) {
   const { title, description, location, date, limit, hobby } = req.body;
 
   if (title === "") {
@@ -55,17 +71,17 @@ router.post("/newplan", function(req, res, next) {
     .then(chat => {
       let newPlan;
       console.log(hobby);
-      unsplash.searchPhotos(hobby, [1, 2, 3], 2, 50, function(
+      unsplash.searchPhotos(hobby, [1, 2, 3], 2, 50, function (
         error,
         photos,
         link
       ) {
-       let image_new = photos[0];
-       if(image_new === undefined || image_new === null){
-           image_new = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-       }else{
-            image_new = photos[0].links.download
-       }
+        let image_new = photos[0];
+        if (image_new === undefined || image_new === null) {
+          image_new = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+        } else {
+          image_new = photos[0].links.download
+        }
         newPlan = new Plan({
           owner: req.user._id,
           chat: chat._id,
@@ -201,7 +217,7 @@ router.put("/editplan/:_id", (req, res, next) => {
     );
 });
 
-router.delete("/deleteplan/:_id", function(req, res, next) {
+router.delete("/deleteplan/:_id", function (req, res, next) {
   Plan.findByIdAndDelete(req.params._id)
     .then(plan => {
       Chat.findByIdAndDelete(plan.chat)
@@ -263,7 +279,7 @@ router.delete("/deleteplan/:_id", function(req, res, next) {
     );
 });
 
-router.post("/planrequest/:_id", function(req, res, next) {
+router.post("/planrequest/:_id", function (req, res, next) {
   Plan.findById(req.params._id)
     .then(planFounded => {
       const newPlanConfirmation = new PlanConfirmation({
@@ -300,7 +316,7 @@ router.post("/planrequest/:_id", function(req, res, next) {
     );
 });
 
-router.post("/acceptplan/:_id", function(req, res, next) {
+router.post("/acceptplan/:_id", function (req, res, next) {
   PlanConfirmation.findById(req.params._id)
     .then(confirmationFounded => {
       Plan.findByIdAndUpdate(
@@ -368,7 +384,7 @@ router.post("/acceptplan/:_id", function(req, res, next) {
     );
 });
 
-router.post("/declineplan/:_id", function(req, res, next) {
+router.post("/declineplan/:_id", function (req, res, next) {
   PlanConfirmation.findById(req.params._id)
     .then(confirmationFounded => {
       Plan.findByIdAndUpdate(
@@ -394,7 +410,7 @@ router.post("/declineplan/:_id", function(req, res, next) {
     );
 });
 
-router.post("/addfriendtoplan", function(req, res, next) {
+router.post("/addfriendtoplan", function (req, res, next) {
   const { planId, userId } = req.body;
 
   Plan.findByIdAndUpdate(
@@ -438,7 +454,7 @@ router.post("/addfriendtoplan", function(req, res, next) {
     );
 });
 
-router.post("/leaveplan/:_id", function(req, res, next) {
+router.post("/leaveplan/:_id", function (req, res, next) {
   Plan.findByIdAndUpdate(
     req.params._id,
     { $pull: { users: req.user._id } },
@@ -472,7 +488,7 @@ router.post("/leaveplan/:_id", function(req, res, next) {
     );
 });
 
-router.post("/kickuserofplan", function(req, res, next) {
+router.post("/kickuserofplan", function (req, res, next) {
   const { planId, userId } = req.body;
 
   Plan.findByIdAndUpdate(planId, { $pull: { users: userId } }, { new: true })
@@ -506,7 +522,7 @@ router.post("/kickuserofplan", function(req, res, next) {
     );
 });
 
-router.post("/addplanfav/:_id", function(req, res, next) {
+router.post("/addplanfav/:_id", function (req, res, next) {
   Plan.findById(req.params._id)
     .then(plan => {
       User.findByIdAndUpdate(
@@ -528,7 +544,7 @@ router.post("/addplanfav/:_id", function(req, res, next) {
     );
 });
 
-router.delete("/delplanfav/:_id", function(req, res, next) {
+router.delete("/delplanfav/:_id", function (req, res, next) {
   Plan.findById(req.params._id)
     .then(plan => {
       User.findByIdAndUpdate(
@@ -552,7 +568,7 @@ router.delete("/delplanfav/:_id", function(req, res, next) {
     );
 });
 
-router.get("/allplans", function(req, res, next) {
+router.get("/allplans", function (req, res, next) {
   Plan.find()
     .sort("date")
     .populate("users")
@@ -563,7 +579,7 @@ router.get("/allplans", function(req, res, next) {
     );
 });
 
-router.get("/friendplans", function(req, res, next) {
+router.get("/friendplans", function (req, res, next) {
   User.findById(req.user._id)
     .then(user => {
       let promises = [];
@@ -590,7 +606,7 @@ router.get("/friendplans", function(req, res, next) {
     );
 });
 
-router.get("/plan/:_id", function(req, res, next) {
+router.get("/plan/:_id", function (req, res, next) {
   Plan.findById(req.params._id)
     .populate("users")
     .populate("owner")
@@ -600,7 +616,7 @@ router.get("/plan/:_id", function(req, res, next) {
     );
 });
 
-router.get("/planstogo", function(req, res, next) {
+router.get("/planstogo", function (req, res, next) {
   User.findById(req.user._id).then(user => {
     Plan.find({ users: { $in: [user._id] } })
       .sort("date")
@@ -613,11 +629,11 @@ router.get("/planstogo", function(req, res, next) {
   });
 });
 
-router.get("/favouriteplans", function(req, res, next) {
+router.get("/favouriteplans", function (req, res, next) {
   let promises = [];
   User.findById(req.user._id)
     .then(user => {
-      user.favourites.forEach(function(plan) {
+      user.favourites.forEach(function (plan) {
         promises.push(
           Plan.findById(plan._id)
             .populate("users")
@@ -633,7 +649,7 @@ router.get("/favouriteplans", function(req, res, next) {
     );
 });
 
-router.get("/userplans", function(req, res, next) {
+router.get("/userplans", function (req, res, next) {
   Plan.find({ owner: req.user._id })
     .sort("date")
     .populate("users")
@@ -643,7 +659,7 @@ router.get("/userplans", function(req, res, next) {
     );
 });
 
-router.get("/plannotifications/:_id", function(req, res, next) {
+router.get("/plannotifications/:_id", function (req, res, next) {
   PlanConfirmation.find({ plan: req.params._id })
     .populate("user")
     .then(confirmations => res.status(200).json({ confirmations }))

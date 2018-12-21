@@ -17,6 +17,11 @@ class PlansService {
             .catch(err => err.response.data)
     }
 
+    twittering = () => {
+        return this.service.post()
+        .then(response => response)
+    }
+
 
     deletePlan = (id) => {
         return this.service.delete(`/deleteplan/${id}`)
@@ -54,7 +59,7 @@ class PlansService {
     }
 
     kickUserOfPlan = (userId, planId) => {
-        return this.service.post("/kickuserofplan", {userId, planId})
+        return this.service.post("/kickuserofplan", { userId, planId })
             .then(response => response.data)
     }
 

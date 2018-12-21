@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Map from "../../Map/Map.jsx";
 import PlanService from "../../PlansService";
 import Left from "../../../icons/icons/left.png";
 import Nav from "../../Nav/Nav.jsx";
+import "./PlanMap.css"
 
 export default class PlanMap extends Component {
   constructor(props) {
@@ -27,6 +29,7 @@ export default class PlanMap extends Component {
     console.log(this.state.plan);
     return (
       <React.Fragment>
+         <Link to={`/plan/${this.state.plan._id}`}><span className="buttonBackMap"></span></Link>
         <Map center={this.state.plan.location.coordinates} view={true} />
       </React.Fragment>
     );

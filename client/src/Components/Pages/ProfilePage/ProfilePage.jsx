@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import UserService from '../../UserService';
 import "./ProfilePage.css"
 import Nav from "../../Nav/Nav"
@@ -55,6 +56,7 @@ export default class ProfilePage extends Component {
   render() {
     return( 
       <React.Fragment>
+        <Link to={"/plans"}><span className="buttonOtherProfileBack"></span></Link>
         <Nav  title={"Perfil"} 
         iconleft={LeftCopy} 
         widthR={"20px"} 

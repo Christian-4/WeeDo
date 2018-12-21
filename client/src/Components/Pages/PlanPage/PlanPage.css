@@ -125,6 +125,10 @@ text-align: left;
     display: flex;
 }
 
+.buttonsPlan{
+  justify-content: space-between
+}
+
 .buttonApuntarme{
     outline: none;
   height: 48px;
@@ -150,6 +154,8 @@ text-align: left;
   border-radius: 24px;
   margin-left: 10px;
 }
+
+
 
 .month{
   

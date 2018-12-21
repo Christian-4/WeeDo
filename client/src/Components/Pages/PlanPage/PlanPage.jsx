@@ -27,6 +27,8 @@ const monthNames = [
   "DEC"
 ];
 
+  
+
 export default class PlanPage extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +39,11 @@ export default class PlanPage extends Component {
       plan: null,
       notifications: null,
       redirectWhenDelete: false,
-      showthemap: false
+      showthemap: false,
+      class: "buttonsPlan",
+      text: "¡Quiero apuntarme!",
+      showButton: true
+
     };
 
     this.plansService = new PlansService();
@@ -50,23 +56,12 @@ export default class PlanPage extends Component {
       this.userService.getUser()
         .then(res => {
           this.setState({ ...this.state, plan: response.plan, user: res.user });
+          this.isJoined()
+          this.showText()
         })
     });
   }
 
-  // handleDeletePlan = (e) => {
-  //   e.preventDefault();
-  //   console.log("holaaa delete")
-  //   const { plan_id } = this.state;
-
-  //   this.plansService.deletePlan(plan_id)
-  //     .then(response => {
-  //       console.log("planesborrados", response.message)
-  //       if (response.message === "Plan deleted!") {
-  //         this.setState({ ...this.state, redirectWhenDelete: true })
-  //       }
-  //     });
-  // }
 
   parserDate = () => {
     let newDate = new Date(this.state.plan.date);
@@ -80,10 +75,12 @@ export default class PlanPage extends Component {
         console.log(response);
         this.userService.getUser()
           .then(res => {
-            this.setState({ ...this.state, plan: response.plan, user: res.user });
+            this.setState({ ...this.state, plan: response.plan, user: res.user, text: "Petición enviada!" });
+           
           })
       });
     });
+  
   };
 
   addPlanFav = id => {
@@ -112,7 +109,37 @@ export default class PlanPage extends Component {
     });
   };
 
-  showMap = () => { };
+  isJoined = () => {
+
+    var usersJoinded =  this.state.plan.users.filter(function(user){
+          return user._id === this.state.user._id
+      }.bind(this))
+
+      if(usersJoinded.length === 0){
+    
+        this.setState({...this.state,className:"buttonsPlan buttons-flex", showButton:false})
+      
+      }
+   };
+
+   showText = () =>{
+
+      if(!this.state.plan.confirmations.length === 0 || !this.state.plan.confirmations.length === undefined){
+        var requestSend = this.state.plan.confirmations.filter(function(confirmation){
+          console.log(confirmation._id, )
+          return confirmation.user._id === this.state.user._id
+        }.bind(this))
+  
+        if(!requestSend.length === 0 ){
+          this.setState({...this.state, text: "¡Quiero apuntarme!"})
+          
+        }else{
+          this.setState({...this.state, text:  "Petición enviada"})
+        
+        }
+      }
+      
+   }
 
   printPlan = (planRequest, addPlanFav, delPlanFav) => {
     const { title, description, date, chat } = this.state.plan;
@@ -170,10 +197,19 @@ export default class PlanPage extends Component {
             </Link>
           </div>
 
-          <div className="buttonsPlan">
-            <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>
-              ¡Quiero apuntarme!
-            </button>
+          <div className={this.state.class}>
+              {!this.state.showButton
+               ?
+                  <button className="buttonApuntarme" onClick={() => planRequest(this.state.plan_id)}>
+                  {this.state.text}
+                  </button>
+                
+              :
+                ""
+              }
+            
+            
+           
             <Link to={`/planmap/${this.state.plan_id}`}>
               <img src={group5} />
             </Link>
@@ -183,10 +219,7 @@ export default class PlanPage extends Component {
                 :
                 (<img src={group4} onClick={() => addPlanFav(this.state.plan_id)} />)
             }
-            {/* <button onClick={() => delPlanFav(this.state.plan_id)}>Del from Favourites</button> */}
-            {/* <form onSubmit={this.handleDeletePlan} className="new-plan-form">
-              <input type="submit" value="delete-plan" />
-            </form> */}
+           
           </div>
         </div>
       </React.Fragment>
@@ -241,12 +274,7 @@ export default class PlanPage extends Component {
             <br />
             <br />
           </div>
-        )}
-
-        {/* {this.state.plan !== null && this.state.showthemap &&
-
-          <div> {this.printMap()} </div>
-        } */}
+        )}      
       </div>
     );
   }

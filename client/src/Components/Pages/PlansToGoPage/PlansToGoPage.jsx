@@ -8,6 +8,21 @@ import SearchIcon from "../../../icons/icons/white.png"
 import NotificationIcon from "../../../icons/icons/notifications.png"
 
 
+const monthNames = [
+  "ENE",
+  "FEB",
+  "MAR",
+  "ABR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AGO",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC"
+];
+
 export default class PlansToGoPage extends Component {
   constructor(props) {
     super(props)
@@ -29,6 +44,39 @@ export default class PlansToGoPage extends Component {
   }
 
 
+  parserDate = (date) => {
+    let newDate = new Date(date);
+    return newDate;
+  };
+
+  showDay = (date) => {
+    let newDate = new Date(date);
+    return newDate.getUTCDate();
+  }
+
+  showMonth = (date) => {
+    let newDate = new Date(date);
+ 
+    return monthNames[newDate.getMonth()];
+  }
+
+  showYear = (date) => {
+    let newDate = new Date(date);
+    return newDate.getUTCDate();
+  }
+
+  showHour = (date) =>{
+    let newDate = new Date(date);
+    return newDate.getUTCHours();
+  }
+
+
+  showMins = (date) =>{
+    let newDate = new Date(date);
+    return newDate.getMinutes();
+  }
+
+
 
   printPlans = (addPlanFav, delPlanFav) => {
     return (
@@ -45,7 +93,12 @@ export default class PlansToGoPage extends Component {
                 </div>
               </div>
               <div className="allPlanCardRight">
-                <div className="allPlanCardDate">{plan.date}<Link to={`/chat/${plan.chat}`}><img className="chat" src={ChatIcon} /></Link></div>
+                <div className="allPlanCardDate">
+                {this.showDay(plan.date)+" "}
+                    {this.showMonth(plan.date)+","}
+                    {this.showHour(plan.date)+":"}
+                    {this.showMins(plan.date)}
+                <Link to={`/chat/${plan.chat}`}><img className="chat" src={ChatIcon} /></Link></div>
                 <div className="allPlanCardTitle"><Link to={`/plan/${plan._id}`}>{plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{plan.users.map(function (user, index) {
                   return (
@@ -55,7 +108,7 @@ export default class PlansToGoPage extends Component {
               </div>
             </div>
           )
-        })}
+        }.bind(this))}
       </React.Fragment>
     )
   }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const PlanConfirmation = require('./PlanConfirmation')
 
 const planSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -13,7 +13,7 @@ const planSchema = new Schema({
     limit: Number,
     hobby: String,
     image:String,
-    confirmations: [{ type: Schema.Types.ObjectId, ref: 'PlanConfirmations' }]
+    confirmations: [{ type: Schema.Types.ObjectId, ref: 'PlanConfirmation' }]
 }, {
         timestamps: {
             createdAt: 'created_at',

@@ -594,6 +594,14 @@ router.get("/plan/:_id", function(req, res, next) {
   Plan.findById(req.params._id)
     .populate("users")
     .populate("owner")
+    .populate({
+      path: "confirmations",
+      model: "PlanConfirmation"
+    })
+    
+
+
+
     .then(plan => res.status(200).json({ plan }))
     .catch(err =>
       res.status(500).json({ message: "Error to show the plan " + err })

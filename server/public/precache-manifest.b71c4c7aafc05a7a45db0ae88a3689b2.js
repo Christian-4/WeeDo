@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "36d049d9b95b6e93de5c",
+    "revision": "f5f5297db176437d614b",
     "url": "/static/css/main.27baf9df.chunk.css"
   },
   {
-    "revision": "36d049d9b95b6e93de5c",
-    "url": "/static/js/main.36d049d9.chunk.js"
+    "revision": "f5f5297db176437d614b",
+    "url": "/static/js/main.f5f5297d.chunk.js"
   },
   {
     "revision": "a80d168181421e6e9141",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/static/media/MiPerfilColor.0da4ca61.png"
   },
   {
-    "revision": "e0dfde9043c5d6c90e720e362793fd4b",
+    "revision": "09a641b32f4bed6c314eb451f28eae8b",
     "url": "/index.html"
   }
 ];

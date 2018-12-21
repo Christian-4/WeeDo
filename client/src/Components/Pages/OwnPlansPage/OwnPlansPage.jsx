@@ -86,7 +86,7 @@ export default class OwnPlansPage extends Component {
             <div className="allPlanCard">
               <div className="allPlanCardLeft">
                 <div className="allPlanCardImagePlan">
-                  <img src="https://as01.epimg.net/tikitakas/imagenes/2017/08/16/portada/1502909050_145252_1502909120_noticia_normal.jpg" />
+                  <img src={plan.image} />
                 </div>
               </div>
               <div className="allPlanCardRight">

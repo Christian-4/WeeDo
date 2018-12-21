@@ -3,7 +3,11 @@
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
+}
+
+.div-input .input{
+  font-size: 18px;
 }
 
 .input {
@@ -25,6 +29,7 @@
 input::-webkit-input-placeholder {
   color: #aaa;
   text-align: right;
+  font-size: 14px;
 }
 
 .underline {

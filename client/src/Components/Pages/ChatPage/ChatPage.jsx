@@ -69,8 +69,8 @@ export default class ChatPage extends Component {
       if (data.id === this.state.id) {
         this.addMessage(data);
       }
-      
-    
+
+
     });
 
 
@@ -122,6 +122,13 @@ export default class ChatPage extends Component {
     let plan = this.state.plan
     return (
       <React.Fragment>
+        {
+          this.state.name._id === this.state.owner._id ?
+            <Link to={`/notifications/${plan._id}`}><span className="chatButtonNotifications"></span></Link>
+            :
+            <span className="chatButtonNotificationsBlocked"></span>
+        }
+        <Link to={`/plansgo`}><span className="chatButtonBack"></span></Link>
         <Nav title={this.state.plan.title}
           iconleft={Left}
           iconright={Notifications}
@@ -132,7 +139,7 @@ export default class ChatPage extends Component {
         />
         <section className="plan-data-section">
           <div className="plan-data">
-            <div className="plan-date">
+            <div className="plan-date plan-chat-date">
               <div className="month">
                 {<img src={Calendar} />}
                 {weekDays[this.parserDate().getDay()] + ", "}
@@ -196,7 +203,7 @@ export default class ChatPage extends Component {
   render() {
     return (
       <div>
-       {this.state.name !== null &&
+        {this.state.name !== null &&
           this.state.messages !== null &&
           this.state.owner !== null &&
           this.state.users !== null &&

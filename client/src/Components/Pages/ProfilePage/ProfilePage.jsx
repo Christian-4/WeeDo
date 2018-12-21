@@ -42,7 +42,7 @@ export default class ProfilePage extends Component {
               {this.state.user.hobbies.map(function(hobby,index){
                 return(
                   <div className="myInteresesDiv">
-                   
+                   {hobby}
                   </div>
                 )
               })}

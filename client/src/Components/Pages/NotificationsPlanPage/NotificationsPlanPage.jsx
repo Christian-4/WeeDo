@@ -63,6 +63,7 @@ export default class NotificationsPlanPage extends Component {
     printNotifications = (acceptPlan, declinePlan) => {
         return (
             <React.Fragment>
+                <Link to={`/chat/${this.state.plan.chat}`}><span className="buttonBackNotifications"></span></Link>
                 {this.state.notifications.map(function (notification, index) {
                     return (
                         <React.Fragment>

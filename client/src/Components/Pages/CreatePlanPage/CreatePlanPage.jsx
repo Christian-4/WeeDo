@@ -182,7 +182,7 @@ export default class CreatePlanPage extends Component {
             handleChange={this.handleChange}
           />
 
-          <div className="">
+          <div className="datePlanCreate">
             <label className="date-label">Fecha y hora</label>
             <div className="div-date-time">
               <DataTime timeChange={this.timeChange} />

@@ -91,6 +91,7 @@ export default class ParticipantsPage extends Component {
     render() {
         return (
             <React.Fragment>
+                <Link to={"/plans"}><span className="participantsButtonBack"></span></Link>
                 <Nav title={"Asistentes"}
                     iconleft={LeftIcon}
                     widthR={"20px"}

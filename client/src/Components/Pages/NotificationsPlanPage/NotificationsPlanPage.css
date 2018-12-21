@@ -46,3 +46,12 @@ hr{
   background-color: #F8F8F8;
   border: 0px;
 }
+
+.buttonBackNotifications{
+  position: absolute;
+  top: 45px;
+  left: 28px;
+  width: 30px;
+  height:30px;
+  z-index: 300
+}

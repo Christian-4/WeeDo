@@ -53,7 +53,7 @@ export class MapContainer extends React.Component {
         onClick={this.onMapClicked}
         style={{ width: "375px", height: "510px", position: "" }}
         visible={this.props.showMap}
-    
+        disableDefaultUI={true}
       >
         
 
@@ -61,6 +61,7 @@ export class MapContainer extends React.Component {
         onClick={this.onMarkerClick}
         name={'Current location'}
         position={coords}
+        animation={this.props.google.maps.Animation.BOUNCE}
          />
 
         <InfoWindow

@@ -116,9 +116,16 @@ export default class CreatePlanPage extends Component {
     let min = parseInt(arrTime[1].split(" ")[0]);
     let seg = 0;
 
-    console.log(hour,min,seg)
+    let typeHour =(arrTime[1].split(' ')[1])
+
     let newDate = this.state.date
-    newDate.hour = hour
+    if(typeHour === "PM"){
+      newDate.hour = hour+12
+      
+    }else{
+      newDate.hour = hour
+    }
+   
     newDate.min = min
     newDate.seg = seg
 

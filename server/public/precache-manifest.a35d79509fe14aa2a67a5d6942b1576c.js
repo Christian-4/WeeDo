@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "95ae00f0a9e06165aac6",
-    "url": "/static/css/main.1c5fe736.chunk.css"
+    "revision": "98bf5cd60bd32defbbc7",
+    "url": "/static/css/main.1662b4d0.chunk.css"
   },
   {
-    "revision": "95ae00f0a9e06165aac6",
-    "url": "/static/js/main.95ae00f0.chunk.js"
+    "revision": "98bf5cd60bd32defbbc7",
+    "url": "/static/js/main.98bf5cd6.chunk.js"
   },
   {
-    "revision": "49df8966d81d00cf613a",
-    "url": "/static/css/1.9734e49a.chunk.css"
+    "revision": "0f08915f77af3c2620e5",
+    "url": "/static/css/1.f957982d.chunk.css"
   },
   {
-    "revision": "49df8966d81d00cf613a",
-    "url": "/static/js/1.49df8966.chunk.js"
+    "revision": "0f08915f77af3c2620e5",
+    "url": "/static/js/1.0f08915f.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -30,6 +30,10 @@ self.__precacheManifest = [
   {
     "revision": "5d1d1308305b15e87ab947f12b6305da",
     "url": "/static/media/saved.5d1d1308.png"
+  },
+  {
+    "revision": "9b705afd27a011748997f1a081985d62",
+    "url": "/static/media/logo.9b705afd.png"
   },
   {
     "revision": "4906010f03e5046c45b06406024ffe41",
@@ -52,6 +56,22 @@ self.__precacheManifest = [
     "url": "/static/media/chat.b12673a0.png"
   },
   {
+    "revision": "07c89221f01dd1b083230df6b82edf57",
+    "url": "/static/media/cine.07c89221.png"
+  },
+  {
+    "revision": "749ff801cbe56918f71970dc6bbd5f97",
+    "url": "/static/media/rugby.749ff801.png"
+  },
+  {
+    "revision": "84d3d4c7f2e851c490c188589198d7bc",
+    "url": "/static/media/basket.84d3d4c7.png"
+  },
+  {
+    "revision": "213ea1a97756289ff2b460c54e797501",
+    "url": "/static/media/futbol.213ea1a9.png"
+  },
+  {
     "revision": "965a7a1a7bd29d1565b5edeca7b4b9b7",
     "url": "/static/media/icons_mobiscroll.965a7a1a.woff"
   },
@@ -66,6 +86,10 @@ self.__precacheManifest = [
   {
     "revision": "4ed2563b69e3536be3eafa44b48ba05d",
     "url": "/static/media/Group4.4ed2563b.png"
+  },
+  {
+    "revision": "ceaf54f9729fcb5f341288328c3e2e9b",
+    "url": "/static/media/savedd.ceaf54f9.png"
   },
   {
     "revision": "ddf6f0486780d802b480aa45549fe3f6",
@@ -88,7 +112,7 @@ self.__precacheManifest = [
     "url": "/static/media/MiPerfilColor.0da4ca61.png"
   },
   {
-    "revision": "21a098e5f102629913671fdd93ee248e",
+    "revision": "c910e858444eb7c320e1d401947347cb",
     "url": "/index.html"
   }
 ];

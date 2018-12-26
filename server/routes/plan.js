@@ -112,19 +112,19 @@ router.post("/newplan", function (req, res, next) {
                     .then(() => {
                       res.status(200).json({ plan, message: "Plan create!" });
                       lastPlanCreated = plan
-                      client.post('statuses/update', {
-                        status: `Nuevo plan creado!!\n
-Plan: ${lastPlanCreated.title}\n
-Descripcion: ${lastPlanCreated.description}\n
-Lugar: ${lastPlanCreated.location.place}\n
-Pagina: https://weed0.herokuapp.com`
-                      })
-                        .then(function (tweet) {
-                          console.log(tweet);
-                        })
-                        .catch(function (error) {
-                          throw error;
-                        })
+//                       client.post('statuses/update', {
+//                         status: `Nuevo plan creado!!\n
+// Plan: ${lastPlanCreated.title}\n
+// Descripcion: ${lastPlanCreated.description}\n
+// Lugar: ${lastPlanCreated.location.place}\n
+// Pagina: https://weed0.herokuapp.com`
+//                       })
+//                         .then(function (tweet) {
+//                           console.log(tweet);
+//                         })
+//                         .catch(function (error) {
+//                           throw error;
+//                         })
                     })
                     .catch(err => {
                       Chat.findByIdAndDelete(chat._id).then(() => {

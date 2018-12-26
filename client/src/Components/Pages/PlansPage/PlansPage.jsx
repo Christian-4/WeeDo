@@ -83,6 +83,7 @@ export default class PlansPage extends Component {
       })
   }
 
+
   parserDate = (date) => {
     let newDate = new Date(date);
     return newDate;
@@ -187,6 +188,7 @@ export default class PlansPage extends Component {
         heigthR={"20px"} 
         widthL={"20px"} 
         heigthL={"20px"}
+        route={`/plansmap`}
           />
         <div className="allPlanSelected">
           <div className="enMadrid">

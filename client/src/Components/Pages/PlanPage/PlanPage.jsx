@@ -52,7 +52,6 @@ export default class PlanPage extends Component {
 
   componentDidMount() {
     this.plansService.getPlan(this.state.plan_id).then(response => {
-      console.log(response);
       this.userService.getUser()
         .then(res => {
           this.setState({ ...this.state, plan: response.plan, user: res.user });
@@ -70,9 +69,8 @@ export default class PlanPage extends Component {
 
   planRequest = id => {
     this.plansService.planRequest(id).then(response => {
-      console.log(response);
       this.plansService.getPlan(this.state.plan_id).then(response => {
-        console.log(response);
+
         this.userService.getUser()
           .then(res => {
             this.setState({ ...this.state, plan: response.plan, user: res.user, text: "Petición enviada!" });
@@ -85,9 +83,8 @@ export default class PlanPage extends Component {
 
   addPlanFav = id => {
     this.plansService.addPlanFav(id).then(response => {
-      console.log(response);
       this.plansService.getPlan(this.state.plan_id).then(response => {
-        console.log(response);
+
         this.userService.getUser()
           .then(res => {
             this.setState({ ...this.state, plan: response.plan, user: res.user });
@@ -98,9 +95,8 @@ export default class PlanPage extends Component {
 
   delPlanFav = id => {
     this.plansService.delPlanFav(id).then(response => {
-      console.log(response);
       this.plansService.getPlan(this.state.plan_id).then(response => {
-        console.log(response);
+
         this.userService.getUser()
           .then(res => {
             this.setState({ ...this.state, plan: response.plan, user: res.user });

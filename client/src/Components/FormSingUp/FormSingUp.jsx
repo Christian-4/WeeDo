@@ -87,7 +87,7 @@ export default class FormSingUp extends Component {
     } else {
       this.authService.signup({ username, password, password_confirm, email, location, image, hobbies })
         .then(response => {
-          console.log(response.data.message)
+        
           if (response.data.message === "SignUp succesfull") {
             this.redirectLogin("login")
           }

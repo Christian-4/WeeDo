@@ -5,7 +5,8 @@ import SearchIcon from "../../icons/icons/white.png"
 import Location from "../../icons/icons/location.png"
 import { Link } from "react-router-dom";
 import './PlanCard.css'
-
+import PlanService from '../PlansService'
+import UserService from "../UserService";
 
 const monthNames = [
     "ENE",
@@ -33,7 +34,11 @@ export default class PlanCard extends Component {
             plan: this.props.plan,
             user: this.props.user
         }
+
+        this.planService = new PlanService()
+        this.userService = new UserService()
     }
+
 
 
     addPlanFav = (id) => {
@@ -103,19 +108,19 @@ export default class PlanCard extends Component {
   render() {
     return (
       <React.Fragment>
-           <div className="allPlanCard">
-              <div className="allPlanCardLeft">
-                <div className="allPlanCardImagePlan">
+           <div className="allPlanCard-map">
+              <div className="allPlanCardLeft-map">
+                <div className="allPlanCardImagePlan-map">
                   <img src={this.state.plan.image} />
                 </div>
-                <div className="allPlanCardImageOwner">
+                <div className="allPlanCardImageOwner-map">
                   <Link to={`/profile/${this.state.plan.owner._id}`}><img src={this.state.plan.owner.image} /></Link>
                 </div>
               </div>
-              {/* <div className="allPlanCardRight">
+              <div className="allPlanCardRight-map">
                 {
                   this.state.user.favourites.includes(this.state.plan._id) ?
-                    (<div className="allPlanCardDate">
+                    (<div className="allPlanCardDate-map">
                    
                     {this.showDay(this.state.plan.date)+" "}
                     {this.showMonth(this.state.plan.date)+","}
@@ -123,7 +128,7 @@ export default class PlanCard extends Component {
                     {this.showMins(this.state.plan.date)}
                     <img onClick={() => this.delPlanFav(this.state.plan._id)} src={SavedIcon} /></div>)
                     :
-                    (<div className="allPlanCardDate">
+                    (<div className="allPlanCardDate-map">
                    
                     {this.showDay(this.state.plan.date)+" "}
                     {this.showMonth(this.state.plan.date)+","}
@@ -136,10 +141,10 @@ export default class PlanCard extends Component {
                 <div className="allPlanCardTitle"><Link to={`/plan/${this.state.plan._id}`}>{this.state.plan.title}</Link></div>
                 <div className="allPlanCardUsers"><span className="textasist">Van a asistir </span><span>{this.state.plan.users.map(function (user, index) {
                   return (
-                    <Link to={`/participants/${this.state.plan._id}`}><img src={this.state.user.image} /></Link>
+                    <Link to={`/participants/${this.state.plan._id}`}><img src={user.image} /></Link>
                   )
                 }.bind(this))}</span></div>
-              </div> */}
+              </div>
             </div>
       </React.Fragment>
     )

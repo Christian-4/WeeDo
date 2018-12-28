@@ -23,7 +23,8 @@ class PlansMap extends Component {
         lat: null,
         lng: null
       },
-      user: null
+      user: null,
+      update:false
     }
 
     this.planService = new PlansService()
@@ -40,17 +41,22 @@ class PlansMap extends Component {
 
         this.UserService.getUser()
           .then(responseuser => {
-            console.log(this.props.coords)
+            let ltd = 36.51543 //this.props.coords.latitude;
+            let lng = -4.88583//this.props.coords.longitude;
             if (this.props.isGeolocationAvailable && this.props.isGeolocationEnabled) {
-              let ltd = 36.51543 //this.props.coords.latitude;
-              let lng = -4.88583//this.props.coords.longitude;
-
+                if(this.props.coords !=null){
+                  ltd = this.props.coords.latitude;
+                  lng = this.props.coords.longitude;
+                }
 
               let array = response.plans.filter(function (plan) {
                 return plan.location.coordinates.lat + plan.location.coordinates.lng + 5 <= ltd - lng
               })
 
-              this.setState({ ...this.state, location: array[0].location.coordinates, plans: array, user: responseuser.user })
+              if(array.length > 0){
+                this.setState({ ...this.state, location: array[0].location.coordinates, plans: array, user: responseuser.user })
+              }
+
 
             }
           })
@@ -62,10 +68,27 @@ class PlansMap extends Component {
     console.log(this.state.plan);
     return (
       <React.Fragment>
-        <Map center={this.state.location} view={true} />
+        <Map center={this.state.location} view={true} update={this.state.update}/>
       </React.Fragment>
     );
   };
+
+  
+
+  handleSlideCard = (index) => {
+
+   let location = {
+      lat: null,
+      lng: null
+    }
+
+
+    location.lat =  this.state.plans[index].location.coordinates.lat;
+    location.lng =  this.state.plans[index].location.coordinates.lng;
+
+    this.setState({...this.state,location,update:true})
+    
+  }
 
   render() {
 
@@ -79,10 +102,11 @@ class PlansMap extends Component {
       arrows:false,
       centerMode: true,
       adaptiveHeight: true,
-      centerPadding:'20px'
+      centerPadding:'20px',
+      focusOnSelect:true,
+      afterChange: (index) => (this.handleSlideCard(index))
   
-
-    };
+    }
 
     return (
       <div>

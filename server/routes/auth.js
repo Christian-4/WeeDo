@@ -36,7 +36,7 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
   
 
 
-  if (username === "" || password === "" || email === "" || location === "" || hobbies.length <= 0) {
+  if (username === "" || password === "" || email === "" || location === null || hobbies.length <= 0) {
     res.status(500).json({ message: "Indicar todos los datos" });
     return;
   }

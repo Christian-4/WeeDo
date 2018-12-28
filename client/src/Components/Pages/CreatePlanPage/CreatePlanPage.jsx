@@ -72,10 +72,7 @@ export default class CreatePlanPage extends Component {
 
     let fecha = new Date()
 
-  
-    console.log(this.state.date)
-    console.log("newDate al crear", date)
-     
+
 
 
     const { title, description, location, newdate, limit, hobby } = this.state;
@@ -197,7 +194,7 @@ export default class CreatePlanPage extends Component {
             </div>
           </div>
 
-          <SearchInput locationChange={e=>{this.locationChange(e)}}/>
+          <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle={'input'} listStyle={'list-style'}/>
     
 
           <Input

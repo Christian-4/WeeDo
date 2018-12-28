@@ -12,7 +12,7 @@ const userSchema = new Schema({
     enum: ["Disable", "Active"],
     default: "Active"
   },
-  location: String,
+  location: {},
   hobbies: Array,
   plans: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],

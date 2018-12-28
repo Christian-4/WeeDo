@@ -9,6 +9,8 @@ import Hobbies from "../HobbiesDiv/Hobbies.jsx"
 import InputCreatePlan from "../InputCreatePlan/InputCreatePlan";
 import Logo from "../../icons/icons/logo.png"
 import "./FormSingUp.css"
+import SearchInput from "../SearchInput/SearchInput.jsx"
+
 
 
 const options = [
@@ -26,7 +28,7 @@ export default class FormSingUp extends Component {
       password: "",
       email: "",
       image: "",
-      location: "",
+      location: [],
       hobbies: [],
       redirect: false,
       displayHobbies: false
@@ -113,6 +115,16 @@ export default class FormSingUp extends Component {
     })
   }
 
+  locationChange = e => {
+    let new_array = []
+    console.log(e)
+    new_array.push(e.place.place)
+    new_array.push(e.place.coordinates.lat)
+    new_array.push(e.place.coordinates.lng)
+    this.setState({...this.state, location: new_array})
+  }
+
+
   render() {
 
     const { location } = this.state;
@@ -142,7 +154,8 @@ export default class FormSingUp extends Component {
           <InputCreatePlan label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange= {this.handleChange} type={"password"}/>
           <InputCreatePlan label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
           <InputCreatePlan name="image" handleChange={this.handleChange} type={"file"} />
-          <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} />
+          {/* <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} /> */}
+          <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
           <button className="btn" onClick={this.displayHobbies}> Next</button><br></br>
           {hobbies}
             <input className="signupButton" type="submit" value="Signup" />

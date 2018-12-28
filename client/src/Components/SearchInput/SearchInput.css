@@ -72,18 +72,18 @@
   }
   
   .list-style{
-    cursor: pointer;
-    list-style: none;
+    cursor: pointer ;
+    list-style: none ;
     border-bottom: 1px solid rgb(209, 208, 208);
-    height: 30px;
-    width: 200px;
-    padding-left: 20px;
-    line-height: 40px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    margin-bottom: 3px;
-    text-align: left;
-    border-radius:5px;
+    height: 30px ;
+    width: 200px ;
+    padding-left: 20px ;
+    line-height: 40px ;
+    white-space: nowrap ;
+    overflow: hidden ;
+    text-overflow: ellipsis ;
+    margin-bottom: 3px ; 
+    text-align: left ;
+    border-radius:5px ;
     color:rgb(172,172,172);
   }

@@ -45,3 +45,47 @@
     align-self: center;
     margin-bottom: 40px;
 }
+
+
+.input-signup {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    color: #555;
+    box-sizing: border-box;
+    font-size: 10px;
+    height: 50px;
+    left: 23%;
+    margin: -25px 0 0 -100px;
+    position: relative;
+    top: 50%;
+    width: 300px;
+    outline: none;
+  }
+
+
+  .name-label-search-signup {
+    margin-bottom: 10px;
+    align-self: flex-start;
+    margin-left: -260px;
+
+  }
+  
+
+.list-style-signUp{
+    cursor: pointer ;
+    list-style: none ;
+    border-bottom: 1px solid rgb(209, 208, 208);
+    height: 30px ;
+    width: 200px ;
+    padding-left: 20px ;
+    line-height: 40px ;
+    white-space: nowrap ;
+    overflow: hidden ;
+    text-overflow: ellipsis ;
+    margin-bottom: 3px ; 
+    text-align: left ;
+    border-radius:5px ;
+    color:rgb(172,172,172);
+  
+}

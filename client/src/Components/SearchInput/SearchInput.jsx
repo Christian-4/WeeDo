@@ -8,7 +8,9 @@ export default class SearchInput extends Component {
     super(props);
     this.state = {
       place: null,
-      label: "Lugar"
+      label: "Localización",
+      boxStyle: this.props.boxStyle,
+      listStyle: this.props.listStyle
     };
   }
 
@@ -23,8 +25,8 @@ export default class SearchInput extends Component {
             country={"country:in|country:es"}
             coordinates={true}
             placeholder="busqueda"
-            locationBoxStyle={'input'}
-            locationListStyle={'list-style'}
+            locationBoxStyle={this.state.boxStyle}
+            locationListStyle={this.state.listStyle}
             onChange={e => {
               this.props.locationChange({ place: e });
             }}

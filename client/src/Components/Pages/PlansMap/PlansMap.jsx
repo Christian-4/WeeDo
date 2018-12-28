@@ -41,8 +41,8 @@ class PlansMap extends Component {
 
         this.UserService.getUser()
           .then(responseuser => {
-            let ltd = 36.51543 //this.props.coords.latitude;
-            let lng = -4.88583//this.props.coords.longitude;
+            let ltd =parseFloat(responseuser.user.location.split(',')[2]) //this.props.coords.latitude;
+            let lng =parseFloat(responseuser.user.location.split(',')[3])//this.props.coords.longitude;
             if (this.props.isGeolocationAvailable && this.props.isGeolocationEnabled) {
                 if(this.props.coords !=null){
                   ltd = this.props.coords.latitude;

@@ -6,7 +6,9 @@
 }
 
 .myProfile .myProfileHeader{
-    display: flex;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
   margin-top: 18px;
 }
 
@@ -147,4 +149,74 @@
 
 .logoutButton{
     margin-top: 15px;
+}
+
+.birthdate{
+  width: 188px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #cccccc;
+}
+.birthdate-filled{
+  width: 123px;
+  height: 16px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+.location {
+  width: 82px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #cccccc;
+}
+
+.location-filled {
+  width: 302px;
+  height: 16px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #5e5e5e;
+}
+
+
+.myIntereses > .hobbies{
+  display: flex;
+}
+
+.hobbie-image{
+  width: 22.1px;
+  height: 14.1px;
+  object-fit: contain;
+  transform: rotate(10deg);
+  
+}
+
+.hobbie-mask{
+  width: 32px;
+  height: 32px;
+  border-radius: 40px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(225deg, #c9a1f0, #7ab2eb);
+  margin-left: 20px
+  
 }

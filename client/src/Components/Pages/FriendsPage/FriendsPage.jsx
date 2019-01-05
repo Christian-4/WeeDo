@@ -131,8 +131,6 @@ export default class FriendsPage extends Component {
     return (
       <React.Fragment>
          <Nav  title={"Encontrar conexiones"} 
-        iconleft={SearchIcon} 
-        iconright={FilterBars} 
         widthR={"20px"} 
         heigthR={"20px"} 
         widthL={"20px"} 

@@ -48,9 +48,14 @@ export default class ProfilePage extends Component {
             {arrayHobbies.map((hobbie) => {
 
               return (
-                <div className="hobbie-mask">
-                  <img src={require(`../../../icons/icons/${hobbie}.png`)} alt="h-image" className="hobbie-image"></img>
+                <div>
+                  <div className="hobbie-mask">
+                    <img src={require(`../../../icons/icons/${hobbie}.png`)} alt="h-image" className="hobbie-image"></img>
+                  </div>
+                  <p className="p-text">{hobbie}</p>
                 </div>
+
+
 
               )
             })}
@@ -60,6 +65,15 @@ export default class ProfilePage extends Component {
 
       </React.Fragment>
     )
+  }
+
+
+  iconClicked = () => {
+    
+  }
+
+  printAboutMe = () => {
+
   }
 
   printUser = () => {
@@ -107,6 +121,16 @@ export default class ProfilePage extends Component {
               <Input label={"Intereses"} placeholder={"Añadir intereses"} />
               :
               this.printHobbies()
+            }
+          </div>
+          <div className="aboutMe">
+            <label >Más sobre mí</label>
+            {this.state.user.aboutMe === null || this.state.user.aboutMe === undefined
+              || this.state.user.aboutMe.length === 0
+              ?
+              <p class="birthdate">Añade información sobre tí</p>
+              :
+              this.printAboutMe()
             }
           </div>
           <div className="logoutButton">

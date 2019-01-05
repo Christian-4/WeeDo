@@ -25,6 +25,7 @@ import ParticipantsPage from './Components/Pages/ParticipantsPage/ParticipantsPa
 import PlanMap from "./Components/Pages/PlanMap/PlanMap.jsx"
 import IndividualChat from "./Components/Pages/IndividualChat/IndividualChat.jsx"
 import PlansMap from "./Components/Pages/PlansMap/PlansMap.jsx"
+import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
 
 
 class App extends Component {
@@ -92,7 +93,8 @@ class App extends Component {
           <Route exact path="/notifications/:id" component={NotificationsPlanPage} />
           <Route exact path="/participants/:id" component={ParticipantsPage} />
           <Route exact path="/planmap/:id" component={PlanMap}/>
-      <Route exact path="/plansmap" render={() => <PlansMap />}/>
+          <Route exact path="/plansmap" render={() => <PlansMap />}/>
+          <Route exact path="/filterPlans" render={() => <FilterPlans />}/>
           
         </Switch>
 

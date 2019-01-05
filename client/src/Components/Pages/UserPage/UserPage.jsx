@@ -174,7 +174,6 @@ export default class UserPage extends Component {
     return (
       <React.Fragment>
         <Nav title={"Encontrar conexiones"}
-          iconleft={SearchIconNav}
           iconright={FilterBars}
           widthR={"20px"}
           heigthR={"20px"}

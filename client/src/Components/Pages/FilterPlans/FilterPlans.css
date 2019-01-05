@@ -1,0 +1,49 @@
+.calendar{
+    display: flex;
+    justify-content: center;
+}
+
+
+.days{
+    margin-right: 5px;
+}
+
+.name{
+    width: 21px;
+    height: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+  
+}
+
+.number{
+  width: 18px;
+  height: 19px;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+
+}
+
+.number{
+    border: 2px solid #f0f0f0;
+    padding: 3px;
+    border-radius: 20px
+}
+
+.no-selected{
+    color: #5e5e5e;
+}
+
+.day-selected{
+    color: #5e5e5e;
+}

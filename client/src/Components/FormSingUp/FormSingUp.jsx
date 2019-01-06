@@ -64,7 +64,7 @@ export default class FormSingUp extends Component {
   };
 
   redirectLogin = () => {
-    console.log("redirect login")
+
     this.setState({ ...this.state, redirect: true })
   }
 

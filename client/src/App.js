@@ -30,8 +30,8 @@ import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       userSession: null,
@@ -75,7 +75,7 @@ class App extends Component {
           {/* <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} /> */}
           <Route exact path="/signup" render={() => <SignupPage />} />
           <Route exact path="/" render={() => <LoginPage getUserSession={this.getUserSession} />} />
-          <Route exact path="/plans" render={() => <PlansPage />} />
+          <Route exact path="/plans" render={props => <PlansPage filters={props.location.filters} />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
           <Route exact path="/profile" render={() => <MyProfilePage />} />
@@ -95,6 +95,7 @@ class App extends Component {
           <Route exact path="/planmap/:id" component={PlanMap}/>
           <Route exact path="/plansmap" render={() => <PlansMap />}/>
           <Route exact path="/filterPlans" render={() => <FilterPlans />}/>
+          
           
         </Switch>
 

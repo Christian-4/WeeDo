@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import Left from "../../../icons/icons/left.png"
 import Nav from "../../Nav/Nav.jsx"
 import './FilterPlans.css'
+
 
 export default class FilterPlans extends Component {
 
@@ -10,14 +12,56 @@ export default class FilterPlans extends Component {
 
         this.state = {
             date: new Date(),
-            classNumber: 'number no-selected',
-            className: 'name no-selected'
+            classNameButton: "add-filters-button button-visibility-hidden",
+            redirect: false
         }
+
+        this.filters = {
+            days: [],
+            time: []
+        }
+
+       
     }
 
+    
 
-    numberClicked = () =>{
+    showButton = () => {
+        this.setState({...this.state,classNameButton: "add-filters-button button-visibility-visible"})
+    }
+
+    buttonClicked = () => {
+        console.log(this.filters.days, this.filters.time)
+        this.setState({...this.state,redirect:true})
+    }
+
+    numberClicked = (e,day) => {
         
+        if( this.filters.days.includes(day)){
+           let index = this.filters.days.indexOf(day);
+            this.filters.days.splice(index,1)
+            e.target.className = "number no-selected";
+        }else{
+            this.filters.days.push(day);
+            e.target.className = "number day-selected";
+        }
+       
+        this.showButton()
+    }
+
+    timeClicked = (e,filter) => {
+
+        if(this.filters.time.includes(filter)){
+            let index = this.filters.time.indexOf(filter);
+            this.filters.time.splice(index,1)
+            e.target.className = "no-p-selected"
+        }else{
+            e.target.className = "p-selected"
+            this.filters.time.push(filter)
+        }
+
+      
+        this.showButton()
     }
 
     transformDate = (currentDay, valueDay) => {
@@ -26,12 +70,10 @@ export default class FilterPlans extends Component {
         if (currentDay - valueDay <= 0) {
             let res = - (currentDay - valueDay)
             newDay = day.getDate() - res;
-            console.log(newDay)
 
         } else if (currentDay - valueDay >= day) {
 
         }
-
         return newDay;
     }
 
@@ -42,7 +84,7 @@ export default class FilterPlans extends Component {
         let arrayDays = []
         let lastDay = new Date(2019, this.state.date.getMonth() + 1, 0).getDate();
         let arrayNameDay = ['LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB', 'DOM'];
-
+        let auxCurrentDay = currentDay;
 
         switch (currentDay) {
             case 0:
@@ -71,6 +113,7 @@ export default class FilterPlans extends Component {
                 break;
         }
 
+
         currentDay = 0;
         while (currentDay <= 6) {
             if (monday === lastDay) {
@@ -84,39 +127,83 @@ export default class FilterPlans extends Component {
             }
         }
 
+        console.log(this.state.date.getDay())
 
         return (
-            <div className="calendar">
+            <React.Fragment>
+                <div className="calendarTitle">
+                    <p>Seleccionar días en concreto</p>
+                </div>
+                <div className="calendar">
 
-                {arrayDays.map((day, index) => {
-                    return (
-                        <div className="days">
-                            <p className={this.state.className}>{arrayNameDay[index]}</p>
-                            <div className="oval">
-                                <p className={this.state.classNumber} onClick={this.numberClicked}>{day}</p>
+                    {arrayDays.map((day, index) => {
+                        return (
+                            <div className="days">
+                                {index === ((this.state.date.getDay() + 6) !== 6 ? (this.state.date.getDay() + 6) % 6 : (this.state.date.getDay() + 6))
+                                    ?
+                                    <React.Fragment>
+                                        <p className="name current-day">{arrayNameDay[index]}</p>
+                                        <div className="oval">
+                                            <p className="number current-day" value={day} onClick={e => this.numberClicked(e)}>{day}</p>
+                                        </div>
+                                    </React.Fragment>
+
+                                    :
+                                    <React.Fragment>
+                                        <p className="name no-selected">{arrayNameDay[index]}</p>
+                                        <div className="oval">
+                                            <p className="number no-selected"  onClick={e => this.numberClicked(e,day)}>{day}</p>
+                                        </div>
+                                    </React.Fragment>
+                                }
+
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
+                <div className="filterList">
+                    <h3>Ordenar por</h3>
+                    <p className="no-p-selected" onClick={e=>this.timeClicked(e,'M-assistance')}>Mayor asisentcia de mis conexiones</p>
+                    <p className="no-p-selected" onClick={e=>this.timeClicked(e,'h-menor')}>Hora - de más pronto a más tarde</p>
+                    <p className="no-p-selected" onClick={e=>this.timeClicked(e,'h-mayor')}>Hora - de mas tarde a más pronto</p>
+                    <p className="no-p-selected" onClick={e=>this.timeClicked(e,'assistance-asc')}>Número de asistentes - Ascendente</p>
+                    <p className="no-p-selected" onClick={e=>this.timeClicked(e,'assistance-desc')}>Número de asistentes - Descendente</p>
+                </div>
 
-            </div>
+                <div className="button-div">
+                    <button className={this.state.classNameButton} onClick = {e=>this.buttonClicked(e)}>Aplicar filtros</button>
+                </div>
+            </React.Fragment>
+
         )
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <Nav
-                    title={"Filtrar resultados"}
-                    iconleft={Left}
-                    widthL={"9px"}
-                    heigthL={"15px"}
-                />
-
-                <div>
-                    {this.printCalendar()}
-                </div>
-            </React.Fragment>
-        )
+        if(this.state.redirect){
+            return <Redirect to={{
+                pathname: '/plans',
+                filters: { 
+                    days: this.filters.days,
+                    time: this.filters.time 
+                }
+            }} />
+        }else{
+            return (
+            
+                <React.Fragment>
+                    <Nav
+                        title={"Filtrar resultados"}
+                        iconleft={Left}
+                        widthL={"9px"}
+                        heigthL={"15px"}
+                    />
+    
+                    <div>
+                        {this.printCalendar()}
+                    </div>
+                </React.Fragment>
+            )
+        }   
+       
     }
 }

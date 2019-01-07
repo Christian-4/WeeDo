@@ -43,13 +43,44 @@ export default class PlansPage extends Component {
   }
 
 
+  filterDate =  (range,plansList,start,end) => {
+    let arrayRes =[]
+    if(range){
+      //hay rango
+      arrayRes = plansList.filter(plan => {
+         return  plan.date > start && plan.date < end
+      })
+    }else{
+      //no hay rango
+      arrayRes = plansList.filter(plan => {
+          return plan.date === start
+      })
+    }
+  }
+
   componentDidMount() {
+    let filters = this.props.filters
+   
     this.planService.getAllPlans()
       .then(response => {
         this.userService.getUser()
           .then(responseuser => {
-            console.log(response)
-            this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
+            if(filters !== undefined){
+                //filtramos planes
+                if(filters.days.length>0){
+                  // hay filtro de dias
+                  if(filters.days.length===1){
+                    //dia en concreto
+                    let filteredPlans = this.filterDate(false,response.plans,filters.days[0])
+                  }else{
+                    // hay rango de dias
+                    let filteredPlans = this.filterDate(true,response.plans,filters.days[0],filters.days[filters.days.length-1])
+                  }
+                  console.log("hay filtros de dias")
+                }
+            }else{
+              this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
+            }
           })
       })
   }

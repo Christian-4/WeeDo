@@ -24,6 +24,7 @@ export default class FilterPlans extends Component {
        
     }
 
+
     
 
     showButton = () => {
@@ -86,12 +87,14 @@ export default class FilterPlans extends Component {
         let arrayNameDay = ['LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB', 'DOM'];
         let auxCurrentDay = currentDay;
 
+        console.log(currentDay)
+
         switch (currentDay) {
             case 0:
                 monday = this.transformDate(this.state.date.getDate(), 6)
                 break;
             case 1:
-                monday = currentDay;
+                monday = this.state.date.getDate();
                 break;
             case 2:
                 monday = this.transformDate(this.state.date.getDate(), 1)
@@ -184,7 +187,7 @@ export default class FilterPlans extends Component {
                 pathname: '/plans',
                 filters: { 
                     days: this.filters.days,
-                    time: this.filters.time 
+                    time: this.filters.time
                 }
             }} />
         }else{

@@ -47,16 +47,40 @@ export default class PlansPage extends Component {
     let arrayRes =[]
     if(range){
       //hay rango
+     
       arrayRes = plansList.filter(plan => {
-         return  plan.date > start && plan.date < end
+        console.log(this.showDay(this.parserDate(plan.date)) >= start && this.showDay(this.parserDate(plan.date)) <= end)
+         return  this.showDay(this.parserDate(plan.date)) >= start && this.showDay(this.parserDate(plan.date)) <= end
       })
     }else{
       //no hay rango
       arrayRes = plansList.filter(plan => {
-          return plan.date === start
+          return this.showDay(this.parserDate(plan.date)) === start
       })
     }
+
+    return arrayRes;
   }
+
+  orderPlans = (filters) => {
+    if(filters.time[0] === 'assistance-asc'){
+      console.log('cuando entro', this.state.plans)
+      this.state.plans.sort((planA,planB) => {
+        if(planA.users.lenght > planB.users.length){
+          return 1
+        } 
+        if(planA.users.length < planB.users.length){
+          return -1
+        } 
+        return 0
+        
+      })
+    }
+
+    console.log('cuando salgo', this.state.plans)
+
+  }
+
 
   componentDidMount() {
     let filters = this.props.filters
@@ -72,11 +96,19 @@ export default class PlansPage extends Component {
                   if(filters.days.length===1){
                     //dia en concreto
                     let filteredPlans = this.filterDate(false,response.plans,filters.days[0])
+                    this.setState({ ...this.state, plans: filteredPlans, user: responseuser.user })
                   }else{
                     // hay rango de dias
                     let filteredPlans = this.filterDate(true,response.plans,filters.days[0],filters.days[filters.days.length-1])
+                    this.setState({ ...this.state, plans: filteredPlans, user: responseuser.user })
                   }
-                  console.log("hay filtros de dias")
+                }else{
+                  this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
+                }
+
+                if(filters.time.length>0){
+                  // hay filtro de tiempo
+                  let orderedPlans = this.orderPlans(filters)
                 }
             }else{
               this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
@@ -157,6 +189,7 @@ export default class PlansPage extends Component {
     return (
       <React.Fragment>
         {this.state.plans.map(function (plan, index) {
+          console.log('cuando pinto',plan,index)
           return (
             <React.Fragment>
               { plan.owner._id === user._id

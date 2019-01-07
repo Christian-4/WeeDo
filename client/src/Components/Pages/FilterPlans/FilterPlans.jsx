@@ -50,18 +50,40 @@ export default class FilterPlans extends Component {
         this.showButton()
     }
 
-    timeClicked = (e,filter) => {
+    comproveTimeToggle = (e,filter) => {
+        if(filter === 'h-menor' && this.filters.time.includes('h-mayor')){
+            let index  = this.filters.time.indexOf('h-mayor');
+            this.filters.time.splice(index,1)
+            e.target.parentNode.childNodes[3].className = "no-p-selected"
+        }else if(filter === 'h-mayor' && this.filters.time.includes('h-menor')){
+            let index  = this.filters.time.indexOf('h-menor');
+            this.filters.time.splice(index,1)
+            e.target.parentNode.childNodes[2].className = "no-p-selected"
+        }else if(filter === 'assistance-asc' && this.filters.time.includes('assistance-desc')){
+            let index  = this.filters.time.indexOf('assistance-desc');
+            this.filters.time.splice(index,1)
+            e.target.parentNode.childNodes[5].className = "no-p-selected"
+        }else if(filter === 'assistance-desc' && this.filters.time.includes('assistance-asc')){
+            let index  = this.filters.time.indexOf('assistance-asc');
+            this.filters.time.splice(index,1)
+            e.target.parentNode.childNodes[4].className = "no-p-selected"
+        }
+    }
 
+    timeClicked = (e,filter) => {
+        console.log("antes de nada", this.filters.time)
         if(this.filters.time.includes(filter)){
             let index = this.filters.time.indexOf(filter);
             this.filters.time.splice(index,1)
             e.target.className = "no-p-selected"
         }else{
+           
             e.target.className = "p-selected"
             this.filters.time.push(filter)
+            this.comproveTimeToggle(e,filter);
         }
 
-      
+        console.log("cuando salgo", this.filters.time)
         this.showButton()
     }
 

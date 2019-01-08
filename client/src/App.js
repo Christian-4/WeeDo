@@ -26,6 +26,8 @@ import PlanMap from "./Components/Pages/PlanMap/PlanMap.jsx"
 import IndividualChat from "./Components/Pages/IndividualChat/IndividualChat.jsx"
 import PlansMap from "./Components/Pages/PlansMap/PlansMap.jsx"
 import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
+import ConfigureProfile from "./Components/Pages/ConfigureProfile/ConfigureProfile.jsx"
+import BasicData from "./Components/Pages/BasicData/BasicData.jsx"
 
 
 class App extends Component {
@@ -95,6 +97,8 @@ class App extends Component {
           <Route exact path="/planmap/:id" component={PlanMap}/>
           <Route exact path="/plansmap" render={() => <PlansMap />}/>
           <Route exact path="/filterPlans" render={() => <FilterPlans />}/>
+          <Route exact path="/configureProfile" render={() => <ConfigureProfile />}/>
+          <Route exact path="/basicData" render={() => <BasicData />}/>
           
           
         </Switch>

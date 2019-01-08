@@ -26,7 +26,7 @@
   outline: none;
 }
 
-input::-webkit-input-placeholder {
+.input::-webkit-input-placeholder {
   color: #aaa;
   text-align: right;
   font-size: 14px;

@@ -130,7 +130,7 @@ export default class FormSingUp extends Component {
     const { location } = this.state;
 
     if (this.state && this.state.redirect) {
-      return <Redirect to="/" />
+      return <Redirect to="/configureProfile" />
     }
 
     let hobbies = ""
@@ -158,9 +158,10 @@ export default class FormSingUp extends Component {
           <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
           <button className="btn" onClick={this.displayHobbies}> Next</button><br></br>
           {hobbies}
-            <input className="signupButton" type="submit" value="Signup" />
+            <input className="signupButton" type="submit" value="Siguiente" />
         </form>
         <Link to={"/"}><button className="loginButton">¿Tienes cuenta?</button></Link>
+        
       </div>
     );
   }

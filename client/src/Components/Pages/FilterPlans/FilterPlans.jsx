@@ -90,13 +90,17 @@ export default class FilterPlans extends Component {
     transformDate = (currentDay, valueDay) => {
         let newDay = 0;
         let day = new Date(2019, this.state.date.getMonth(), 0);
+        console.log('tranform '+currentDay,valueDay,day)
         if (currentDay - valueDay <= 0) {
             let res = - (currentDay - valueDay)
             newDay = day.getDate() - res;
 
         } else if (currentDay - valueDay >= day) {
 
+        }else{
+            newDay = currentDay-valueDay;
         }
+        
         return newDay;
     }
 
@@ -169,7 +173,7 @@ export default class FilterPlans extends Component {
                                     <React.Fragment>
                                         <p className="name current-day">{arrayNameDay[index]}</p>
                                         <div className="oval">
-                                            <p className="number current-day" value={day} onClick={e => this.numberClicked(e)}>{day}</p>
+                                            <p className="number current-day"  onClick={e => this.numberClicked(e,day)}>{day}</p>
                                         </div>
                                     </React.Fragment>
 

@@ -49,7 +49,6 @@ export default class PlansPage extends Component {
       //hay rango
      
       arrayRes = plansList.filter(plan => {
-        console.log(this.showDay(this.parserDate(plan.date)) >= start && this.showDay(this.parserDate(plan.date)) <= end)
          return  this.showDay(this.parserDate(plan.date)) >= start && this.showDay(this.parserDate(plan.date)) <= end
       })
     }else{
@@ -62,10 +61,21 @@ export default class PlansPage extends Component {
     return arrayRes;
   }
 
+  getCompleteHour = (plan) =>{
+    return (this.showHour(this.parserDate(plan.date)))
+
+  }
+  getCompleteMin = (plan) =>{
+    return (this.showMins(this.parserDate(plan.date)))
+
+  }
+
+
   orderPlans = (filters) => {
-    if(filters.time[0] === 'assistance-asc'){
-      console.log('cuando entro', this.state.plans)
-      this.state.plans.sort((planA,planB) => {
+    let newArray = this.state.plans
+  
+    if(filters.time[0] === 'assistance-asc'){      
+      newArray.sort((planA,planB) => {
         if(planA.users.lenght > planB.users.length){
           return 1
         } 
@@ -75,10 +85,62 @@ export default class PlansPage extends Component {
         return 0
         
       })
+      
+    }else if(filters.time[0] === 'h-mayor'){
+      newArray.sort((planA,planB) => {
+        console.log(this.getCompleteHour(planA),this.getCompleteHour(planB));
+        if(this.getCompleteHour(planA) > this.getCompleteHour(planB)){
+          return -1
+        }
+        if(this.getCompleteHour(planA) < this.getCompleteHour(planB)){
+          return 1
+        }
+
+        if(this.getCompleteMin(planA) > this.getCompleteMin(planB)){
+          return -1
+        }
+
+        if(this.getCompleteMin(planA) < this.getCompleteMin(planB)){
+          return 1
+        }
+
+
+        return 0
+
+      })
+    }else if(filters.time[0] === 'h-menor'){
+      newArray.sort((planA,planB) => {
+        console.log(this.getCompleteHour(planA),this.getCompleteHour(planB));
+        if(this.getCompleteHour(planA) > this.getCompleteHour(planB)){
+          return 1
+        }
+        if(this.getCompleteHour(planA) < this.getCompleteHour(planB)){
+          return -1
+        }
+
+        if(this.getCompleteMin(planA) > this.getCompleteMin(planB)){
+          return 1
+        }
+
+        if(this.getCompleteMin(planA) < this.getCompleteMin(planB)){
+          return -1
+        }
+
+
+        return 0
+
+      })
     }
 
-    console.log('cuando salgo', this.state.plans)
 
+    this.setState({...this.state,plans: newArray})
+
+  }
+
+  filterPlansFromOwner = (plans) =>{
+    return plans.filter(plan =>{
+       return  plan.owner._id !== this.state.user._id
+    })
   }
 
 
@@ -103,7 +165,9 @@ export default class PlansPage extends Component {
                     this.setState({ ...this.state, plans: filteredPlans, user: responseuser.user })
                   }
                 }else{
-                  this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
+                  this.setState({ ...this.state, user: responseuser.user })
+                  let arrayPlans = this.filterPlansFromOwner(response.plans);
+                  this.setState({ ...this.state, plans: arrayPlans})
                 }
 
                 if(filters.time.length>0){
@@ -111,7 +175,9 @@ export default class PlansPage extends Component {
                   let orderedPlans = this.orderPlans(filters)
                 }
             }else{
-              this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
+              this.setState({ ...this.state, user: responseuser.user })
+              let arrayPlans = this.filterPlansFromOwner(response.plans);
+              this.setState({ ...this.state, plans: arrayPlans})
             }
           })
       })
@@ -120,12 +186,12 @@ export default class PlansPage extends Component {
   addPlanFav = (id) => {
     this.planService.addPlanFav(id)
       .then(response => {
-        console.log(response)
+       
         this.planService.getAllPlans()
           .then(response => {
             this.userService.getUser()
               .then(responseuser => {
-                console.log(response)
+               
                 this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
               })
           })
@@ -135,12 +201,12 @@ export default class PlansPage extends Component {
   delPlanFav = (id) => {
     this.planService.delPlanFav(id)
       .then(response => {
-        console.log(response)
+       
         this.planService.getAllPlans()
           .then(response => {
             this.userService.getUser()
               .then(responseuser => {
-                console.log(response)
+               
                 this.setState({ ...this.state, plans: response.plans, user: responseuser.user })
               })
           })
@@ -189,7 +255,7 @@ export default class PlansPage extends Component {
     return (
       <React.Fragment>
         {this.state.plans.map(function (plan, index) {
-          console.log('cuando pinto',plan,index)
+         
           return (
             <React.Fragment>
               { plan.owner._id === user._id

@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import { geolocated } from 'react-geolocated'
 import './PlansMap.css'
 import PlanCard from '../../PlanCard/PlanCard.jsx'
+import geolib from 'geolib'
 
 
 class PlansMap extends Component {
@@ -50,8 +51,25 @@ class PlansMap extends Component {
                 }
 
               let array = response.plans.filter(function (plan) {
-                return plan.location.coordinates.lat + plan.location.coordinates.lng + 5 <= ltd - lng
-              })
+               
+               var dist = geolib.getDistance(
+                  {
+                    latitude:plan.location.coordinates.lat,
+                    longitude:  plan.location.coordinates.lng
+                  },
+                  {
+                    latitude:ltd,
+                    longitude:lng
+                  }
+
+                )
+               
+        
+                return (
+                  geolib.convertUnit('km', dist, 2) <= 6 &&
+                  plan.owner._id !== responseuser.user._id
+                )
+              }.bind(this))
 
               if(array.length > 0){
                 this.setState({ ...this.state, location: array[0].location.coordinates, plans: array, user: responseuser.user })
@@ -65,7 +83,7 @@ class PlansMap extends Component {
   }
 
   printMap = () => {
-    console.log(this.state.plan);
+    
     return (
       <React.Fragment>
         <Map center={this.state.location} view={true} update={this.state.update}/>

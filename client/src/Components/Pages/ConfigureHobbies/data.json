@@ -1,0 +1,47 @@
+{
+    "Hobbies":[
+        "Viajar",
+        "Cocinar",
+        "Moda",
+        "Cine",
+        "Fiesta",
+        "Museos",
+        "Charlas",
+        "Leer",
+        "Artesanía",
+        "Coser",
+        "Maquillaje",
+        "Shopping",
+        "Mascotas"
+    ],
+
+    "Artes":[
+        "Bailar",
+        "Fotografía",
+        "Dibujar",
+        "Pintar",
+        "Cantar",
+        "Esculpir",
+        "Escribir",
+        "Actuar"
+    ],
+
+   
+
+    "Deporte":[
+        "Baloncesto",
+        "Snow",
+        "Fútbol",
+        "Esquí",
+        "Patinar",
+        "Tenis",
+        "Natación",
+        "Bici",
+        "Rugby",
+        "Trekking"
+    ]
+
+   
+}
+
+

@@ -28,6 +28,7 @@ import PlansMap from "./Components/Pages/PlansMap/PlansMap.jsx"
 import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
 import ConfigureProfile from "./Components/Pages/ConfigureProfile/ConfigureProfile.jsx"
 import BasicData from "./Components/Pages/BasicData/BasicData.jsx"
+import ConfigureHobbies from "./Components/Pages/ConfigureHobbies/ConfigureHobbies.jsx"
 
 
 class App extends Component {
@@ -99,6 +100,7 @@ class App extends Component {
           <Route exact path="/filterPlans" render={() => <FilterPlans />}/>
           <Route exact path="/configureProfile" render={() => <ConfigureProfile />}/>
           <Route exact path="/basicData" render={() => <BasicData />}/>
+          <Route exact path="/configureHobbies" render = {() => <ConfigureHobbies/>}/>
           
           
         </Switch>

@@ -15,7 +15,7 @@ export default class DataDate extends Component {
       val: "Fecha",
       label:this.props.label,
       placeholder:this.props.placeholder,
-      width: this.props.width
+      className: this.props.className
     };
 
     this.show = this.show.bind(this);
@@ -33,9 +33,8 @@ export default class DataDate extends Component {
       <React.Fragment>
           <mobiscroll.Date
             placeholder={this.state.placeholder !== undefined ? this.state.placeholder  : "Fecha"}
-            width = {this.state.width}
             inputStyle="box"
-            className="date-div input-date"
+            className={this.props.className}
             onChange={e => this.props.dateChange(e)}
           />
     

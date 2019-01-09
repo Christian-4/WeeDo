@@ -24,3 +24,21 @@
 .input-time{
   margin-right: 23px
 }
+
+.date-div-configure{
+  width: 311px;
+  margin-bottom: 50px;
+}
+
+.input-date-config::-webkit-input-placeholder{
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: #cccccc;
+  padding: 16px;
+}
+
+ 

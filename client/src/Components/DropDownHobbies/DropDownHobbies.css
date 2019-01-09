@@ -1,0 +1,82 @@
+.arrow-image{
+    width:15px;
+    height: 9px;
+    object-fit: contain;
+}
+
+.div-drop-down{
+    display: flex;
+    justify-content: space-between;
+    padding: 13.5px 32px
+}
+
+.div-drop-down{
+    border-top: 1px solid #f0f0f0;
+    margin-bottom: 15px;
+}
+
+.title-drop-down{
+    margin: 0;
+    padding: 0;
+}
+
+.title-drop-down{
+    
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #5e5e5e;
+}
+
+.div-pack-hobbie{
+    display: flex;
+    flex-direction: column;
+    margin-right: 18px;
+}
+
+.drop-down-mask{
+    width: 48px;
+    height: 48px;
+    border-radius: 40px;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(225deg, #c9a1f0, #7ab2eb);
+}
+
+
+
+.drop-down-hobbie-image{
+  width: 37px;
+  height: 24px;
+  object-fit: contain;
+  padding: 10px 5px;
+
+}
+
+.name-hobbie{
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #5e5e5e;
+}
+
+.name-hobbie{
+    text-align: center;
+}
+
+.hobbies-menu{
+    width: 95%;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+}
+

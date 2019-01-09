@@ -90,7 +90,7 @@ export default class CreatePlanPage extends Component {
       });
   };
 
-  onChange = date => this.setState(console.log(date));
+  
 
   dateChange = date => {
     let arrDate = date.valueText.split("/");
@@ -150,7 +150,6 @@ export default class CreatePlanPage extends Component {
 
   showCalendar = e => {
     e.preventDefault();
-    console.log("mostra calendar");
     this.setState({ ...this.state, showCalendar: !this.state.showCalendar });
   };
 
@@ -190,7 +189,7 @@ export default class CreatePlanPage extends Component {
             <label className="date-label">Fecha y hora</label>
             <div className="div-date-time">
               <DataTime timeChange={this.timeChange} />
-              <DataDate dateChange={this.dateChange} />
+              <DataDate dateChange={this.dateChange} className={"date-div input-date"} />
             </div>
           </div>
 

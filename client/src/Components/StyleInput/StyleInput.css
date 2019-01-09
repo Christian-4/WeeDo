@@ -25,7 +25,7 @@
     box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     border:0px;
-    margin-bottom: 56px;
+    margin-bottom: 30px;
 }
 
 
@@ -40,4 +40,39 @@
   padding: 16px;
   }
   
+
+  .num-telf-div{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+  }
+  
+
+  .ind{
+    width: 56px;
+    height: 48px;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius:24px;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+
+  .ind{
+      margin-right: 20px;
+    
+  }
+  .num-telf{
+    width: 247px;
+    height: 48px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius:0px;
+    border-top-right-radius:24px;
+    border-bottom-right-radius:24px;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+ 
+
   

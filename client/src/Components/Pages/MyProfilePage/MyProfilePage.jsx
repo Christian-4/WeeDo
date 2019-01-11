@@ -6,9 +6,28 @@ import "./MyProfilePage.css"
 import Logout from "../../Logout/Logout.jsx"
 import Nav from "../../Nav/Nav"
 import Edit from "../../../icons/icons/edit.png"
-
 import Notifications from "../../../icons/icons/notifications.png"
-import Input from '../../InputCreatePlan/InputCreatePlan.jsx'
+import Input from "../../InputCreatePlan/InputCreatePlan.jsx"
+import Birthdate from "../../../icons/icons/Birthdate.png"
+import Location from "../../../icons/icons/location.png"
+
+const monthNames = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre"
+];
+
+
+
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -29,6 +48,49 @@ export default class ProfilePage extends Component {
       })
   }
 
+  parserDate = (date) => {
+    let newDate = new Date(date);
+    return newDate;
+  };
+
+  showDay = (date) => {
+    let newDate = new Date(date);
+    return newDate.getUTCDate();
+  }
+
+  showMonth = (date) => {
+    let newDate = new Date(date);
+
+    return monthNames[newDate.getMonth()];
+  }
+
+  showYear = (date) => {
+    let newDate = new Date(date);
+    return newDate.getFullYear();
+  }
+
+  showHour = (date) => {
+    let newDate = new Date(date);
+    return newDate.getUTCHours();
+  }
+
+
+  showMins = (date) => {
+    let newDate = new Date(date);
+    return newDate.getMinutes();
+  }
+
+  calculateYears = () => {
+    let res = 0;
+    let today = new Date()
+    res = this.showYear(today) - this.showYear(this.state.user.birthdate)
+
+    return res
+
+  }
+
+
+
   printLocation() {
     let location = this.state.user.location.split(',')
     return location[0] + ',' + location[1];
@@ -36,7 +98,7 @@ export default class ProfilePage extends Component {
 
 
   printHobbies() {
-    let arrayHobbies = this.state.user.hobbies[0].split(',')
+    let arrayHobbies = this.state.user.hobbies
 
     return (
       <React.Fragment>
@@ -55,8 +117,6 @@ export default class ProfilePage extends Component {
                   <p className="p-text">{hobbie}</p>
                 </div>
 
-
-
               )
             })}
           </div>
@@ -69,7 +129,7 @@ export default class ProfilePage extends Component {
 
 
   iconClicked = () => {
-    
+
   }
 
   printAboutMe = () => {
@@ -101,14 +161,32 @@ export default class ProfilePage extends Component {
               ?
               <p className="birthdate"> Establece tu fecha de nacimiento </p>
               :
-              <p className="birthdate-filled">{this.state.user.birthdate}</p>
+              <div className="aboutMe-div">
+                <img  src={Birthdate} className="birthdate-image"></img>
+                <p className="birthdate-filled">
+                  {
+                    this.showDay(this.state.user.birthdate) +
+                    " " +
+                    this.showMonth(this.state.user.birthdate) +
+                    ", " +
+                    this.calculateYears() +
+                    " años"
+                  }
+                </p>
+              </div>
+
+
             }
 
             {this.state.user.location === null || this.state.user.location === undefined
               ?
               <p className="location"> ¿Dónde vives? </p>
               :
-              <p className="location-filled">{this.printLocation()}</p>
+              <div className="aboutMe-div">
+                  <img src={Location} className="location-image"></img>
+                  <p className="location-filled">{this.printLocation()}</p>
+              </div>
+            
             }
 
 
@@ -128,7 +206,7 @@ export default class ProfilePage extends Component {
             {this.state.user.aboutMe === null || this.state.user.aboutMe === undefined
               || this.state.user.aboutMe.length === 0
               ?
-              <p class="birthdate">Añade información sobre tí</p>
+              <p className="birthdate">Añade información sobre tí</p>
               :
               this.printAboutMe()
             }

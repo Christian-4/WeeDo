@@ -28,6 +28,9 @@ export default class UserPage extends Component {
     this.UserService = new UserService();
   }
 
+
+  
+
   componentDidMount() {
     this.UserService.getUser().then(res => {
       this.setState({ ...this.state, userSessionId: res.user._id });
@@ -56,7 +59,6 @@ export default class UserPage extends Component {
 
   addFriend = (id, service) => {
     service.addFriend(id).then(response => {
-      console.log(response);
       this.UserService.getUser().then(res => {
         this.setState({ ...this.state, userSessionId: res.user._id });
         this.FriendsService.getAllUsers(this.state.userSessionId).then(
@@ -85,7 +87,6 @@ export default class UserPage extends Component {
             <p>Intereses del usuario</p>
             <div className="allUsersCardHobbiesDivs">
               {user.hobbies.map(function (hobby) {
-                console.log(hobby)
                 return (
                   <div className="allUsersCardHobby">
                     <div className="hobbiesDivColor">

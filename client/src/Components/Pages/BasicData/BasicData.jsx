@@ -17,10 +17,15 @@ export default class BasicData extends Component {
       birthdate: null,
       name: null,
       phoneNumber: null,
-      buttonClassName: "acept-basic-data-button invisible-button"
+      buttonClassName: "acept-basic-data-button invisible-button",
+      user:null
     }
 
     this.UserService = new UserService()
+  }
+
+  componentDidMount = () =>{
+    this.setState({...this.state,user:this.props.user})
   }
 
   dateChange = date => {
@@ -51,7 +56,7 @@ export default class BasicData extends Component {
 
   saveData = () => {
     let { birthdate, name, phoneNumber } = this.state
-    let updateUser = this.props.user
+    let updateUser = this.state.user
     updateUser.birthdate = birthdate
     updateUser.name = name
     updateUser.phoneNumber = phoneNumber

@@ -31,12 +31,12 @@ router.get("/confirm/:confirmCode", (req, res, next) => {
 
 router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
 
-  const { username, password, password_confirm, email, location, hobbies} = req.body;
+  const { username, password, password_confirm, email, location} = req.body;
   const pictureUrl = req.file.url;
   
 
 
-  if (username === "" || password === "" || email === "" || location === null || hobbies.length <= 0) {
+  if (username === "" || password === "" || email === "" || location === null) {
     res.status(500).json({ message: "Indicar todos los datos" });
     return;
   }
@@ -73,8 +73,7 @@ router.post("/signup", uploadCloud.single("image"), (req, res, next) => {
       password: hashPass,
       email: email, 
       location: location,
-      image: pictureUrl,
-      hobbies: hobbies
+      image: pictureUrl
     });
 
 

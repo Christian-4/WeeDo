@@ -71,9 +71,6 @@ export default class CreatePlanPage extends Component {
     );
 
 
-
-
-
     const { title, description, location, newdate, limit, hobby } = this.state;
 
     this.plansService
@@ -89,7 +86,6 @@ export default class CreatePlanPage extends Component {
       });
   };
 
-  
 
   dateChange = date => {
     let arrDate = date.valueText.split("/");
@@ -169,6 +165,24 @@ export default class CreatePlanPage extends Component {
     return (
       <React.Fragment>
         <Nav title={"Crea un plan"} />
+
+        <div>
+          <p>¿Público abierto o privado?</p>
+          <div className="type-plans-div">
+            <div className="type-selected-plans">
+              <p className="p-type-selected">Cualquiera puede apuntarse a un plan</p>
+              <button className="button-type-selected">Público</button>
+            </div>
+            <div className="type-selected-plans">
+              <p className="p-type-selected">Solo tus conexiones puden apuntarse al plan</p>
+              <button className="button-type-selected">Privado</button>
+            </div>
+            <div className="type-selected-plans">
+              <p className="p-type-selected">Solo a quienes tu invites pueden apuntarse al plan</p>
+              <button className="button-type-selected">Cerrado</button>
+            </div>
+          </div>
+        </div>
 
         <form onSubmit={this.handleNewPlan} className="new-plan-form">
           <Input

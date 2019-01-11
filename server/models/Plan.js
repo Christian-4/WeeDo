@@ -12,7 +12,8 @@ const planSchema = new Schema({
     date: Date,
     limit: Number,
     hobby: String,
-    image:String,
+    image: String,
+    type: String,
     confirmations: [{ type: Schema.Types.ObjectId, ref: 'PlanConfirmation' }]
 }, {
         timestamps: {

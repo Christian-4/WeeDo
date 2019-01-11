@@ -78,26 +78,19 @@ export default class FormSingUp extends Component {
 
     e.preventDefault();
 
-    const { username, password, password_confirm, email, location, image, hobbies } = this.state;
+    const { username, password, password_confirm, email, location, image } = this.state;
 
 
-
-    if (this.props.profile) {
-      this.userService.editProfile({ username, password, password_confirm, email, location, image, hobbies })
-        .then(response => console.log(response))
-        .catch(err => console.log(err))
-
-    } else {
-      this.authService.signup({ username, password, password_confirm, email, location, image, hobbies })
+      this.authService.signup({ username, password, password_confirm, email, location, image })
         .then(response => {
-          console.log("responde ",response)
+
           if (response.data.message === "SignUp succesfull") {
             this.user = response.data.newUser;
             this.redirectLogin("login")
           }
          
-        })
-    }
+        }).catch(err => console.log(err))
+    
 
 
   }
@@ -116,7 +109,6 @@ export default class FormSingUp extends Component {
 
   locationChange = e => {
     let new_array = []
-    console.log(e)
     new_array.push(e.place.place)
     new_array.push(e.place.coordinates.lat)
     new_array.push(e.place.coordinates.lng)
@@ -158,8 +150,6 @@ export default class FormSingUp extends Component {
           <InputCreatePlan name="image" handleChange={this.handleChange} type={"file"} />
           {/* <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} /> */}
           <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
-          <button className="btn" onClick={this.displayHobbies}> Next</button><br></br>
-          {hobbies}
             <input className="signupButton" type="submit" value="Siguiente" />
         </form>
         <Link to={"/"}><button className="loginButton">¿Tienes cuenta?</button></Link>

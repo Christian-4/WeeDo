@@ -29,7 +29,7 @@ export default class UserPage extends Component {
   }
 
 
-  
+
 
   componentDidMount() {
     this.UserService.getUser().then(res => {
@@ -121,14 +121,12 @@ export default class UserPage extends Component {
             <p>Intereses del usuario</p>
             <div className="allUsersCardHobbiesDivs">
               {user.hobbies.map(function (hobby) {
-                console.log(hobby)
                 return (
-                  <div className="allUsersCardHobby">
-                    <div className="hobbiesDivColor">
-                      <img src={CineIcon} />
-                      <img src={RugbyIcon} />
-                      <img src={BasketIcon} />
-                      <img src={FutbolIcon} />
+                  <div>
+                    <div className="allUsersCardHobby">
+                      <div className="mask-hobby-allUsers">
+                        <img className="image-hobby-allUsers" src={require(`../../../icons/icons/${hobby}.png`)}></img>
+                      </div>
                     </div>
                     <p>{hobby}</p>
                   </div>

@@ -32,7 +32,15 @@ class UserService {
             .then(response => response.data)
     }
 
-  
+    saveBasicData = (user) => {
+        return this.service.put('/saveBasicData',user)
+            .then(response => response.data)
+    }
+
+    saveHobbies = (user) => {
+        return this.service.put('/saveHobbies', user)
+            .then(response => response.data)
+    }  
 
    
 

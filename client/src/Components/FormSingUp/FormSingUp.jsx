@@ -34,6 +34,8 @@ export default class FormSingUp extends Component {
       displayHobbies: false
     }
 
+    this.user = null
+
     this.authService = new AuthService();
     this.userService = new UserService();
   }
@@ -81,7 +83,6 @@ export default class FormSingUp extends Component {
 
 
     if (this.props.profile) {
-      console.log("editado")
       this.userService.editProfile({ username, password, password_confirm, email, location, image, hobbies })
         .then(response => console.log(response))
         .catch(err => console.log(err))
@@ -89,14 +90,12 @@ export default class FormSingUp extends Component {
     } else {
       this.authService.signup({ username, password, password_confirm, email, location, image, hobbies })
         .then(response => {
-        
+          console.log("responde ",response)
           if (response.data.message === "SignUp succesfull") {
+            this.user = response.data.newUser;
             this.redirectLogin("login")
           }
-          //  }else{
-          //     this.ShowErrorMessage(response.data.message)
-          //  }
-
+         
         })
     }
 
@@ -130,9 +129,12 @@ export default class FormSingUp extends Component {
     const { location } = this.state;
 
     if (this.state && this.state.redirect) {
-      return <Redirect to="/configureProfile" />
+      return <Redirect to={{
+        pathname: "/configureProfile",
+        user: this.user
+      }} />
     }
-
+    
     let hobbies = ""
 
     if (this.state.displayHobbies) {

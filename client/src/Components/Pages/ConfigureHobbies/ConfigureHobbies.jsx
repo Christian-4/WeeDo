@@ -3,6 +3,7 @@ import Nav from "../../Nav/Nav.jsx"
 import DropDownHobbies from "../../DropDownHobbies/DropDownHobbies.jsx"
 import data from "./data.json"
 import { Link } from "react-router-dom"
+import UserService from "../../UserService"
 import "./ConfigureHobbies.css"
 
 export default class ConfigureHobbies extends Component {
@@ -13,7 +14,17 @@ export default class ConfigureHobbies extends Component {
             data: data,
             keys: Object.keys(data),
             hobbiesSelected: ["Interés", "Interés", "Interés", "Interés", "Interés"],
-            className: "finalizar-configure-data invisible-button"
+            className: "finalizar-configure-data invisible-button",
+            user: null
+        }
+
+        this.UserService = new UserService()
+       
+    }
+
+    componentDidMount = () => {
+        if(this.props !== undefined){
+            this.setState({...this.state,user: this.props.user})
         }
     }
 
@@ -26,7 +37,20 @@ export default class ConfigureHobbies extends Component {
 
         arrayHobbiesSelected[index] = hobby.name;
         this.setState({ ...this.state, hobbiesSelected: arrayHobbiesSelected, className:"finalizar-configure-data visible-button" })
-        console.log(this.state.hobbiesSelected)
+        
+    }
+
+    saveData = () => {
+        let updateUser = this.props.user
+
+        let hobbies = this.state.hobbiesSelected.filter(hobby =>{
+            return hobby !=="Interés"
+        })
+        updateUser.hobbies = hobbies
+
+        this.UserService.saveHobbies(updateUser)
+        .then(response =>{})
+        .catch(err=>{})
     }
 
     render() {
@@ -72,7 +96,7 @@ export default class ConfigureHobbies extends Component {
                     })
                 }
 
-                <Link to={"/login"}><button className={this.state.className}>Finalizar</button></Link>
+                <Link to={"/"}><button className={this.state.className} onClick={this.saveData}>Finalizar</button></Link>
 
             </React.Fragment>
         )

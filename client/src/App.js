@@ -98,9 +98,9 @@ class App extends Component {
           <Route exact path="/planmap/:id" component={PlanMap}/>
           <Route exact path="/plansmap" render={() => <PlansMap />}/>
           <Route exact path="/filterPlans" render={() => <FilterPlans />}/>
-          <Route exact path="/configureProfile" render={() => <ConfigureProfile />}/>
-          <Route exact path="/basicData" render={() => <BasicData />}/>
-          <Route exact path="/configureHobbies" render = {() => <ConfigureHobbies/>}/>
+          <Route exact path="/configureProfile" render={props => <ConfigureProfile user={props.location.user} />}/>
+          <Route exact path="/basicData" render={props => <BasicData  user={props.location.user}/>}/>
+          <Route exact path="/configureHobbies" render = {props => <ConfigureHobbies user={props.location.user}/>}/>
           
           
         </Switch>

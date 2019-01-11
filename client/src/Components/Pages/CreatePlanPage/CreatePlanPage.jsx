@@ -70,7 +70,6 @@ export default class CreatePlanPage extends Component {
       this.state.date.seg
     );
 
-    let fecha = new Date()
 
 
 

@@ -92,6 +92,25 @@ router.put("/editprofile", uploadCloud.single("image"), (req, res, next) => {
   });
 });
 
+router.put('/saveBasicData',(req,res,next)=>{
+  updateUser = req.body
+
+  User.findOneAndUpdate({username: updateUser.username},updateUser, {new:true})
+   .then(updateUser => {
+        res.status(200).json({message: "User edited!" });
+   }).catch(err => console.log(err))
+})
+
+router.put('/saveHobbies',(req,res,next) =>{
+ 
+  updateUser = req.body
+  console.log(updateUser)
+  User.findOneAndUpdate({username: updateUser.username}, updateUser, {new:true})
+    .then(updateUser => {
+      res.status(200).json({message: "User edited!" });
+    }).catch(err => console.log(err))
+
+})
 
 router.get("/profile/:_id", (req, res, next) => {
   User.findById(req.params._id)

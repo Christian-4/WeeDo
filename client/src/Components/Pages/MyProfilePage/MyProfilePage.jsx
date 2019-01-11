@@ -151,7 +151,7 @@ export default class ProfilePage extends Component {
           <div className="myProfileHeader">
             <img src={this.state.user.image} />
             <div className="myProfileHeaderText">
-              <p className="name">{this.state.user.username}</p>
+              <p className="name-profile">{this.state.user.name}</p>
             </div>
           </div>
           <div className="sobreMi">

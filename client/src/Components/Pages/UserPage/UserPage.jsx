@@ -88,12 +88,11 @@ export default class UserPage extends Component {
             <div className="allUsersCardHobbiesDivs">
               {user.hobbies.map(function (hobby) {
                 return (
-                  <div className="allUsersCardHobby">
-                    <div className="hobbiesDivColor">
-                      <img src={CineIcon} />
-                      <img src={RugbyIcon} />
-                      <img src={BasketIcon} />
-                      <img src={FutbolIcon} />
+                  <div>
+                    <div className="allUsersCardHobby">
+                      <div className="mask-hobby-allUsers">
+                        <img className="image-hobby-allUsers" src={require(`../../../icons/icons/${hobby}.png`)}></img>
+                      </div>
                     </div>
                     <p>{hobby}</p>
                   </div>

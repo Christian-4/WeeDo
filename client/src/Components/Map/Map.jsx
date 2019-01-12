@@ -3,11 +3,6 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import PlansService from "../PlansService"
 
 
-const point = [
-
-
-]
-
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +34,6 @@ export class MapContainer extends React.Component {
 
 
   updateCenter = () => {
-    console.log("update")
     this.setState({...this.state,center:this.props.center,update:true})
   }
 
@@ -62,11 +56,11 @@ export class MapContainer extends React.Component {
         
         center={coords}
         google={this.props.google}
+        initialCenter={coords}
         onClick={this.onMapClicked}
         style={{ width: "375px", height: "510px", position: "" }}
         visible={this.props.showMap}
         disableDefaultUI={true}
-        centerAroundCurrentLocation={true}
         bounds = {this.props.google.maps.LatLngBounds(this.state.center)}
         onTilesloaded={() => this.updateCenter()}
         onCenterChanged={() => this.updateCenter()}

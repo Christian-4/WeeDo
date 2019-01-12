@@ -28,7 +28,7 @@ router.get("/favicon.ico", (req, res, next) => {
 });
 
 router.post("/newplan", function (req, res, next) {
-  const { title, description, location, date, limit, hobby } = req.body;
+  const { title, description, location, date, limit, hobby, type } = req.body;
 
   if (title === "") {
     res.status(500).json({ message: "Provide a title" });
@@ -55,6 +55,12 @@ router.post("/newplan", function (req, res, next) {
     return;
   }
 
+  if  (type=== ""){
+    res.status(500).json({message: "Provide a type"})
+  }
+
+ 
+
   const newChat = new Chat({
     users: [req.user._id],
     type: "Plan"
@@ -64,7 +70,6 @@ router.post("/newplan", function (req, res, next) {
     .save()
     .then(chat => {
       let newPlan;
-      console.log(hobby);
       unsplash.searchPhotos(hobby, [1, 2, 3], 2, 50, function (
         error,
         photos,
@@ -86,6 +91,7 @@ router.post("/newplan", function (req, res, next) {
           date,
           limit,
           hobby,
+          type,
           image: image_new,
           confirmations: []
         });

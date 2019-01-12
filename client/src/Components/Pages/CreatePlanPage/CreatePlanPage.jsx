@@ -9,6 +9,7 @@ import Input from "../../InputCreatePlan/InputCreatePlan.jsx";
 import DataTime from "../../DataTime/DataTime.jsx";
 import DataDate from "../../DataDate/DataDate.jsx";
 import SearchInput from "../../SearchInput/SearchInput.jsx"
+
 //import Autocomplete from "react-google-autocomplete";
 
 const options = [
@@ -27,6 +28,7 @@ export default class CreatePlanPage extends Component {
       location: null,
       limit: 0,
       hobby: "",
+      type:"",
       showMap: false,
       center: { lat: 40.4378698, lng: -3.8196207 },
       redirect: false,
@@ -40,8 +42,12 @@ export default class CreatePlanPage extends Component {
         min: 0,
         seg:0
       }
-    };
 
+     
+    }
+
+    this.classNameButton = "button-type-no-selected"
+    this.isButtonClicked = false;
   
 
     this.plansService = new PlansService();
@@ -71,10 +77,10 @@ export default class CreatePlanPage extends Component {
     );
 
 
-    const { title, description, location, newdate, limit, hobby } = this.state;
+    const { title, description, location, newdate, limit, hobby, type} = this.state;
 
     this.plansService
-      .createNewPlan({ title, description, location, date, limit, hobby })
+      .createNewPlan({ title, description, location, date, limit, hobby, type })
       .then(response => {
         if (response.message === "Plan create!") {
           this.setState({
@@ -152,12 +158,22 @@ export default class CreatePlanPage extends Component {
     this.setState({...this.state, location: {coordinates: e.place.coordinates, place: e.place.place}})
   }
 
+  buttonClicked = e => {
+    if(this.isButtonClicked){
+      e.target.className = "button-type-no-selected"
+      this.isButtonClicked = false;
+      this.setState({...this.state,type:""})
+    }else{
+      e.target.className = "button-type-selected"
+      this.isButtonClicked = true;
+      this.setState({...this.state,type:e.target.name})
+    }
+    
+  }
 
 
   render() {
-    const { type } = this.state.hobby;
-    const map = this.renderMap();
-
+    
     if (this.state.redirect) {
       return <Redirect to={`/plan/${this.state.planId}`} />;
     }
@@ -171,15 +187,15 @@ export default class CreatePlanPage extends Component {
           <div className="type-plans-div">
             <div className="type-selected-plans">
               <p className="p-type-selected">Cualquiera puede apuntarse a un plan</p>
-              <button className="button-type-selected">Público</button>
+              <button name="public" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Público</button>
             </div>
             <div className="type-selected-plans">
               <p className="p-type-selected">Establece el nivel del alcence al que puede mostrarse tú plan</p>
-              <button className="button-type-selected">Conexiones</button>
+              <button  name="private" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Conexiones</button>
             </div>
             <div className="type-selected-plans">
               <p className="p-type-selected">Solo a quienes tu invites pueden apuntarse al plan</p>
-              <button className="button-type-selected">Cerrado</button>
+              <button name="closed" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Cerrado</button>
             </div>
           </div>
         </div>

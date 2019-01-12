@@ -104,7 +104,6 @@ export default class PlansPage extends Component {
           return 1
         }
 
-
         return 0
 
       })
@@ -125,8 +124,7 @@ export default class PlansPage extends Component {
         if(this.getCompleteMin(planA) < this.getCompleteMin(planB)){
           return -1
         }
-
-
+  
         return 0
 
       })
@@ -138,10 +136,24 @@ export default class PlansPage extends Component {
   }
 
   filterPlansFromOwner = (plans) =>{
-    return plans.filter(plan =>{
-       return  plan.owner._id !== this.state.user._id
-    })
+    let newArray = []
+     plans.forEach(plan =>{
+     
+         if (plan.owner._id !== this.state.user._id && plan.type !== "closed"){
+           console.log(plan.type,this.state.user.friends,plan.owner)
+            if(plan.type === "private" && this.state.user.friends.includes(plan.owner._id)){
+              console.log("plan privado")
+              newArray.push(plan)
+            }else if(plan.type === "public"){
+              newArray.push(plan)
+            }
+         } 
+    })  
+
+    return newArray;
   }
+
+  
 
 
   componentDidMount() {
@@ -177,6 +189,7 @@ export default class PlansPage extends Component {
             }else{
               this.setState({ ...this.state, user: responseuser.user })
               let arrayPlans = this.filterPlansFromOwner(response.plans);
+              console.log(arrayPlans)
               this.setState({ ...this.state, plans: arrayPlans})
             }
           })

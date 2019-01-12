@@ -13,7 +13,7 @@ const planSchema = new Schema({
     limit: Number,
     hobby: String,
     image: String,
-    type: String,
+    type: {type:String, default:"public"},
     confirmations: [{ type: Schema.Types.ObjectId, ref: 'PlanConfirmation' }]
 }, {
         timestamps: {

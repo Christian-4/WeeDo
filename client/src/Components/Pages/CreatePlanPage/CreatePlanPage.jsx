@@ -167,15 +167,15 @@ export default class CreatePlanPage extends Component {
         <Nav title={"Crea un plan"} />
 
         <div>
-          <p>¿Público abierto o privado?</p>
+          <p className="title-question">¿Público, privado o cerrado?</p>
           <div className="type-plans-div">
             <div className="type-selected-plans">
               <p className="p-type-selected">Cualquiera puede apuntarse a un plan</p>
               <button className="button-type-selected">Público</button>
             </div>
             <div className="type-selected-plans">
-              <p className="p-type-selected">Solo tus conexiones puden apuntarse al plan</p>
-              <button className="button-type-selected">Privado</button>
+              <p className="p-type-selected">Establece el nivel del alcence al que puede mostrarse tú plan</p>
+              <button className="button-type-selected">Conexiones</button>
             </div>
             <div className="type-selected-plans">
               <p className="p-type-selected">Solo a quienes tu invites pueden apuntarse al plan</p>
@@ -191,18 +191,23 @@ export default class CreatePlanPage extends Component {
             placeholder={"Título del plan"}
             handleChange={this.handleChange}
           />
-          <Input
+          {/* <Input
             name={"description"}
             label={"Descripción"}
             placeholder={"Breve descripción del plan"}
             handleChange={this.handleChange}
-          />
+
+          /> */}
+          <div className="div-description">
+            <label className="label-description">Descripción</label>
+            <textarea name="description" className="text-area-description" placeholder="Breve descripción del plan"  onChange={e => this.handleChange(e)}></textarea>
+          </div>
 
           <div className="datePlanCreate">
             <label className="date-label">Fecha y hora</label>
             <div className="div-date-time">
-              <DataTime timeChange={this.timeChange} />
               <DataDate dateChange={this.dateChange} className={"date-div input-date"} />
+              <DataTime timeChange={this.timeChange} />
             </div>
           </div>
 
@@ -215,12 +220,17 @@ export default class CreatePlanPage extends Component {
             placeholder={"Identifica el tipo de plan"}
             handleChange={this.handleChange}
           />
-          <Input
+          {/* <Input
             name={"limit"}
             label={"Limit"}
             placeholder={"Número máximo de asistentes"}
             handleChange={this.handleChange}
-          />
+          /> */}
+
+          <div className="limit-div">
+            <label className="label-limit">Número máximo de personas</label>
+            <input name="limit" className="input-limit" placeholder="Nº pers" onChange={e=>this.handleChange(e)}></input>
+          </div>
 
           <button className="create-plan-button" type="submit">
             Crear Plan

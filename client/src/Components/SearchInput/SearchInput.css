@@ -56,8 +56,12 @@
   .name-label-search {
     margin-bottom: 10px;
     align-self: flex-start;
-    margin-left: -260px;
+    margin-left: -225px;
 
+  }
+
+  .name-label-search{
+    color: #5e5e5e;
   }
   
   .create-plan-button {

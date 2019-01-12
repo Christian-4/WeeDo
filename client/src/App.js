@@ -29,6 +29,7 @@ import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
 import ConfigureProfile from "./Components/Pages/ConfigureProfile/ConfigureProfile.jsx"
 import BasicData from "./Components/Pages/BasicData/BasicData.jsx"
 import ConfigureHobbies from "./Components/Pages/ConfigureHobbies/ConfigureHobbies.jsx"
+import SendPlanPage from "./Components/Pages/SendPlanPage/SendPlanPage.jsx"
 
 
 class App extends Component {
@@ -101,7 +102,7 @@ class App extends Component {
           <Route exact path="/configureProfile" render={props => <ConfigureProfile user={props.location.user} />}/>
           <Route exact path="/basicData" render={props => <BasicData  user={props.location.user}/>}/>
           <Route exact path="/configureHobbies" render = {props => <ConfigureHobbies user={props.location.user}/>}/>
-          
+          <Route exact path="/sendPlanPage/:id" component={SendPlanPage}/>
           
         </Switch>
 

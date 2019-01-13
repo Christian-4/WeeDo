@@ -46,7 +46,7 @@ export default class FormLogIn extends Component {
           <InputCreatePlan label="Usuario" placeholder="Tu usuario" name="username" handleChange= {this.handleChange} type={"text"}/>
           <InputCreatePlan label="Password" placeholder="Tu contraseña" name="password" handleChange={this.handleChange} type={"password"}/>
           <input className="loginButton" type="submit" value="Login" />
-          <Link to={"/signup"}><button className="signupButton">Crear cuenta</button></Link>
+          <Link to={"/signup"}><span className="haveAccountLogin">¿Aún no tienes una cuenta? <span className="haveAccountLoginBold">Regístrate</span></span></Link>
         </form>
       </div>
     )

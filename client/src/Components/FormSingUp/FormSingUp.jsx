@@ -152,7 +152,7 @@ export default class FormSingUp extends Component {
           <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
             <input className="signupButton" type="submit" value="Siguiente" />
         </form>
-        <Link to={"/login"}><button className="loginButton">¿Tienes cuenta?</button></Link>
+        <Link to={"/login"}><span className="haveAccount">¿Ya tienes cuenta? <span className="haveAccountBold">Login</span></span></Link>
         
       </div>
     );

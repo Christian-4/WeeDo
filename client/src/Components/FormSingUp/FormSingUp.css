@@ -68,7 +68,6 @@
     margin-bottom: 10px;
     align-self: flex-start;
     margin-left: -260px;
-
   }
   
 
@@ -87,5 +86,22 @@
     text-align: left ;
     border-radius:5px ;
     color:rgb(172,172,172);
-  
+}
+
+.haveAccount{
+    display: block;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #a1a9ed;
+  margin-top: 29px;
+  margin-bottom: -50px;
+}
+
+.haveAccountBold{
+    font-weight: bold;
 }

@@ -29,6 +29,7 @@ import FilterPlans from "./Components/Pages/FilterPlans/FilterPlans.jsx"
 import ConfigureProfile from "./Components/Pages/ConfigureProfile/ConfigureProfile.jsx"
 import BasicData from "./Components/Pages/BasicData/BasicData.jsx"
 import ConfigureHobbies from "./Components/Pages/ConfigureHobbies/ConfigureHobbies.jsx"
+import InitialPage from "./Components/Pages/InitialPage/InitialPage.jsx"
 
 
 class App extends Component {
@@ -77,7 +78,8 @@ class App extends Component {
         <Switch>
           {/* <Route exact path="/" render={() => <Home userSessionId = {this.state.userSessionId}/>} /> */}
           <Route exact path="/signup" render={() => <SignupPage />} />
-          <Route exact path="/" render={() => <LoginPage getUserSession={this.getUserSession} />} />
+          <Route exact path="/" render={() => <InitialPage />} />
+          <Route exact path="/login" render={() => <LoginPage getUserSession={this.getUserSession} />} />
           <Route exact path="/plans" render={props => <PlansPage filters={props.location.filters} />} />
           <Route exact path="/plan/:id" component={PlanPage} />
           <Route exact path="/newplan" render={() => <CreatePlanPage />} />
@@ -105,7 +107,7 @@ class App extends Component {
           
         </Switch>
 
-        {window.location.href !== `${process.env.REACT_APP_API_URL}/` && window.location.href !== `${process.env.REACT_APP_API_URL}/signup` ?
+        {window.location.href !== `${process.env.REACT_APP_API_URL}/` && window.location.href !== `${process.env.REACT_APP_API_URL}/login` && window.location.href !== `${process.env.REACT_APP_API_URL}/signup` ?
           <Tapbar></Tapbar>
           : ""
         }

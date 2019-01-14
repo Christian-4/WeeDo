@@ -81,16 +81,16 @@ export default class FormSingUp extends Component {
     const { username, password, password_confirm, email, location, image } = this.state;
 
 
-      this.authService.signup({ username, password, password_confirm, email, location, image })
-        .then(response => {
+    this.authService.signup({ username, password, password_confirm, email, location, image })
+      .then(response => {
 
-          if (response.data.message === "SignUp succesfull") {
-            this.user = response.data.newUser;
-            this.redirectLogin("login")
-          }
-         
-        }).catch(err => console.log(err))
-    
+        if (response.data.message === "SignUp succesfull") {
+          this.user = response.data.newUser;
+          this.redirectLogin("login")
+        }
+
+      }).catch(err => console.log(err))
+
 
 
   }
@@ -112,7 +112,11 @@ export default class FormSingUp extends Component {
     new_array.push(e.place.place)
     new_array.push(e.place.coordinates.lat)
     new_array.push(e.place.coordinates.lng)
-    this.setState({...this.state, location: new_array})
+    this.setState({ ...this.state, location: new_array })
+  }
+
+  clickUploadImage = e => {
+    
   }
 
 
@@ -126,7 +130,7 @@ export default class FormSingUp extends Component {
         user: this.user
       }} />
     }
-    
+
     let hobbies = ""
 
     if (this.state.displayHobbies) {
@@ -137,23 +141,33 @@ export default class FormSingUp extends Component {
         </div>
 
       )
+
     }
 
     return (
       <div className="signUp">
-        <img className="logoSignup" src={Logo}/>
+        <img className="logoSignup" src={Logo} />
         <form onSubmit={this.handleFormSubmit}>
           <InputCreatePlan nameLabel={"name-label-signUp"} label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
-          <InputCreatePlan nameLabel={"name-label-signUp"} label="Password" placeholder="Tu password" name="password" handleChange= {this.handleChange} type={"password"}/>
-          <InputCreatePlan nameLabel={"name-label-signUp"} label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange= {this.handleChange} type={"password"}/>
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Password" placeholder="Tu password" name="password" handleChange={this.handleChange} type={"password"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange={this.handleChange} type={"password"} />
           <InputCreatePlan nameLabel={"name-label-signUp"} label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
-          <InputCreatePlan nameLabel={"name-label-signUp"} name="image" handleChange={this.handleChange} type={"file"} />
-          {/* <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} /> */}
-          <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
-            <input className="signupButton" type="submit" value="Siguiente" />
+          {/* <InputCreatePlan nameLabel={"name-label-signUp"} name="image" handleChange={this.handleChange} type={"file"} /> */}
+
+          <div className="upload-image-container">
+            {/* <label>Subir Imagen</label> */}
+            <div className="upload-image-div">
+              <input id="upload" className="upload-image-input" name="image" handleChange={this.handleChange} type={"file"}/>
+              <img className="image-icon-upload" onClick={ e => this.clickUploadImage() } src={require("../../icons/icons/AddPhoto.png")} width="24px" height="24px">
+              </img>
+            </div>
+          </div>
+
+          <SearchInput locationChange={e => { this.locationChange(e) }} boxStyle={'input-signup'} listStyle={'list-style-signUp'} />
+          <input className="signupButton" type="submit" value="Siguiente" />
         </form>
         <Link to={"/"}><button className="loginButton">¿Tienes cuenta?</button></Link>
-        
+
       </div>
     );
   }

@@ -57,7 +57,7 @@
     box-sizing: border-box;
     font-size: 16px;
     left: 23%;
-    margin: -25px 0 0 -54px;
+    margin: -25px 0 0 -44px;
     position: relative;
     top: 50%;
     width: 300px;
@@ -94,4 +94,29 @@
 
 .list-style-signUp:has(div){
     width: 77%;
-  }
+}
+
+
+.upload-image-input{
+    width: 70%;
+    opacity: 1;
+    position: relative;
+    margin-left: 10px
+}
+
+.upload-image-div{
+    /* background-image:url("../../icons/icons/AddPhoto.png"); */
+    background-repeat: no-repeat;
+    position: relative;;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+
+.upload-image-container{
+    display: flex;
+}
+
+.image-icon-upload{
+    position: absolute;
+}

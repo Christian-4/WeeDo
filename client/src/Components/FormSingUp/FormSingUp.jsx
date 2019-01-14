@@ -143,11 +143,11 @@ export default class FormSingUp extends Component {
       <div className="signUp">
         <img className="logoSignup" src={Logo}/>
         <form onSubmit={this.handleFormSubmit}>
-          <InputCreatePlan label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
-          <InputCreatePlan label="Password" placeholder="Tu password" name="password" handleChange= {this.handleChange} type={"password"}/>
-          <InputCreatePlan label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange= {this.handleChange} type={"password"}/>
-          <InputCreatePlan label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
-          <InputCreatePlan name="image" handleChange={this.handleChange} type={"file"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Password" placeholder="Tu password" name="password" handleChange= {this.handleChange} type={"password"}/>
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange= {this.handleChange} type={"password"}/>
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} name="image" handleChange={this.handleChange} type={"file"} />
           {/* <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} /> */}
           <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
             <input className="signupButton" type="submit" value="Siguiente" />

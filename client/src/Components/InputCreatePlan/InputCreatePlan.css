@@ -54,8 +54,18 @@
   margin-left: 40px;
 }
 
+.name-label-signUp {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  margin-left: 14px;
+}
+
 .name-label{
   color: #5e5e5e
+}
+
+.name-label-signUp{
+  color: #5e5e5e;
 }
 
 .create-plan-button {

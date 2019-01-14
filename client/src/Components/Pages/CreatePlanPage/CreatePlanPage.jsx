@@ -202,6 +202,7 @@ export default class CreatePlanPage extends Component {
 
         <form onSubmit={this.handleNewPlan} className="new-plan-form">
           <Input
+            nameLabel={"name-label"}
             name={"title"}
             label={"Nombre del plan"}
             placeholder={"Título del plan"}
@@ -231,6 +232,7 @@ export default class CreatePlanPage extends Component {
     
 
           <Input
+            nameLabel={"name-label"}
             name={"hobby"}
             label={"Etiquetas"}
             placeholder={"Identifica el tipo de plan"}

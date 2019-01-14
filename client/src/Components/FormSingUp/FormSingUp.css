@@ -1,6 +1,8 @@
 .signUp{
    margin-bottom: 150px;
    display: flex;
+   justify-content: center;
+   align-items: center;
    flex-direction: column;
 }
 
@@ -53,10 +55,9 @@
     border-bottom: 1px solid #ccc;
     color: #555;
     box-sizing: border-box;
-    font-size: 10px;
-    height: 50px;
+    font-size: 16px;
     left: 23%;
-    margin: -25px 0 0 -100px;
+    margin: -25px 0 0 -54px;
     position: relative;
     top: 50%;
     width: 300px;
@@ -89,3 +90,8 @@
     color:rgb(172,172,172);
   
 }
+
+
+.list-style-signUp:has(div){
+    width: 77%;
+  }

@@ -123,10 +123,18 @@ router.get("/profile/:_id", (req, res, next) => {
 router.get("/getuser", (req, res, next) => {
   User.findById(req.user._id)
     .populate("plans")
+    .populate("friends")
     .then(user => res.status(200).json({ user }))
     .catch(err =>
       res.status(500).json({ message: "Error to get user " + err })
     );
 });
+
+router.get("/sendPlanUser", (req,res,next)=> {
+  const{user,plan} = req.body
+
+  
+
+}),
 
 module.exports = router;

@@ -50,6 +50,7 @@ export default class FormSingUp extends Component {
 
   handleChange = (e) => {
     let { name, value } = e.target;
+    console.log(name)
     if (name == "image") {
       this.setState({ ...this.state, image: e.target.files[0] })
     } else {
@@ -116,7 +117,7 @@ export default class FormSingUp extends Component {
   }
 
   clickUploadImage = e => {
-    
+
   }
 
 
@@ -154,14 +155,12 @@ export default class FormSingUp extends Component {
           <InputCreatePlan nameLabel={"name-label-signUp"} label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
           {/* <InputCreatePlan nameLabel={"name-label-signUp"} name="image" handleChange={this.handleChange} type={"file"} /> */}
 
-          <div className="upload-image-container">
-            {/* <label>Subir Imagen</label> */}
-            <div className="upload-image-div">
-              <input id="upload" className="upload-image-input" name="image" handleChange={this.handleChange} type={"file"}/>
-              <img className="image-icon-upload" onClick={ e => this.clickUploadImage() } src={require("../../icons/icons/AddPhoto.png")} width="24px" height="24px">
-              </img>
-            </div>
+
+          <div className="upload-image-div">
+            <input id="upload" className="upload-image-input" name="image" onChange={e=>this.handleChange(e)} type="file" />
+            <label for="upload" className="label-upload">Subir Imagen</label>
           </div>
+
 
           <SearchInput locationChange={e => { this.locationChange(e) }} boxStyle={'input-signup'} listStyle={'list-style-signUp'} />
           <input className="signupButton" type="submit" value="Siguiente" />

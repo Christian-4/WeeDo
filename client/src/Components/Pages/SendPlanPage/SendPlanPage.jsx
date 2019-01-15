@@ -19,6 +19,7 @@ export default class SendPlanPage extends Component {
     }
 
     this.UserService = new UserService()
+    this.PlanService = new PlanService()
   }
 
   componentDidMount() {

@@ -48,11 +48,12 @@ export default class SendPlanPage extends Component {
   }
 
    
-  sendPlanToUser = () => {
+  sendPlanToUser = (e) => {
 
     let promises=[]
 
-    this.usersSelected.forEach(user => {
+    e.target.className = "send-plan-button-clicked"
+    this.state.usersSelected.forEach(user => {
       let planId = this.state.planId
       promises.push( this.UserService.sendPlanToUser({user,planId}))
     })
@@ -88,7 +89,7 @@ export default class SendPlanPage extends Component {
         <div className="button-send-div">
           {this.state.selected
             ?
-            <button className="send-plan-button" onClick={this.sendPlanToUser}>Enviar</button>
+            <button className="send-plan-button" onClick={e=>this.sendPlanToUser(e)}></button>
             :
             ""
           }

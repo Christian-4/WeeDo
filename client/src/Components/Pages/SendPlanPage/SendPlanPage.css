@@ -67,6 +67,14 @@
     content: "Seleccionado"
 }
 
+.send-plan-button::before{
+    content: "Enviar"
+}
+
+.send-plan-button-clicked:before{
+    content: "Enviado"
+}
+
 .selected-button{
     font-size: 18px;
     font-weight: 500;
@@ -88,7 +96,7 @@
 }
 
 
-.send-plan-button{
+.send-plan-button, .send-plan-button-clicked{
     width: 311px;
     height: 48px;
     border-radius: 24px;
@@ -96,7 +104,7 @@
     background-image: linear-gradient(261deg, #c9a1f0, #7ab2eb 98%);
 }
 
-.send-plan-button{
+.send-plan-button, .send-plan-button-clicked{
     font-size: 18px;
     font-weight: 500;
     font-style: normal;

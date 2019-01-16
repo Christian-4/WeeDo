@@ -67,7 +67,7 @@ export default class ChatPage extends Component {
 
     this.socket.on("chatMsg", data => {
       if (data.id === this.state.id) {
-        this.addMessage(data);
+         this.addMessage(data);
       }
 
 
@@ -92,7 +92,7 @@ export default class ChatPage extends Component {
 
   addMessage = message => {
     this.setState(state => ({ messages: [...state.messages, message] }));
-    this.chatService.addMessage(this.state.id, message);
+     this.chatService.addMessage(this.state.id, message);
   };
 
   submitMessage = messageString => {
@@ -106,7 +106,7 @@ export default class ChatPage extends Component {
     };
 
     this.socket.emit("chatMsg", message);
-    this.addMessage(message);
+     this.addMessage(message);
   };
 
   parserDate = () => {

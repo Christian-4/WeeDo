@@ -43,8 +43,8 @@ class UserService {
     }  
 
     sendPlanToUser = (user) => {
-        return this.service.put('/sendPlanToUser',user)
-            .then(response => response.data)
+        return this.service.post('/sendPlanToUser',user)
+            .then(response =>   response.data)
     }
    
 

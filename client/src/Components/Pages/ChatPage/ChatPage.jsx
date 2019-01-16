@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ChatInput from "../../ChatInput/ChatInput.jsx";
 import ChatMessage from "../../ChatMessage/ChatMessage.jsx";
 import ChatService from "../../ChatService";
-import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
@@ -67,7 +66,7 @@ export default class ChatPage extends Component {
 
     this.socket.on("chatMsg", data => {
       if (data.id === this.state.id) {
-        this.addMessage(data);
+         this.addMessage(data);
       }
 
 
@@ -92,7 +91,7 @@ export default class ChatPage extends Component {
 
   addMessage = message => {
     this.setState(state => ({ messages: [...state.messages, message] }));
-    this.chatService.addMessage(this.state.id, message);
+     this.chatService.addMessage(this.state.id, message);
   };
 
   submitMessage = messageString => {
@@ -106,7 +105,7 @@ export default class ChatPage extends Component {
     };
 
     this.socket.emit("chatMsg", message);
-    this.addMessage(message);
+     this.addMessage(message);
   };
 
   parserDate = () => {

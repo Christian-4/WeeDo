@@ -31,7 +31,8 @@ export default class FormSingUp extends Component {
       location: [],
       hobbies: [],
       redirect: false,
-      displayHobbies: false
+      displayHobbies: false,
+      textLabel: "Subir Imagen"
     }
 
     this.user = null
@@ -50,7 +51,9 @@ export default class FormSingUp extends Component {
 
   handleChange = (e) => {
     let { name, value } = e.target;
+   
     if (name == "image") {
+      this.state.textLabel = e.target.files[0].name
       this.setState({ ...this.state, image: e.target.files[0] })
     } else {
 
@@ -81,16 +84,16 @@ export default class FormSingUp extends Component {
     const { username, password, password_confirm, email, location, image } = this.state;
 
 
-      this.authService.signup({ username, password, password_confirm, email, location, image })
-        .then(response => {
+    this.authService.signup({ username, password, password_confirm, email, location, image })
+      .then(response => {
 
-          if (response.data.message === "SignUp succesfull") {
-            this.user = response.data.newUser;
-            this.redirectLogin("login")
-          }
-         
-        }).catch(err => console.log(err))
-    
+        if (response.data.message === "SignUp succesfull") {
+          this.user = response.data.newUser;
+          this.redirectLogin("login")
+        }
+
+      }).catch(err => console.log(err))
+
 
 
   }
@@ -112,7 +115,11 @@ export default class FormSingUp extends Component {
     new_array.push(e.place.place)
     new_array.push(e.place.coordinates.lat)
     new_array.push(e.place.coordinates.lng)
-    this.setState({...this.state, location: new_array})
+    this.setState({ ...this.state, location: new_array })
+  }
+
+  clickUploadImage = e => {
+
   }
 
 
@@ -126,7 +133,7 @@ export default class FormSingUp extends Component {
         user: this.user
       }} />
     }
-    
+
     let hobbies = ""
 
     if (this.state.displayHobbies) {
@@ -137,20 +144,28 @@ export default class FormSingUp extends Component {
         </div>
 
       )
+
     }
 
     return (
       <div className="signUp">
-        <img className="logoSignup" src={Logo}/>
+        <img className="logoSignup" src={Logo} />
         <form onSubmit={this.handleFormSubmit}>
-          <InputCreatePlan label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
-          <InputCreatePlan label="Password" placeholder="Tu password" name="password" handleChange= {this.handleChange} type={"password"}/>
-          <InputCreatePlan label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange= {this.handleChange} type={"password"}/>
-          <InputCreatePlan label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
-          <InputCreatePlan name="image" handleChange={this.handleChange} type={"file"} />
-          {/* <InputCreatePlan label="Localizacion" placeholder="Tu localización" name="location" handleChange={this.handleChange} type={"text"} /> */}
-          <SearchInput locationChange={e=>{this.locationChange(e)}} boxStyle = {'input-signup'} listStyle={'list-style-signUp'}/>
-            <input className="signupButton" type="submit" value="Siguiente" />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Usuario" placeholder="Tu usuario" name="username" handleChange={this.handleChange} type={"text"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Password" placeholder="Tu password" name="password" handleChange={this.handleChange} type={"password"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Confirma Password" placeholder="Repite password" name="password_confirm" handleChange={this.handleChange} type={"password"} />
+          <InputCreatePlan nameLabel={"name-label-signUp"} label="Email" placeholder="Tu email" name="email" handleChange={this.handleChange} type={"email"} />
+          {/* <InputCreatePlan nameLabel={"name-label-signUp"} name="image" handleChange={this.handleChange} type={"file"} /> */}
+
+
+          <div className="upload-image-div">
+            <input id="upload" className="upload-image-input" name="image" onChange={e=>this.handleChange(e)} type="file" />
+            <label for="upload" className="label-upload">{this.state.textLabel}</label>
+          </div>
+
+
+          <SearchInput locationChange={e => { this.locationChange(e) }} boxStyle={'input-signup'} listStyle={'list-style-signUp'} />
+          <input className="signupButton" type="submit" value="Siguiente" />
         </form>
         <Link to={"/login"}><span className="haveAccount">¿Ya tienes cuenta? <span className="haveAccountBold">Login</span></span></Link>
         

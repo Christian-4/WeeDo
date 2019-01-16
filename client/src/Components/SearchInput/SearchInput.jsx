@@ -21,7 +21,7 @@ export default class SearchInput extends Component {
         <div className="div-input-search locationCreatePlan">
           <GoogleComponent
             apiKey={API_KEY}
-            language={"eS"}
+            language={"es"}
             country={"country:in|country:es"}
             coordinates={true}
             placeholder="busqueda"

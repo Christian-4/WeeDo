@@ -42,6 +42,10 @@ class UserService {
             .then(response => response.data)
     }  
 
+    sendPlanToUser = (user) => {
+        return this.service.post('/sendPlanToUser',user)
+            .then(response =>   response.data)
+    }
    
 
 }

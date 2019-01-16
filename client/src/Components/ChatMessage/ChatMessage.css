@@ -44,3 +44,20 @@
     height:40px;
     margin-right: 10px
 }
+
+
+.plan-invitation{
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: underline;
+  color: #bb99e3;
+}
+
+.plan-invitation:visited{
+  color: #bb99e3
+}

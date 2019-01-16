@@ -30,12 +30,20 @@ export default class ConfigureHobbies extends Component {
 
 
     addHobbySelected = (hobby) => {
+        let arrayHobbiesSelected =[]
+  
+        if(this.state.hobbiesSelected.includes(hobby.name)){
+            console.log("ya esta ")
+            let index = this.state.hobbiesSelected.indexOf(hobby.name);
+            arrayHobbiesSelected = this.state.hobbiesSelected;
+            arrayHobbiesSelected[index] = "Interés";
+        }else{
+            let index = this.state.hobbiesSelected.indexOf("Interés")
+            arrayHobbiesSelected = this.state.hobbiesSelected;
+            arrayHobbiesSelected[index] = hobby.name;
+        }
 
-        let index = this.state.hobbiesSelected.indexOf("Interés")
-
-        let arrayHobbiesSelected = this.state.hobbiesSelected;
-
-        arrayHobbiesSelected[index] = hobby.name;
+     
         this.setState({ ...this.state, hobbiesSelected: arrayHobbiesSelected, className:"finalizar-configure-data visible-button" })
         
     }
@@ -55,7 +63,8 @@ export default class ConfigureHobbies extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div>
+
                 <Nav
                     title={"Configurar tu perfil"}
                 />
@@ -98,7 +107,7 @@ export default class ConfigureHobbies extends Component {
 
                 <Link to={"/"}><button className={this.state.className} onClick={this.saveData}>Finalizar</button></Link>
 
-            </React.Fragment>
+            </div>
         )
     }
 }

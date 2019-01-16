@@ -1,12 +1,13 @@
-const express = require("express");
-const passport = require("passport");
-const router = express.Router();
-const User = require("../models/User");
+const express     = require("express");
+const passport    = require("passport");
+const router      = express.Router();
+const User        = require("../models/User");
+const Plan        = require("../models/Plan");
+const Chat        = require("../models/Chat");
 const uploadCloud = require("../config/cloudinary");
-
-// Bcrypt to encrypt passwords
-const bcrypt = require("bcrypt");
-const bcryptSalt = 10;
+const _           = require('lodash');
+const bcrypt      = require("bcrypt");
+const bcryptSalt  = 10;
 
 router.put("/editprofile", uploadCloud.single("image"), (req, res, next) => {
   const {
@@ -123,10 +124,37 @@ router.get("/profile/:_id", (req, res, next) => {
 router.get("/getuser", (req, res, next) => {
   User.findById(req.user._id)
     .populate("plans")
+    .populate("friends")
     .then(user => res.status(200).json({ user }))
     .catch(err =>
       res.status(500).json({ message: "Error to get user " + err })
     );
 });
+
+router.post("/sendPlanToUser", (req,res,next)=> {
+  const{user,planId} = req.body
+
+
+  User.findById(user)
+  .then(userfounded => {
+    Plan.findById(planId)
+    .then(planfounded => {
+       let chatId = _.intersectionWith(req.user.friendchats,userfounded.friendchats,_.isEqual)
+       let message  = "Un plan para ti: "+planfounded.title;
+       let messages = {name: req.user.username, message: message, image: req.user.image, planId: planfounded._id}
+       Chat.findByIdAndUpdate(chatId,{$addToSet:{messages}},{new:true})
+       .then(response => {
+          res.status(200).json({message:"Plan send to user succesfully!"})
+       })
+       .catch(err => {res.status(500).json({message:"Error to add message to chat"})})
+    })
+    .catch(err => {res.status(500).json({message:"Error searching plan"})})
+
+  })
+  .catch(err => {res.status(500).json({message:"Error searching user"})})
+
+  
+
+}),
 
 module.exports = router;

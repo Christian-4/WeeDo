@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@mobiscroll/cli": "^0.8.9",
         "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-4.5.0.tgz",
         "axios": "^0.18.0",
         "dotenv": "^6.2.0",

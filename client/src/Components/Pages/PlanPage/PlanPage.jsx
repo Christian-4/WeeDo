@@ -206,7 +206,7 @@ export default class PlanPage extends Component {
             
             
            
-            <Link to={`/planmap/${this.state.plan_id}`}>
+            <Link to={`/sendPlanPage/${this.state.plan_id}`}>
               <img src={group5} />
             </Link>
             {

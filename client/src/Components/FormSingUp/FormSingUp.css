@@ -1,6 +1,8 @@
 .signUp{
    margin-bottom: 100px;
    display: flex;
+   justify-content: center;
+   align-items: center;
    flex-direction: column;
 }
 
@@ -53,10 +55,9 @@
     border-bottom: 1px solid #ccc;
     color: #555;
     box-sizing: border-box;
-    font-size: 10px;
-    height: 50px;
+    font-size: 16px;
     left: 23%;
-    margin: -25px 0 0 -100px;
+    margin: -25px 0 0 -44px;
     position: relative;
     top: 50%;
     width: 300px;
@@ -105,3 +106,50 @@
 .haveAccountBold{
     font-weight: bold;
 }
+
+
+.list-style-signUp:has(div){
+    width: 77%;
+}
+
+
+.upload-image-input{
+   opacity: 0;
+   position: absolute;
+   pointer-events: none;
+   width: 1px;
+   height: 1px;
+}
+
+
+.upload-image-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.image-icon-upload{
+    position: absolute;
+}
+
+.label-upload, .label-uploaded{
+    margin-left: 10px;
+    margin-bottom: 26px;
+    width: 311px;
+    height: 48px;
+    text-align: center;
+    vertical-align: middle;   
+    font-size: 18px; 
+    line-height: 2.5em;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal
+}
+
+.label-upload, .label-uploaded{
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+}
+

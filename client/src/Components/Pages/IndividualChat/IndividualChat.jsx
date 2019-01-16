@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ChatInput from "../../ChatInput/ChatInput.jsx";
 import ChatMessage from "../../ChatMessage/ChatMessage.jsx";
 import ChatService from "../../ChatService";
-import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
@@ -30,27 +29,23 @@ export default class IndividualChat extends Component {
   componentDidMount() {
 
     this.socket = io(`${process.env.REACT_APP_API_URL}`);
-    this.socket.on("connect", () =>
-      console.log("connected to back via websockets")
-    );
-    this.socket.on("disconnect", () =>
-      console.log("DISconnected to back via websockets")
-    );
+    this.socket.on("connect", () =>console.log("connected to back via websockets"));
+    this.socket.on("disconnect", () => console.log("DISconnected to back via websockets"));
 
-    this.socket.on("chatMsg", data => this.addMessage(data));
+    this.socket.on("chatMsg", data => {
+      this.setState(state => ({ messages: [...state.messages, data] }));
+    });
 
 
 
-    console.log(this.state.id)
 
     this.chatService.getIndividualChat(this.state.id).then(response => {
-      console.log("holaaaa", response)
       this.setState({
         ...this.state,
         name: response.user,
         messages: response.chat.messages,
         image: response.user,
-        users: response.chat.users
+        users: response.chat.users,
       });
     });
   }
@@ -62,11 +57,13 @@ export default class IndividualChat extends Component {
 
   submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
+    console.log("holaa entra en enviar mensaje"+this.state.name.username)
     const message = {
       name: this.state.name.username,
       message: messageString,
       id: this.state.id,
-      image: this.state.name.image
+      image: this.state.name.image,
+      planId:""
     };
 
     this.socket.emit("chatMsg", message);
@@ -112,6 +109,7 @@ export default class IndividualChat extends Component {
               message={message.message}
               name={message.name}
               userConected={this.state.name.username}
+              planId={message.planId}
             />
           ))}
         </section>

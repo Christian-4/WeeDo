@@ -31,7 +31,7 @@ router.get("/getchat/:_id", (req, res, next) => {
 });
 
 router.post("/addmessage/:_id", (req, res, next) => {
-  Chat.findByIdAndUpdate(req.params._id, { $addToSet: { messages: { name: req.user.username, message: req.body.message, image:req.user.image } } }, { new: true })
+  Chat.findByIdAndUpdate(req.params._id, { $addToSet: { messages: { name: req.user.username, message: req.body.message, image:req.user.image, planId:"" } } }, { new: true })
     .then(chat => {
       res.status(200)
     })

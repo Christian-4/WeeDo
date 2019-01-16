@@ -31,7 +31,8 @@ export default class FormSingUp extends Component {
       location: [],
       hobbies: [],
       redirect: false,
-      displayHobbies: false
+      displayHobbies: false,
+      textLabel: "Subir Imagen"
     }
 
     this.user = null
@@ -50,8 +51,9 @@ export default class FormSingUp extends Component {
 
   handleChange = (e) => {
     let { name, value } = e.target;
-    console.log(name)
+   
     if (name == "image") {
+      this.state.textLabel = e.target.files[0].name
       this.setState({ ...this.state, image: e.target.files[0] })
     } else {
 
@@ -158,7 +160,7 @@ export default class FormSingUp extends Component {
 
           <div className="upload-image-div">
             <input id="upload" className="upload-image-input" name="image" onChange={e=>this.handleChange(e)} type="file" />
-            <label for="upload" className="label-upload">Subir Imagen</label>
+            <label for="upload" className="label-upload">{this.state.textLabel}</label>
           </div>
 
 

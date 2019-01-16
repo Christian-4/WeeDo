@@ -116,7 +116,7 @@
     position: absolute;
 }
 
-.label-upload{
+.label-upload, .label-uploaded{
     margin-left: 10px;
     margin-bottom: 26px;
     width: 311px;
@@ -131,8 +131,9 @@
     letter-spacing: normal
 }
 
-.label-upload{
+.label-upload, .label-uploaded{
     color: #555;
     border: 1px solid #ccc;
     border-radius: 24px;
 }
+

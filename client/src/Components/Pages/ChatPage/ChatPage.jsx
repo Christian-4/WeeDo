@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ChatInput from "../../ChatInput/ChatInput.jsx";
 import ChatMessage from "../../ChatMessage/ChatMessage.jsx";
 import ChatService from "../../ChatService";
-import ChatManager from "../../../chat/chatManager";
 import Nav from "../../Nav/Nav.jsx";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";

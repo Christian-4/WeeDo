@@ -22,16 +22,18 @@
 
 
 .input-time{
-  margin-right: 23px
+  /* margin-right: 23px */
 }
 
 .date-div-configure{
   width: 311px;
   margin-bottom: 50px;
+  font-size: 16px;
+
 }
 
 .input-date-config::-webkit-input-placeholder{
-  text-align: left;
+  text-align: center;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;

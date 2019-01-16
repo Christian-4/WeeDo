@@ -108,7 +108,7 @@ class App extends Component {
           
         </Switch>
 
-        {window.location.href !== `${process.env.REACT_APP_API_URL}/` && window.location.href !== `${process.env.REACT_APP_API_URL}/login` && window.location.href !== `${process.env.REACT_APP_API_URL}/signup` ?
+        {window.location.href !== `${process.env.REACT_APP_API_URL2}/` && window.location.href !== `${process.env.REACT_APP_API_URL2}/login` && window.location.href !== `${process.env.REACT_APP_API_URL2}/signup` ?
           <Tapbar></Tapbar>
           : ""
         }

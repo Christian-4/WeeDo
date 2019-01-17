@@ -40,9 +40,9 @@ export default class BasicData extends Component {
     newDate.year = year
 
     let datenew = new Date(
-      newDate.year,
+      newDate.year + 1,
       newDate.month - 1,
-      newDate.day,  
+      newDate.day + 1,  
       );
 
     this.setState({ ...this.state, birthdate: datenew })

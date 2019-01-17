@@ -171,14 +171,7 @@ showMins = (date) =>{
   render() {
     return (
       <React.Fragment>
-        <Nav title={"Mis conexiones"}
-          iconleft={SearchIcon}
-          iconright={""}
-          widthR={"20px"}
-          heigthR={"20px"}
-          widthL={"20px"}
-          heigthL={"20px"}
-        />
+        <Nav title={"Mis conexiones"}/>
         <div className="allPlanSelected">
           <p><Link to={"/plans"}>En Madrid</Link></p>
           <div className="misConexiones">

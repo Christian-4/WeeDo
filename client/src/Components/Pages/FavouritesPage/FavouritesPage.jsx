@@ -40,7 +40,6 @@ export default class FavouritesPage extends Component {
   componentDidMount() {
     this.planService.getFavouritePlans()
       .then(response => {
-        console.log(response)
         this.setState({ ...this.state, plans: response.favouriteplans })
       })
   }
@@ -48,17 +47,15 @@ export default class FavouritesPage extends Component {
   addPlanFav = (id) => {
     this.planService.addPlanFav(id)
       .then(response => {
-        console.log(response)
       })
   }
 
   delPlanFav = (id) => {
     this.planService.delPlanFav(id)
       .then(response => {
-        console.log(response)
         this.planService.getFavouritePlans()
           .then(response => {
-            console.log(response)
+  
             this.setState({ ...this.state, plans: response.favouriteplans })
           })
       })
@@ -134,14 +131,7 @@ export default class FavouritesPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav  title={"Mis planes"} 
-        iconleft={SearchIcon} 
-        iconright={NotificationIcon} 
-        widthR={"20px"} 
-        heigthR={"20px"} 
-        widthL={"20px"} 
-        heigthL={"20px"}
-        />
+        <Nav  title={"Mis planes"}/>
         <div className="selectPlans">
           <div className="creados">
             <p><Link to={"/ownplans"}>Creados</Link></p>

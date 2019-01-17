@@ -8,8 +8,9 @@ export default ({ image, name, message, userConected, planId }) => (
       <section className="message-section-right">
         <img src={image} className="image-chat" />
         <div className="text-message">
-          {planId !== "" ?
-
+    
+          {(planId !== "" && planId !== undefined && planId !== null) ?
+                
             <Link to={`/plan/${planId}`} className="plan-invitation">{message}</Link>
             :
             <p>{message}</p>
@@ -20,7 +21,7 @@ export default ({ image, name, message, userConected, planId }) => (
         <section className="message-section-left">
           <img src={image} className="image-chat" />
           <div className="text-message">
-            {planId !== "" ?
+            {planId !== "" && planId !== undefined && planId !== null ?
 
               <Link to={`/plan/${planId}`} className="plan-invitation">{message}</Link>
               :

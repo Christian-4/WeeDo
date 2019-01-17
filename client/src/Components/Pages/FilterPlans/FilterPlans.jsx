@@ -71,7 +71,7 @@ export default class FilterPlans extends Component {
     }
 
     timeClicked = (e,filter) => {
-        console.log("antes de nada", this.filters.time)
+    
         if(this.filters.time.includes(filter)){
             let index = this.filters.time.indexOf(filter);
             this.filters.time.splice(index,1)
@@ -83,14 +83,12 @@ export default class FilterPlans extends Component {
             this.comproveTimeToggle(e,filter);
         }
 
-        console.log("cuando salgo", this.filters.time)
         this.showButton()
     }
 
     transformDate = (currentDay, valueDay) => {
         let newDay = 0;
         let day = new Date(2019, this.state.date.getMonth(), 0);
-        console.log('tranform '+currentDay,valueDay,day)
         if (currentDay - valueDay <= 0) {
             let res = - (currentDay - valueDay)
             newDay = day.getDate() - res;

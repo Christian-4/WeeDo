@@ -139,14 +139,7 @@ export default class ProfilePage extends Component {
   printUser = () => {
     return (
       <React.Fragment>
-        <Nav title={"Mi perfil"}
-          iconleft={Notifications}
-          iconright={Edit}
-          widthR={"20px"}
-          heigthR={"20px"}
-          widthL={"17px"}
-          heigthL={"17px"}
-        />
+        <Nav title={"Mi perfil"}/>
         <div className="myProfile">
           <div className="myProfileHeader">
             <img src={this.state.user.image} />
@@ -222,7 +215,6 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav></Nav>
         {
           this.state.user !== null &&
           <div>{this.printUser()}</div>

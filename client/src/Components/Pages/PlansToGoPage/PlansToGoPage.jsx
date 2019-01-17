@@ -38,7 +38,6 @@ export default class PlansToGoPage extends Component {
   componentDidMount() {
     this.planService.getPlansToGo()
       .then(response => {
-        console.log(response)
         this.setState({ ...this.state, plans: response.planstogo })
       })
   }
@@ -116,14 +115,7 @@ export default class PlansToGoPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav  title={"Mis planes"} 
-        iconleft={SearchIcon} 
-        iconright={NotificationIcon} 
-        widthR={"20px"} 
-        heigthR={"20px"} 
-        widthL={"20px"} 
-        heigthL={"20px"}
-        />
+        <Nav  title={"Mis planes"}/>
 
         <div className="selectPlans">
           <div className="creados">

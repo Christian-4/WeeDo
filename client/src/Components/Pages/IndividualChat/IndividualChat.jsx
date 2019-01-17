@@ -57,7 +57,7 @@ export default class IndividualChat extends Component {
 
   submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    console.log("holaa entra en enviar mensaje"+this.state.name.username)
+
     const message = {
       name: this.state.name.username,
       message: messageString,
@@ -91,14 +91,7 @@ export default class IndividualChat extends Component {
     return (
       <React.Fragment>
         <Link to={`/profile/${otherUser._id}`}>
-          <Nav title={`${otherUser.username}`}
-            iconleft={Left}
-            iconright={Notifications}
-            widthR={"17px"}
-            heigthR={"17px"}
-            widthL={"9px"}
-            heigthL={"6px"}
-          />
+          <Nav title={`${otherUser.username}`}/>
         </Link>
 
         <section className="section-chat section-chat-individual" id="chat">

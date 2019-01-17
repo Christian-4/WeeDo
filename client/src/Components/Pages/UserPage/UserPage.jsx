@@ -171,13 +171,7 @@ export default class UserPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Nav title={"Encontrar conexiones"}
-          iconright={FilterBars}
-          widthR={"20px"}
-          heigthR={"20px"}
-          widthL={"20px"}
-          heigthL={"20px"}
-        />
+        <Nav title={"Encontrar conexiones"}/>
         {this.state.users !== null && (
           <div>
             {this.printAllUsers(

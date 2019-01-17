@@ -147,6 +147,11 @@
   color: #5e5e5e;
 }
 
+
+.myInteresesDivs{
+  display: flex;
+}
+
 .profile .myIntereses label{
     margin-right: 250px;
 }
@@ -160,3 +165,4 @@
   z-index: 100;
   outline: none;
 }
+

@@ -42,9 +42,12 @@ export default class ProfilePage extends Component {
             <div className="myInteresesDivs">
               {this.state.user.hobbies.map(function(hobby,index){
                 return(
-                  <div className="myInteresesDiv">
-                   {hobby}
+                  <div>
+                  <div className="hobbie-mask">
+                    <img src={require(`../../../icons/icons/${hobby}.png`)} alt="h-image" className="hobbie-image"></img>
                   </div>
+                  <p className="p-text">{hobby}</p>
+                </div>
                 )
               })}
             </div>

@@ -115,12 +115,6 @@ export default class OwnPlansPage extends Component {
     return (
       <React.Fragment>
         <Nav  title={"Mis planes"} 
-        iconleft={SearchIcon} 
-        iconright={NotificationIcon} 
-        widthR={"20px"} 
-        heigthR={"20px"} 
-        widthL={"20px"} 
-        heigthL={"20px"}
         />
         <div className="selectPlans">
           <div className="creados">

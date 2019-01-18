@@ -75,12 +75,24 @@ router.post("/newplan", function (req, res, next) {
         photos,
         link
       ) {
-        let image_new = photos[0];
-        if (image_new === undefined || image_new === null) {
-          image_new = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-        } else {
-          image_new = photos[0].links.download
+
+        console.log(hobby)
+        let image_new ="";
+        if(hobby === "Boda"){
+       
+            image_new = "https://mixfm.mx/wp-content/uploads/2017/12/boda-starwars-mixfm.jpg"
+        }else{
+             image_new = photos[0];
+          if (image_new === undefined || image_new === null) {
+            image_new = "https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+    
+          }else {
+            image_new = photos[0].links.download
+          }
+         
         }
+
+
         newPlan = new Plan({
           owner: req.user._id,
           chat: chat._id,
@@ -95,6 +107,7 @@ router.post("/newplan", function (req, res, next) {
           image: image_new,
           confirmations: []
         });
+      
 
         User.findByIdAndUpdate(
           req.user._id,

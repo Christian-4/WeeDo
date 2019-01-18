@@ -190,8 +190,8 @@ export default class CreatePlanPage extends Component {
               <button name="public" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Público</button>
             </div>
             <div className="type-selected-plans">
-              <p className="p-type-selected">Establece el nivel del alcence al que puede mostrarse tú plan</p>
-              <button  name="private" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Conexiones</button>
+              <p className="p-type-selected">Solo tus conexiones pueden apuntarse al plan</p>
+              <button  name="private" className={this.classNameButton} onClick={e=>this.buttonClicked(e)}>Privado</button>
             </div>
             <div className="type-selected-plans">
               <p className="p-type-selected">Solo a quienes tu invites pueden apuntarse al plan</p>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { GoogleComponent } from "react-google-location";
 import "../SearchInput/SearchInput.css"
-const API_KEY = "AIzaSyCUoFH2viWnRWQJPqZi5AUqBGOPTQqlF-A";
+const API_KEY = "AIzaSyDUeQXCyJDlhOtCB8JwWAk8zCxpjk6k-jo";
 
 export default class SearchInput extends Component {
   constructor(props) {

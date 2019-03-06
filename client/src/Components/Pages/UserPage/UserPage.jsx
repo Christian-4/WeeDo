@@ -5,12 +5,6 @@ import { Link } from "react-router-dom"
 import Nav from "../../Nav/Nav.jsx"
 import "./UserPage.css"
 import SearchIcon from "../../../icons/icons/search.png"
-import SearchIconNav from "../../../icons/icons/white.png"
-import FilterBars from "../../../icons/icons/filterBars.png"
-import CineIcon from "../../../icons/icons/Cine.png"
-import RugbyIcon from "../../../icons/icons/Rugby.png"
-import BasketIcon from "../../../icons/icons/Baloncesto.png"
-import FutbolIcon from "../../../icons/icons/Fútbol.png"
 
 
 export default class UserPage extends Component {
